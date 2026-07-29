@@ -15,14 +15,17 @@ export default {
 <template>
   <PortfolioHero title="UX/UI Design Portfolio">
     <p>
-      With a background in frontend development, I approach design with both the user experience and implementation in
-      mind. My work focuses on creating scalable interfaces, thoughtful interactions and design systems that translate
-      seamlessly from concept to production.
+      With a background in frontend development, I create interfaces that balance thoughtful user experiences with
+      technical understanding.
+    </p>
+    <p>
+      I’m passionate about crafting memorable digital products through playful interactions, strong visual identity and
+      attention to detail.
     </p>
   </PortfolioHero>
 
   <div class="flex w-full flex-col items-center">
-    <div class="max-w-7xl mx-5 py-18 flex flex-col gap-22">
+    <div class="max-w-7xl mx-5 py-18 flex flex-col gap-16 md:gap-22">
       <PortfolioItem
         reverse
         title="Customisable User Dashboard"
