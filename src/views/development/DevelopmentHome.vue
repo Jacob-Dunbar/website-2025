@@ -24,7 +24,7 @@ export default {
   </PortfolioHero>
 
   <div class="flex w-full flex-col items-center">
-    <div class="max-w-7xl mx-5 py-18 flex flex-col gap-12 md:gap-22">
+    <div class="max-w-7xl mx-5 py-18 flex flex-col gap-16 md:gap-22">
       <PortfolioItem
         reverse
         title="Real-Time Messaging System"

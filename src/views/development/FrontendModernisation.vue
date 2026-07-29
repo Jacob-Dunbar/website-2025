@@ -43,7 +43,7 @@ export default {
       </p>
     </CaseStudyHero>
 
-    <ModernisationRoadmap />
+    <ModernisationRoadmap class="px-5" />
 
     <PageDivider />
 

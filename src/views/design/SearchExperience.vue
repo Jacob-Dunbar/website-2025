@@ -81,7 +81,7 @@ export default {
     <CaseStudyContainer>
       <CaseStudySection>
         <template #media>
-          <BrowserFrame filename="search_suggestions.mp4">
+          <BrowserFrame url="search_suggestions.mp4">
             <div class="md:p-8 md:pt-6">
               <video preload="metadata" :src="searchVideo" autoplay loop muted playsinline class="w-full"></video>
             </div>
@@ -131,7 +131,7 @@ export default {
 
       <CaseStudySection>
         <template #media>
-          <BrowserFrame filename="search_suggestions.mp4">
+          <BrowserFrame url="anytask.com/?query=Logo%20Design">
             <img loading="lazy" class="w-full" src="../../assets/category_ui.png" alt="" />
           </BrowserFrame>
         </template>

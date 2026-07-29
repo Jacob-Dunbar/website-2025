@@ -107,7 +107,7 @@ export default {
 
       <CaseStudySection reverse>
         <template #media>
-          <BrowserFrame filename="dashboard.mp4">
+          <BrowserFrame url="anytask.com/buyer/my_dashboard">
             <div class="p-2 md:p-8 md:pt-6">
               <video preload="metadata" :src="dashboardVideo" autoplay loop muted playsinline class="w-full"></video>
             </div>
