@@ -11,16 +11,12 @@ export default {
       type: String,
       required: true,
     },
-    startPosition: {
-      type: Number,
-      default: 50,
-    },
   },
 
   data() {
     return {
-      position: this.startPosition,
-      targetPosition: this.startPosition,
+      position: 20,
+      targetPosition: 20,
       isDragging: false,
       containerRect: null,
       hasAnimated: false,
@@ -83,9 +79,8 @@ export default {
 
     playIntroAnimation() {
       const timeline = [
-        { pos: 20, delay: 0 },
-        { pos: 80, delay: 700 },
-        { pos: 50, delay: 1400 },
+        { pos: 90, delay: 400 },
+        { pos: 25, delay: 1200 },
       ];
 
       timeline.forEach((step) => {
@@ -96,7 +91,7 @@ export default {
     },
 
     animate() {
-      this.position += (this.targetPosition - this.position) * 0.15;
+      this.position += (this.targetPosition - this.position) * 0.1;
       requestAnimationFrame(this.animate);
     },
 
@@ -118,7 +113,6 @@ export default {
 
       let percent = ((clientX - this.containerRect.left) / this.containerRect.width) * 100;
 
-      // clamp
       if (percent < 0) percent = 0;
       if (percent > 100) percent = 100;
 
@@ -139,6 +133,9 @@ export default {
       @pointercancel="stopDrag"
       @pointerleave="stopDrag"
     >
+      <div class="absolute z-10 top-4 right-4 px-3 py-1 rounded-full bg-main-dark/20 backdrop-blur text-sm font-medium">
+        After
+      </div>
       <img
         :src="after"
         class="block w-full max-w-none"
@@ -149,8 +146,13 @@ export default {
         }"
       />
 
-      <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute inset-0 z-20 overflow-hidden">
         <div class="absolute inset-0 bg-white" :style="{ clipPath: `inset(0 ${100 - position}% 0 0)` }">
+          <div
+            class="absolute z-10 top-4 left-4 px-3 py-1 rounded-full bg-main-dark/20 backdrop-blur text-sm font-medium"
+          >
+            Before
+          </div>
           <img
             :src="before"
             class="absolute inset-0 w-full h-full object-cover"
@@ -163,20 +165,12 @@ export default {
         </div>
       </div>
 
-      <div class="absolute top-0 h-full w-[4px] bg-white shadow-lg" :style="{ left: position + '%' }">
+      <div class="absolute z-30 top-0 h-full w-[4px] bg-white shadow-lg" :style="{ left: position + '%' }">
         <div
           class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-main-dark shadow-lg flex items-center justify-center text-main-light border-2 border-white"
         >
           <font-awesome-icon size="sm" icon="left-right" />
         </div>
-      </div>
-
-      <div class="absolute top-4 left-4 px-3 py-1 rounded-full bg-gray-00/70 backdrop-blur text-sm font-medium">
-        Before
-      </div>
-
-      <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/70 backdrop-blur text-sm font-medium">
-        After
       </div>
     </div>
 
