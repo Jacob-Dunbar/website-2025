@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-main-dark: #162934;
+  --color-main-dark: #4f352e;
   --color-main-light: #f0eee6;
 }
 
@@ -15,100 +15,5 @@ h1 {
 }
 
 h2 {
-  font-family: "Instrument Serif", serif;
-}
-
-.gradient-bg {
-  position: relative;
-  opacity: 0.9;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background: linear-gradient(to bottom right, #314587, #3e62b1);
-}
-
-/* Blob 1 */
-.gradient-bg::before {
-  content: "";
-  position: absolute;
-  top: -10%;
-  left: 0%;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(to bottom right, #c972d6cc, #60519dff);
-  border-radius: 999px;
-  filter: blur(70px) brightness(110%);
-  animation: blobOrbit1 14s infinite ease-in-out;
-}
-
-/* Blob 2 */
-.gradient-bg::after {
-  content: "";
-  position: absolute;
-  bottom: 10%;
-  right: 20%;
-  width: 220px;
-  height: 220px;
-  background: linear-gradient(to bottom right, #314587ff, #44aae199);
-  border-radius: 999px;
-  filter: blur(40px) brightness(120%);
-  animation: blobOrbit2 14s infinite ease-in-out;
-  animation-delay: -8s;
-}
-
-@keyframes blobOrbit1 {
-  0% {
-    transform: translate(0%, 0%) scale(1);
-  }
-  10% {
-    transform: translate(20%, -10%) scale(1.05);
-  }
-  22% {
-    transform: translate(35%, 5%) scale(0.95);
-  }
-  35% {
-    transform: translate(10%, 30%) scale(1.1);
-  }
-  48% {
-    transform: translate(-15%, 10%) scale(0.9);
-  }
-  60% {
-    transform: translate(-30%, -20%) scale(1.05);
-  }
-  75% {
-    transform: translate(5%, -35%) scale(1.1);
-  }
-  88% {
-    transform: translate(25%, -10%) scale(0.95);
-  }
-  100% {
-    transform: translate(0%, 0%) scale(1);
-  }
-}
-
-@keyframes blobOrbit2 {
-  0% {
-    transform: translate(10%, 10%) scale(1);
-  }
-  12% {
-    transform: translate(-10%, 30%) scale(1.1);
-  }
-  28% {
-    transform: translate(-35%, 15%) scale(0.9);
-  }
-  40% {
-    transform: translate(-20%, -25%) scale(1.05);
-  }
-  55% {
-    transform: translate(15%, -50%) scale(1.1);
-  }
-  70% {
-    transform: translate(40%, -10%) scale(0.95);
-  }
-  82% {
-    transform: translate(20%, 20%) scale(1.05);
-  }
-  100% {
-    transform: translate(10%, 10%) scale(1);
-  }
+  font-family: "space Grotesk", serif;
 }
