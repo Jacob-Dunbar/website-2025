@@ -17,6 +17,7 @@ const routes = [
   {
     path: "/",
     name: "home",
+    redirect: "/development",
     component: Home,
   },
   {
