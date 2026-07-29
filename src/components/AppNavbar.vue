@@ -135,23 +135,23 @@ export default {
             <button
               @click="toggleContact"
               class="rounded-lg px-4 py-2 cursor-pointer transition relative"
-              :class="contactOpen ? 'bg-[#b6b6b4]' : 'hover:bg-main-dark/30'"
+              :class="contactOpen ? 'bg-[#c3bbb3]' : 'hover:bg-main-dark/30'"
             >
               Contact
               <div class="absolute top-full -mt-2 left-0 w-full">
                 <div
-                  class="extension h-6 bg-[#b6b6b4] rounded-b-lg"
+                  class="extension h-6 bg-[#c3bbb3] rounded-b-lg"
                   :class="contactOpen ? 'extension-open' : 'extension-closed'"
                 >
                   <div class="corner-blob left absolute right-full top-0 size-4 bg-main-light">
                     <div
-                      class="absolute inset-0 bg-[#b6b6b4] [mask-image:radial-gradient(circle_at_0_0,transparent_70%,black_71%)]"
+                      class="absolute inset-0 bg-[#c3bbb3] [mask-image:radial-gradient(circle_at_0_0,transparent_70%,black_71%)]"
                     ></div>
                   </div>
 
                   <div class="corner-blob right absolute left-full top-0 size-4 bg-main-light">
                     <div
-                      class="absolute inset-0 bg-[#b6b6b4] [mask-image:radial-gradient(circle_at_100%_0,transparent_70%,black_71%)]"
+                      class="absolute inset-0 bg-[#c3bbb3] [mask-image:radial-gradient(circle_at_100%_0,transparent_70%,black_71%)]"
                     ></div>
                   </div>
                 </div>
@@ -160,7 +160,7 @@ export default {
 
             <Transition name="blob">
               <div v-if="contactOpen" class="absolute left-1/2 top-full mt-2 -translate-x-1/2">
-                <div class="contact-popover rounded-xl bg-[#b6b6b4] shadow- flex flex-col p-6 gap-4">
+                <div class="contact-popover rounded-xl bg-[#c3bbb3] shadow- flex flex-col p-6 gap-4">
                   <button
                     @click="copyEmail"
                     class="flex cursor-pointer w-full items-center rounded-lg gap-3 px-8 py-3 bg-main-dark/10 hover:bg-main-dark/15 active:bg-main-dark/20"
