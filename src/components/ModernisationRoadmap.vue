@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <div class="grid grid-cols-3 md:grid-cols-4 gap-y-5 max-w-7xl">
+  <div class="grid grid-cols-3 md:grid-cols-4 gap-y-5 max-w-7xl w-full">
     <div class="border border-main-dark/40 rounded-lg p-4 flex flex-col md:flex-row items-center gap-3">
       <img class="size-10 object-contain flex-shrink-0" src="../assets/stackLogos/vue.svg" alt="" />
       <h4>Vue 2</h4>

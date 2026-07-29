@@ -22,7 +22,7 @@ export default {
 <template>
   <div
     :class="[
-      'flex w-full md:items-center gap-6 md:gap-22 flex-col md:flex-col',
+      'flex w-full md:items-center gap-12 md:gap-22 flex-col md:flex-col',
       reverse ? 'md:flex-row-reverse' : 'md:flex-row',
     ]"
   >
@@ -35,10 +35,9 @@ export default {
         {{ title }}
       </h2>
 
-      <div class="flex flex-wrap gap-x-3 text-[10pt] font-semibold uppercase text-main-dark/40">
-        <span class="flex gap-3" v-for="(tag, index) in tags" :key="tag">
+      <div class="flex flex-wrap gap-3 text-[10pt] font-semibold uppercase text-main-dark/40">
+        <span class="border px-2 py-[2px] rounded-md" v-for="(tag, index) in tags" :key="tag">
           {{ tag }}
-          <span v-if="index < tags.length - 1">•</span>
         </span>
       </div>
 
