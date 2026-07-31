@@ -12,6 +12,12 @@ export default {
       emailCopied: false,
     };
   },
+  props: {
+    darkLogo: {
+      type: Boolean,
+      default: false,
+    },
+  },
   components: {
     BaseButton,
     PageDivider,
@@ -96,7 +102,8 @@ export default {
     <Transition name="blob">
       <div
         v-if="menuOpen"
-        class="absolute -top-3 -right-2 rounded-2xl bg-[#b6b6b4] pt-3 pb-6 px-2 flex flex-col shadow-xl"
+        class="absolute -top-3 -right-2 rounded-2xl pt-3 pb-6 px-2 flex flex-col backdrop-blur-md shadow-xl"
+        :class="darkLogo ? 'bg-main-dark/20' : 'bg-main-light/20'"
       >
         <div class="flex justify-end">
           <button @click="closeMenu" class="rounded-lg p-2 hover:bg-main-dark/10 transition">
@@ -107,7 +114,7 @@ export default {
         <div class="px-4 pt-2 flex flex-col gap-3">
           <router-link
             to="/design"
-            class="rounded-lg flex gap-3 items-center px-2 py-2 transition hover:bg-main-dark/30"
+            class="flex cursor-pointer w-full items-center rounded-lg gap-2 px-6 py-4 bg-main-dark/20 hover:bg-main-dark/15"
           >
             Design Portfolio
             <font-awesome-icon icon="arrow-right-long" />
@@ -115,7 +122,7 @@ export default {
 
           <router-link
             to="/development"
-            class="rounded-lg flex gap-3 items-center px-2 py-2 transition hover:bg-main-dark/30"
+            class="flex cursor-pointer w-full items-center rounded-lg gap-2 px-6 py-4 bg-main-dark/20 hover:bg-main-dark/15"
           >
             Development Portfolio
             <font-awesome-icon icon="arrow-right-long" />
@@ -129,7 +136,7 @@ export default {
 
           <button
             @click="copyEmail"
-            class="flex cursor-pointer w-full items-center rounded-lg gap-2 px-6 py-4 bg-main-dark/10 hover:bg-main-dark/15 active:bg-main-dark/20"
+            class="flex cursor-pointer w-full items-center rounded-lg gap-2 px-6 py-4 bg-main-dark/20 hover:bg-main-dark/15 active:bg-main-dark/20"
           >
             jacob.dunbar@googlemail.com
             <font-awesome-icon :icon="emailCopied ? 'check' : 'copy'" />
@@ -139,7 +146,7 @@ export default {
             <a
               href="https://linkedin.com/in/jacob--dunbar"
               target="_blank"
-              class="flex items-center gap-3 px-6 py-4 bg-main-dark/75 text-main-light rounded-lg flex-1 justify-center hover:bg-main-dark/80"
+              class="flex items-center gap-3 px-6 py-4 bg-main-dark text-main-light rounded-lg flex-1 justify-center hover:bg-main-dark/80"
             >
               LinkedIn
               <font-awesome-icon :icon="['fab', 'linkedin']" />
@@ -148,7 +155,7 @@ export default {
             <a
               href="https://github.com/Jacob-Dunbar"
               target="_blank"
-              class="flex items-center gap-3 px-6 py-4 bg-main-dark/75 text-main-light rounded-lg flex-1 justify-center hover:bg-main-dark/80"
+              class="flex items-center gap-3 px-6 py-4 bg-main-dark text-main-light rounded-lg flex-1 justify-center hover:bg-main-dark/80"
             >
               GitHub
               <font-awesome-icon :icon="['fab', 'github']" />
