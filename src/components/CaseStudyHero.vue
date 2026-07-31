@@ -21,8 +21,8 @@ export default {
 </script>
 
 <template>
-  <div class="bg-main-dark text-main-light w-full flex justify-center relative">
-    <div class="max-w-7xl mx-5 flex flex-col gap-18 py-12 md:py-22 md:items-center md:flex-row">
+  <div id="hero" class="bg-main-dark text-main-light w-full min-h-[70vh] flex justify-center relative">
+    <div class="max-w-7xl mx-5 flex flex-col gap-18 py-12 z-10 md:py-22 md:items-center md:flex-row">
       <div class="lg:w-1/2">
         <h2 class="text-5xl md:text-7xl">
           {{ title }}
