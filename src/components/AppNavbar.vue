@@ -13,6 +13,7 @@ export default {
       contactOpen: false,
       email: "jacob.dunbar@googlemail.com",
       emailCopied: false,
+      isTouch: window.matchMedia("(hover: none)").matches,
     };
   },
   components: {
@@ -54,7 +55,6 @@ export default {
 
       this.observer = new IntersectionObserver(
         ([entry]) => {
-          console.log("intersecting:", entry.isIntersecting);
           this.darkLogo = !entry.isIntersecting;
         },
         {
@@ -102,6 +102,12 @@ export default {
         this.emailCopied = false;
       }, 1500);
     },
+    onMouseEnter() {
+      if (!this.isTouch) this.hovering = true;
+    },
+    onMouseLeave() {
+      if (!this.isTouch) this.hovering = false;
+    },
   },
   computed: {
     expanded() {
@@ -127,8 +133,8 @@ export default {
 
 <template>
   <header
-    @mouseenter="hovering = true"
-    @mouseleave="hovering = false"
+    @mouseenter="onMouseEnter"
+    @mouseleave="onMouseLeave"
     :class="[
       'fixed top-0 left-0 right-0 z-50 px-5 justify-center flex text-main-dark py-5 transition-all duration-300',
       expanded ? 'h-22' : 'h-10',
@@ -137,13 +143,13 @@ export default {
     <div class="absolute inset-0 backdrop-blur pointer-events-none"></div>
     <div
       class="flex flex-1 z-10 max-w-7xl items-center justify-between"
-      :class="darkLogo ? 'text-main-dark' : 'text-main-light'"
+      :class="darkLogo ? 'text-main-dark font-medium' : 'text-main-light'"
     >
       <router-link to="/" class="flex gap-1 items-end">
         <div
           :class="[
             'overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out',
-            expanded ? 'w-[238px]' : 'w-[0px]',
+            expanded ? 'w-[255px]' : 'w-[0px]',
           ]"
         >
           <h1 class="text-4xl leading-none">Jacob Dunbar</h1>

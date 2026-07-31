@@ -27,11 +27,11 @@ export default {
 </script>
 
 <template>
-  <div class="flex items-end bg-main-dark text-main-light/80 justify-center py-10 md:py-20 md:mt-20">
+  <div class="flex items-end bg-main-dark text-main-light/80 justify-center py-10 md:py-20 md:mt-10">
     <div
       :class="[
         'overflow-hidden whitespace-nowrap transition-all duration-900 ease-in-out',
-        expanded ? 'w-[202px] md:w-[740px]' : 'w-[0px]',
+        expanded ? 'w-[215px] md:w-[790px]' : 'w-[0px]',
       ]"
     >
       <h1 class="text-3xl md:text-[110px] leading-none">Jacob Dunbar</h1>

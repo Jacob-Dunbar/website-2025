@@ -67,7 +67,6 @@ export default {
   },
   methods: {
     onCompleteChange(complete, index) {
-      console.log(complete, index);
       this.stack[index + 1].complete = complete;
     },
   },
