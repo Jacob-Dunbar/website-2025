@@ -195,11 +195,11 @@ export default {
             </div>
 
             <div
-              class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#f0eee6] to-transparent"
+              class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-main-light to-transparent"
             ></div>
 
             <div
-              class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#f0eee6] to-transparent"
+              class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-main-light to-transparent"
             ></div>
           </div>
 

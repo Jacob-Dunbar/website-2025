@@ -109,7 +109,7 @@ export default {
         <template #media>
           <div class="relative overflow-hidden">
             <img loading="lazy" class="w-[200%] max-w-none" src="../../assets/search_filters.svg" alt="" />
-            <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#f0eee6] to-transparent"></div>
+            <div class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-main-light to-transparent"></div>
           </div>
         </template>
 
@@ -183,11 +183,11 @@ export default {
             </div>
 
             <div
-              class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-[#f0eee6] to-transparent"
+              class="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-main-light to-transparent"
             ></div>
 
             <div
-              class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#f0eee6] to-transparent"
+              class="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-main-light to-transparent"
             ></div>
           </div>
         </template>
