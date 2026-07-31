@@ -16,14 +16,12 @@ export default {
 
 <template>
   <PortfolioHero title="Frontend Development Portfolio">
-    <p>
-      I specialise in building modern frontend experiences with a strong foundation in both engineering and design. My
-      approach combines scalable component systems, clean implementation, and UX thinking to create interfaces that are
-      intuitive for users and maintainable for teams.
-    </p>
+    <h2>
+      I build <span>scalable</span> frontend experiences with both <span>performance</span> and <span>vibe</span>.
+    </h2>
   </PortfolioHero>
 
-  <div class="flex w-full flex-col items-center">
+  <div class="flex w-full flex-col items-center bg-main-light">
     <div class="max-w-7xl mx-5 py-18 flex flex-col gap-16 md:gap-22">
       <PortfolioItem
         reverse
@@ -38,24 +36,24 @@ export default {
       <PageDivider />
 
       <PortfolioItem
-        title="Customisable Dashboard Experience"
-        description="Built a modular dashboard system allowing users to personalise their workspace through configurable widgets, responsive layouts, and scalable component architecture."
-        :tags="['Vue 3', 'Typescript', 'Tailwind', 'Draggable.js']"
-        to="/development/dashboard"
+        title="Frontend Modernisation Project"
+        description="Modernised a legacy Vue application by upgrading the frontend stack, improving maintainability, and creating a more scalable foundation for future development."
+        :tags="['Vue 3', 'Typescript', 'Tailwind', 'AWS Appsync']"
+        to="/development/frontend-modernisation"
       >
-        <img loading="lazy" class="w-full" src="../../assets/dashboard_ui.png" />
+        <ModernisationRoadmap />
       </PortfolioItem>
 
       <PageDivider />
 
       <PortfolioItem
         reverse
-        title="Frontend Modernisation Project"
-        description="Modernised a legacy Vue application by upgrading the frontend stack, improving maintainability, and creating a more scalable foundation for future development."
-        :tags="['Vue 3', 'Typescript', 'Tailwind', 'AWS Appsync']"
-        to="/development/frontend-modernisation"
+        title="Customisable Dashboard Experience"
+        description="Built a modular dashboard system allowing users to personalise their workspace through configurable widgets, responsive layouts, and scalable component architecture."
+        :tags="['Vue 3', 'Typescript', 'Tailwind', 'Draggable.js']"
+        to="/development/dashboard"
       >
-        <ModernisationRoadmap static />
+        <img loading="lazy" class="w-full" src="../../assets/dashboard_ui.png" />
       </PortfolioItem>
     </div>
   </div>
