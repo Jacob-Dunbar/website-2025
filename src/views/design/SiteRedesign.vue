@@ -29,7 +29,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col gap-10 md:gap-26 pb-20">
+  <div class="flex flex-col gap-10 md:gap-26 pb-20 bg-main-light">
     <!-- Intro -->
     <div class="flex flex-col gap-5 lg:flex-row text-gray-800">
       <div class="lg:w-1/2">

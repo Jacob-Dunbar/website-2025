@@ -26,7 +26,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col w-full items-center gap-10 md:gap-28 pb-26">
+  <div class="flex flex-col w-full items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
       title="Frontend Modernisation Project"
       :roles="['Frontend Developer', 'UX/UI Designer']"

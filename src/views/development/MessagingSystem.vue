@@ -33,7 +33,7 @@ export default {
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-10 md:gap-28 pb-26">
+  <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
       title="Real-Time Messaging System"
       :roles="['Frontend Developer', 'UX/UI Designer']"

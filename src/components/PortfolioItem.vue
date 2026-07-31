@@ -21,10 +21,7 @@ export default {
 
 <template>
   <div
-    :class="[
-      'flex w-full md:items-center gap-12 md:gap-22 flex-col md:flex-col',
-      reverse ? 'md:flex-row-reverse' : 'md:flex-row',
-    ]"
+    :class="['flex w-full md:items-center gap-10 lg:gap-22 flex-col', reverse ? 'md:flex-row-reverse' : 'md:flex-row']"
   >
     <div class="md:w-2/3">
       <slot> </slot>

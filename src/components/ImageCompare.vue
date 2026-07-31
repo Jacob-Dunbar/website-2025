@@ -126,7 +126,7 @@ export default {
   <div class="mx-5 max-w-7xl">
     <div
       ref="container"
-      class="relative w-full overflow-hidden rounded-xl border bg-white border-main-dark/30 shadow-xl select-none cursor-ew-resize"
+      class="relative w-full overflow-hidden rounded-xl border bg-white border-main-dark/10 shadow-xl select-none cursor-ew-resize"
       @pointerdown="startDrag"
       @pointermove="onDrag"
       @pointerup="stopDrag"
