@@ -56,16 +56,14 @@ export default {
 <template>
   <div class="w-full min-w-0 max-w-full rounded-xl border border-slate-700 bg-slate-900 shadow-lg flex flex-col">
     <div class="flex min-w-0 items-center gap-2 border-b border-slate-700 px-4 py-3">
-      <div class="h-3 w-3 rounded-full bg-red-400 shrink-0"></div>
-      <div class="h-3 w-3 rounded-full bg-yellow-400 shrink-0"></div>
-      <div class="h-3 w-3 rounded-full bg-green-400 shrink-0"></div>
+      <font-awesome-icon class="text-slate-400" icon="code" />
 
       <div class="ml-3 flex min-w-0 items-center gap-3">
         <span class="min-w-0 truncate text-xs font-medium tracking-wide text-slate-300">
           {{ filename }}
         </span>
 
-        <span class="shrink-0 rounded-md bg-slate-800 px-2 py-0.5 text-[10px] uppercase tracking-wider text-slate-400">
+        <span class="shrink-0 rounded-md bg-slate-700 px-2 py-0.5 text-[10px] uppercase tracking-wider text-slate-400">
           {{ lang }}
         </span>
       </div>
