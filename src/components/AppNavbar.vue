@@ -10,7 +10,7 @@ export default {
       collapsed: false,
       darkLogo: false,
       hovering: false,
-      contactOpen: true,
+      contactOpen: false,
       email: "jacob.dunbar@googlemail.com",
       emailCopied: false,
     };
@@ -120,9 +120,6 @@ export default {
             href: "/Jacob-Dunbar-Design-CV.pdf",
             filename: "Jacob-Dunbar-Design-CV.pdf",
           };
-    },
-    hoverColour() {
-      return this.darkLogo ? "bg-main-dark/20" : "bg-main-light/20";
     },
   },
 };
@@ -252,51 +249,6 @@ export default {
 </template>
 
 <style scoped>
-.extension {
-  transition: height 0.2s ease, opacity 0.2s ease;
-  overflow: visible;
-}
-
-.extension-closed {
-  height: 0;
-  opacity: 0;
-}
-
-.extension-open {
-  height: 16px;
-  opacity: 1;
-}
-
-.corner-blob.right {
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  transform-origin: left;
-}
-
-.corner-blob.left {
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  transform-origin: right;
-}
-
-.extension-closed .corner-blob {
-  opacity: 0;
-  transform: scale(0);
-}
-
-.extension-open .corner-blob {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.15s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-
 .blob-enter-active,
 .blob-leave-active {
   transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.2s ease;
