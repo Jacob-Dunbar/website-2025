@@ -8,8 +8,9 @@ export default {
     return {
       lastScrollY: 0,
       collapsed: false,
+      darkLogo: false,
       hovering: false,
-      contactOpen: false,
+      contactOpen: true,
       email: "jacob.dunbar@googlemail.com",
       emailCopied: false,
     };
@@ -18,19 +19,52 @@ export default {
     BaseButton,
     MobileMenu,
   },
+  watch: {
+    $route() {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          this.setupObserver();
+        });
+      });
+    },
+  },
   mounted() {
     this.lastScrollY = window.scrollY;
     window.addEventListener("scroll", this.handleScroll);
     document.addEventListener("click", this.handleClickOutside);
     document.addEventListener("keydown", this.handleKeydown);
+
+    this.setupObserver();
   },
 
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
     document.removeEventListener("click", this.handleClickOutside);
     document.removeEventListener("keydown", this.handleKeydown);
+    this.observer.disconnect();
   },
   methods: {
+    setupObserver() {
+      const hero = document.getElementById("hero");
+
+      if (!hero) {
+        setTimeout(() => this.setupObserver(), 100);
+        return;
+      }
+
+      this.observer = new IntersectionObserver(
+        ([entry]) => {
+          console.log("intersecting:", entry.isIntersecting);
+          this.darkLogo = !entry.isIntersecting;
+        },
+        {
+          threshold: 0,
+          rootMargin: "-80px 0px 0px 0px",
+        }
+      );
+
+      this.observer.observe(hero);
+    },
     handleScroll() {
       this.contactOpen = false;
 
@@ -87,6 +121,9 @@ export default {
             filename: "Jacob-Dunbar-Design-CV.pdf",
           };
     },
+    hoverColour() {
+      return this.darkLogo ? "bg-main-dark/20" : "bg-main-light/20";
+    },
   },
 };
 </script>
@@ -96,11 +133,15 @@ export default {
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
     :class="[
-      'fixed top-0 left-0 right-0 z-50 px-5 border-b justify-center border-main-dark/30 flex bg-main-light/60 text-main-dark py-5 backdrop-blur transition-all duration-300',
+      'fixed top-0 left-0 right-0 z-50 px-5 justify-center flex text-main-dark py-5 transition-all duration-300',
       expanded ? 'h-22' : 'h-10',
     ]"
   >
-    <div class="flex flex-1 max-w-7xl items-center justify-between text-main-dark">
+    <div class="absolute inset-0 backdrop-blur pointer-events-none"></div>
+    <div
+      class="flex flex-1 z-10 max-w-7xl items-center justify-between"
+      :class="darkLogo ? 'text-main-dark' : 'text-main-light'"
+    >
       <router-link to="/" class="flex gap-1 items-end">
         <div
           :class="[
@@ -111,23 +152,33 @@ export default {
           <h1 class="text-4xl leading-none">Jacob Dunbar</h1>
         </div>
         <div
-          class="bg-main-dark mb-[2px]"
+          class="mb-[2px] transition-all duration-600 ease-in-out"
           :class="[
-            ' bg-main-dark transition-all duration-600 ease-in-out',
+            darkLogo ? 'bg-main-dark' : 'bg-main-light',
             expanded ? 'size-[8px] rotate-90 mb-[4px]' : 'size-[16px] mb-[10px]',
           ]"
         ></div>
       </router-link>
 
       <transition>
-        <MobileMenu v-if="expanded" class="md:hidden transition" />
+        <MobileMenu v-if="expanded" :darkLogo="darkLogo" class="md:hidden transition" />
       </transition>
 
       <transition>
         <nav ref="navbar" v-if="expanded" class="hidden md:flex items-center gap-4">
-          <router-link to="/design" class="rounded-lg px-4 py-2 transition hover:bg-main-dark/30"> Design </router-link>
+          <router-link
+            to="/design"
+            class="rounded-lg px-4 py-2 transition"
+            :class="[darkLogo ? 'hover:bg-main-dark/20' : 'hover:bg-main-light/20']"
+          >
+            Design
+          </router-link>
 
-          <router-link to="/development" class="rounded-lg px-4 py-2 transition hover:bg-main-dark/30">
+          <router-link
+            to="/development"
+            class="rounded-lg px-4 py-2 transition"
+            :class="[darkLogo ? 'hover:bg-main-dark/20' : 'hover:bg-main-light/20']"
+          >
             Development
           </router-link>
 
@@ -135,32 +186,24 @@ export default {
             <button
               @click="toggleContact"
               class="rounded-lg px-4 py-2 cursor-pointer transition relative"
-              :class="contactOpen ? 'bg-[#c3bbb3]' : 'hover:bg-main-dark/30'"
+              :class="[
+                darkLogo ? 'hover:bg-main-dark/20' : 'hover:bg-main-light/20',
+                contactOpen
+                  ? darkLogo
+                    ? 'bg-main-dark/20 !backdrop-blur'
+                    : 'bg-main-light/20 !backdrop-blur'
+                  : 'hover:bg-main-dark/20',
+              ]"
             >
               Contact
-              <div class="absolute top-full -mt-2 left-0 w-full">
-                <div
-                  class="extension h-6 bg-[#c3bbb3] rounded-b-lg"
-                  :class="contactOpen ? 'extension-open' : 'extension-closed'"
-                >
-                  <div class="corner-blob left absolute right-full top-0 size-4 bg-main-light">
-                    <div
-                      class="absolute inset-0 bg-[#c3bbb3] [mask-image:radial-gradient(circle_at_0_0,transparent_70%,black_71%)]"
-                    ></div>
-                  </div>
-
-                  <div class="corner-blob right absolute left-full top-0 size-4 bg-main-light">
-                    <div
-                      class="absolute inset-0 bg-[#c3bbb3] [mask-image:radial-gradient(circle_at_100%_0,transparent_70%,black_71%)]"
-                    ></div>
-                  </div>
-                </div>
-              </div>
             </button>
 
             <Transition name="blob">
-              <div v-if="contactOpen" class="absolute left-1/2 top-full mt-2 -translate-x-1/2">
-                <div class="contact-popover rounded-xl bg-[#c3bbb3] shadow- flex flex-col p-6 gap-4">
+              <div v-if="contactOpen" class="absolute left-1/2 top-full mt-4 -translate-x-1/2">
+                <div
+                  class="contact-popover rounded-lg bg-main-dark/20 backdrop-blur flex flex-col p-6 gap-4"
+                  :class="[darkLogo ? 'bg-main-dark/20' : 'bg-main-light/20']"
+                >
                   <button
                     @click="copyEmail"
                     class="flex cursor-pointer w-full items-center rounded-lg gap-3 px-8 py-3 bg-main-dark/10 hover:bg-main-dark/15 active:bg-main-dark/20"
@@ -194,7 +237,14 @@ export default {
             </Transition>
           </div>
 
-          <BaseButton :href="cv.href" :download="cv.filename" icon="download"> Download CV </BaseButton>
+          <BaseButton
+            :class="darkLogo ? '!bg-main-dark !text-main-light' : '!bg-main-light !text-main-dark'"
+            :href="cv.href"
+            :download="cv.filename"
+            icon="download"
+          >
+            Download CV
+          </BaseButton>
         </nav>
       </transition>
     </div>
@@ -213,7 +263,7 @@ export default {
 }
 
 .extension-open {
-  height: 24px;
+  height: 16px;
   opacity: 1;
 }
 
