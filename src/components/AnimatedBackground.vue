@@ -12,137 +12,104 @@ export default {
       default: false,
     },
   },
-
-  mounted() {
-    if (!this.static) {
-      window.addEventListener("mousemove", this.handleMouseMove);
-    }
-  },
-
-  beforeUnmount() {
-    if (!this.static) {
-      window.removeEventListener("mousemove", this.handleMouseMove);
-    }
-  },
-
   computed: {
     circles() {
-      const count = Math.ceil(window.innerWidth / 125);
+      const count = Math.ceil(window.innerWidth / 190);
 
       return Array.from({ length: count }, () => ({
-        duration: 6 + Math.random() * 6,
+        duration: 8 + Math.random() * 12,
         delay: -Math.random() * 12,
-        distance: 150 + Math.random() * 100,
-
-        left: 10 + Math.random() * 80,
+        distance: 300 + Math.random() * 100,
+        opacity: 0.4 + Math.random() * 0.6,
+        show: Math.random() > (window.innerWidth > 500 ? 0.7 : 0.3),
+        static: this.static ? true : Math.random() > 0.7,
         top: 10 + Math.random() * 80,
       }));
-    },
-  },
-
-  methods: {
-    handleMouseMove(e) {
-      this.$refs.blobs.forEach((blob) => {
-        const rect = blob.getBoundingClientRect();
-
-        const cx = rect.left + rect.width / 2;
-        const cy = rect.top + rect.height / 2;
-
-        const dx = cx - e.clientX;
-        const dy = cy - e.clientY;
-
-        const distance = Math.sqrt(dx * dx + dy * dy);
-
-        const maxDistance = 250;
-
-        if (distance < maxDistance) {
-          const strength = Math.pow(1 - distance / maxDistance, 1.5) * 80;
-          const angle = Math.atan2(dy, dx);
-
-          const offsetX = Math.cos(angle) * strength;
-          const offsetY = Math.sin(angle) * strength;
-
-          blob.style.setProperty("--mouseX", `${offsetX}px`);
-          blob.style.setProperty("--mouseY", `${offsetY}px`);
-        } else {
-          blob.style.setProperty("--mouseX", "0px");
-          blob.style.setProperty("--mouseY", "0px");
-        }
-      });
     },
   },
 };
 </script>
 
 <template>
-  <div class="absolute inset-0 flex overflow-hidden">
-    <div v-for="(circle, index) in circles" :key="index" class="animated-background relative blur-xs overflow-hidden">
+  <div class="absolute inset-0 flex flex-col overflow-hidden -gap-2">
+    <div class="flex flex-1 overflow-hidden">
       <div
-        class="blob-wrapper"
-        :class="{ static }"
-        :style="{
-          '--duration': `${circle.duration}s`,
-          '--delay': `${circle.delay}s`,
-          '--distance': `${circle.distance}px`,
-          left: static ? `${circle.left}%` : null,
-          top: static ? `${circle.top}%` : null,
-        }"
+        v-for="(circle, index) in circles"
+        :key="index"
+        class="animated-background blur-xs relative overflow-hidden opacity-60"
+        :class="circle.static ? 'opacity-40' : 'opacity-70'"
       >
-        <div ref="blobs" class="blob bg-main-light rounded-full blur-3xl"></div>
+        <div
+          ref="blobs"
+          v-if="circle.show"
+          class="blob bg-[#3b88b2] rounded-full blur-3xl w-full"
+          :class="circle.static && 'static'"
+          :style="{
+            '--duration': `${circle.duration}s`,
+            '--delay': `${circle.delay}s`,
+            '--distance': `${circle.distance}px`,
+            opacity: `${circle.opacity}`,
+            top: circle.static ? `${circle.top}%` : null,
+          }"
+        >
+          <div v-if="[1, 2, 4, 5, 6, 9].includes(index)" class="w-full h-1/2 bg-green-600 rounded-full blur-3xl"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flex flex-1 flex-row-reverse overflow-hidden">
+      <div
+        v-for="(circle, index) in circles"
+        :key="index"
+        class="animated-background blur-xs relative overflow-hidden opacity-60"
+        :class="static ? 'opacity-40' : 'opacity-70'"
+      >
+        <div
+          ref="blobs"
+          v-if="circle.show"
+          class="blob bg-[#3b88b2] rounded-full blur-3xl w-full"
+          :class="{ static }"
+          :style="{
+            '--duration': `${circle.duration}s`,
+            '--delay': `${circle.delay}s`,
+            '--distance': `${circle.distance}px`,
+            opacity: `${circle.opacity}`,
+            top: static ? `${circle.top}%` : null,
+          }"
+        >
+          <div v-if="[1, 4, 5, 6, 9].includes(index)" class="w-full h-1/2 bg-green-600 rounded-full blur-3xl"></div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.blob-wrapper {
+.blob {
   width: 100%;
+  aspect-ratio: 1/3;
+  will-change: transform;
 
   animation: float var(--duration) ease-in-out infinite alternate;
   animation-delay: var(--delay);
 }
 
-.blob-wrapper.static {
-  position: absolute;
-  width: 120%;
-  aspect-ratio: 1;
-  opacity: 0.5;
-
-  transform: translate(-50%, -50%);
+.blob.static {
   animation: none;
 }
 
-.blob {
-  width: 100%;
-  aspect-ratio: 1;
-
-  opacity: 0.25;
-
-  transform: translate(var(--mouseX, 0px), var(--mouseY, 0px));
-
-  transition: transform 0.35s ease, opacity 0.4s ease;
-}
-
 .animated-background {
-  width: 125px;
+  width: 190px;
   flex-shrink: 0;
-}
-
-.animated-background:hover .blob {
-  opacity: 0.3;
-}
-
-.animated-background:hover .blob:not(.static) {
-  opacity: 0.22;
 }
 
 @keyframes float {
   from {
-    transform: translate3d(-20px, calc(var(--distance) * -1), 0);
+    transform: translate3d(0px, calc(var(--distance) * -1), 0);
   }
 
   to {
-    transform: translate3d(20px, var(--distance), 0);
+    transform: translate3d(0px, var(--distance), 0);
   }
 }
 </style>
