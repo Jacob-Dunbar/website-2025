@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-main-dark: #4f352e;
-  --color-main-light: #f0eee6;
+  --color-main-dark: black;
+  --color-main-light: white;
 }
 
 body {
@@ -15,5 +15,5 @@ h1 {
 }
 
 h2 {
-  font-family: "space Grotesk", serif;
+  font-family: "Montserrat", serif;
 }
