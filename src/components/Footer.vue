@@ -31,7 +31,7 @@ export default {
     <div
       :class="[
         'overflow-hidden whitespace-nowrap transition-all duration-900 ease-in-out',
-        expanded ? 'w-[190px] md:w-[690px]' : 'w-[0px]',
+        expanded ? 'w-[202px] md:w-[740px]' : 'w-[0px]',
       ]"
     >
       <h1 class="text-3xl md:text-[110px] leading-none">Jacob Dunbar</h1>
@@ -40,7 +40,7 @@ export default {
       class="bg-main-light/80 mb-[2px]"
       :class="[
         ' bg-main-dark transition-all duration-600 ease-in-out',
-        expanded ? 'size-[6px] md:size-[16px] rotate-90 md:mb-[4px]' : 'size-[20px] md:size-[40px] mb-[10px]',
+        expanded ? 'size-[6px] md:size-[16px] rotate-90 md:mb-[6px]' : 'size-[20px] md:size-[40px] mb-[10px]',
       ]"
     ></div>
   </div>

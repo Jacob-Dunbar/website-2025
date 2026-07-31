@@ -143,7 +143,7 @@ export default {
         <div
           :class="[
             'overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out',
-            expanded ? 'w-[222px]' : 'w-[0px]',
+            expanded ? 'w-[238px]' : 'w-[0px]',
           ]"
         >
           <h1 class="text-4xl leading-none">Jacob Dunbar</h1>
@@ -152,7 +152,7 @@ export default {
           class="mb-[2px] transition-all duration-600 ease-in-out"
           :class="[
             darkLogo ? 'bg-main-dark' : 'bg-main-light',
-            expanded ? 'size-[8px] rotate-90 mb-[4px]' : 'size-[16px] mb-[10px]',
+            expanded ? 'size-[8px] rotate-90 mb-[2px]' : 'size-[16px] mb-[10px]',
           ]"
         ></div>
       </router-link>
