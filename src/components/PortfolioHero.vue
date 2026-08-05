@@ -1,5 +1,7 @@
 <script>
 import { TresCanvas } from "@tresjs/core";
+import { Environment } from "@tresjs/cientos";
+
 import SpinningCube from "./SpinningCube.vue";
 
 export default {
@@ -7,6 +9,7 @@ export default {
   components: {
     TresCanvas,
     SpinningCube,
+    Environment,
   },
   props: {
     title: {
@@ -38,9 +41,9 @@ export default {
       <TresCanvas :alpha="true" :clear-alpha="0">
         <TresPerspectiveCamera :position="[0, 0, 5]" :look-at="[0, 0, 0]" />
 
-        <TresAmbientLight :intensity="1" />
-
-        <TresPointLight :position="[3, 3, 5]" :intensity="100" />
+        <Environment preset="studio" />
+        <TresAmbientLight :intensity="0.1" />
+        <TresDirectionalLight :position="[3, 5, 4]" :intensity="2" />
 
         <SpinningCube :design="title === 'UX/UI Design'" />
       </TresCanvas>

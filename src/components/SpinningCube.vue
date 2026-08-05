@@ -37,8 +37,8 @@ export default {
         const idleX = elapsed * 0.25;
         const idleY = elapsed * 0.35;
 
-        const mouseY = mouse.x * 0.8;
-        const mouseX = mouse.y * 0.8;
+        const mouseY = mouse.x * -0.8;
+        const mouseX = mouse.y * -0.8;
 
         rotation.y += (idleY + mouseY - rotation.y) * 0.05;
         rotation.x += (idleX + mouseX - rotation.x) * 0.05;
@@ -65,12 +65,13 @@ export default {
 
 <template>
   <TresMesh v-if="design" ref="cube">
-    <TresTorusGeometry :args="[0.8, 0.09, 16, 128]" />
+    <TresTorusKnotGeometry :args="[0.4, 0.25, 128, 16]" />
     <TresMeshStandardMaterial color="#111" />
   </TresMesh>
 
   <TresMesh v-else ref="cube">
     <TresIcosahedronGeometry :args="[0.8, 0]" />
+    <!-- <TresMeshBasicMaterial wireframe /> -->
     <TresMeshStandardMaterial color="#111" />
   </TresMesh>
 </template>
