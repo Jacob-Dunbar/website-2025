@@ -168,7 +168,7 @@ export default {
           class="mb-[2px] transition-all duration-600 ease-in-out"
           :class="[
             darkLogo ? 'bg-main-dark' : 'bg-main-light',
-            expanded ? 'size-[8px] rotate-90 mb-[2px]' : 'size-[16px] mb-[10px]',
+            expanded ? 'size-[6px] rotate-90' : 'size-[16px] mb-[5px]',
           ]"
         ></div>
       </router-link>
