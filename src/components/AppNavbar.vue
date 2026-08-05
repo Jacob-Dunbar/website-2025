@@ -20,6 +20,7 @@ export default {
     BaseButton,
     MobileMenu,
   },
+  emits: ["update-dark-logo"],
   watch: {
     $route() {
       requestAnimationFrame(() => {
@@ -27,6 +28,9 @@ export default {
           this.setupObserver();
         });
       });
+    },
+    darkLogo(value) {
+      this.$emit("update-dark-logo", value);
     },
   },
   mounted() {
@@ -46,10 +50,16 @@ export default {
   },
   methods: {
     setupObserver() {
+      if (this.observer) {
+        this.observer.disconnect();
+      }
+
       const hero = document.getElementById("hero");
 
+      this.darkLogo = window.scrollY > 80;
+
       if (!hero) {
-        setTimeout(() => this.setupObserver(), 100);
+        setTimeout(() => this.setupObserver(), 300);
         return;
       }
 

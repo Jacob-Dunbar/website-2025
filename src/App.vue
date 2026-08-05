@@ -9,15 +9,20 @@ export default {
     AppNavbar,
     Footer,
   },
+  data() {
+    return {
+      darkLogo: false,
+    };
+  },
 };
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col !bg-main-dark">
     <Todo />
-    <AppNavbar />
+    <AppNavbar @update-dark-logo="darkLogo = $event" />
     <main class="flex-1 flex flex-col min-h-0">
-      <router-view />
+      <router-view :darkLogo="darkLogo" />
     </main>
     <Footer />
   </div>
