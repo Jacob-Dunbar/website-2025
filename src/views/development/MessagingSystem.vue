@@ -10,6 +10,7 @@ import realtimeVideo from "../../assets/messaging_real_time.mp4";
 import translationVideo from "../../assets/translation.mp4";
 import dataLoadingVideo from "../../assets/data_loading.mp4";
 import quickMessageVideo from "../../assets/quick_message.mp4";
+import ScrollNavigator from "../../components/ScrollNavigator.vue";
 
 export default {
   data() {
@@ -20,6 +21,12 @@ export default {
       quickMessageVideo,
     };
   },
+  props: {
+    darkLogo: {
+      type: Boolean,
+      default: false,
+    },
+  },
   components: {
     CaseStudyHero,
     CaseStudySection,
@@ -28,13 +35,26 @@ export default {
     ChallengeSection,
     CaseStudyContainer,
     CodeSnippet,
+    ScrollNavigator,
   },
 };
 </script>
 
 <template>
+  <ScrollNavigator
+    :darkLogo="darkLogo"
+    :sections="[
+      { id: 'ms_hero', label: 'home' },
+      { id: 'ms_challenge', label: 'The Challenge' },
+      { id: 'updates', label: 'Real-Time Updates' },
+      { id: 'm_translations', label: 'Message Translations' },
+      { id: 'scalable', label: 'Scalable Data Loading' },
+      { id: 'components', label: 'Reusable Components' },
+    ]"
+  />
   <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
+      id="ms_hero"
       title="Real-Time Messaging System"
       :roles="['Frontend Developer', 'UX/UI Designer']"
       :tools="['Vue 3', 'Tailwind', 'Typescript', 'AWS Appsync']"
@@ -56,7 +76,7 @@ export default {
 
     <PageDivider />
 
-    <ChallengeSection>
+    <ChallengeSection id="ms_challenge">
       <p>
         Building a real-time messaging system involved much more than creating a chat interface. The feature needed to
         support live communication across multiple areas of the platform while remaining responsive, reliable, and easy
@@ -73,7 +93,7 @@ export default {
     </ChallengeSection>
 
     <CaseStudyContainer>
-      <CaseStudySection>
+      <CaseStudySection id="updates">
         <template #media>
           <BrowserFrame url="anytask.com/my_messages">
             <div class="p-5 md:p-12 bg-[#f5f6f7]">
@@ -109,7 +129,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="m_translations" reverse>
         <template #media>
           <BrowserFrame url="anytask.com/my_messages">
             <div class="p-2 md:p-12 bg-white">
@@ -146,7 +166,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection>
+      <CaseStudySection id="scalable">
         <template #media>
           <BrowserFrame url="anytask.com/my_messages">
             <div class="p-5 md:p-10 bg-white">
@@ -189,7 +209,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="components" reverse>
         <template #media>
           <BrowserFrame url="anytask.com/seller/example_task_page">
             <div class="md:p-12 bg-white">

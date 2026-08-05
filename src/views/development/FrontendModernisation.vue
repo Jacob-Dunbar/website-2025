@@ -7,10 +7,14 @@ import ModernisationRoadmap from "../../components/ModernisationRoadmap.vue";
 import CaseStudyContainer from "../../components/CaseStudyContainer.vue";
 import CodeSnippet from "../../components/CodeSnippet.vue";
 import StylingSystemGraphic from "../../components/StylingSystemGraphic.vue";
+import ScrollNavigator from "../../components/ScrollNavigator.vue";
 
 export default {
-  data() {
-    return {};
+  props: {
+    darkLogo: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     CaseStudyHero,
@@ -21,13 +25,26 @@ export default {
     ModernisationRoadmap,
     CodeSnippet,
     StylingSystemGraphic,
+    ScrollNavigator,
   },
 };
 </script>
 
 <template>
+  <ScrollNavigator
+    :darkLogo="darkLogo"
+    :sections="[
+      { id: 'fm_hero', label: 'home' },
+      { id: 'fm_challenge', label: 'The Challenge' },
+      { id: 'vue3', label: 'Vue 3 Migration' },
+      { id: 'styling', label: 'Styling System' },
+      { id: 'state', label: 'State Managment' },
+      { id: 'testing', label: 'Unit Testing' },
+    ]"
+  />
   <div class="flex flex-col w-full items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
+      id="fm_hero"
       title="Frontend Modernisation Project"
       :roles="['Frontend Developer', 'UX/UI Designer']"
       :tools="['Vue 3', 'Tailwind', 'Typescript', 'Pinia', 'Vitest']"
@@ -47,7 +64,7 @@ export default {
 
     <PageDivider />
 
-    <ChallengeSection>
+    <ChallengeSection id="fm_challenge">
       <p>
         The platform had grown significantly over several years, but parts of the frontend stack were becoming
         increasingly difficult to maintain. The application was built on Vue 2, Bootstrap, Vuex, and legacy tooling,
@@ -72,7 +89,7 @@ export default {
     </ChallengeSection>
 
     <CaseStudyContainer>
-      <CaseStudySection>
+      <CaseStudySection id="vue3">
         <template #media>
           <div class="relative">
             <div class="md:overflow-x-scroll flex flex-col md:flex-row gap-4 md:px-10 pb-5">
@@ -187,7 +204,7 @@ emitter.emit(
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="styling" reverse>
         <template #media>
           <StylingSystemGraphic />
         </template>
@@ -226,7 +243,7 @@ emitter.emit(
 
       <PageDivider />
 
-      <CaseStudySection>
+      <CaseStudySection id="state">
         <template #media>
           <div class="flex flex-col md:flex-row gap-5">
             <CodeSnippet
@@ -310,7 +327,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="testing" reverse>
         <template #media>
           <div class="flex gap-5">
             <CodeSnippet

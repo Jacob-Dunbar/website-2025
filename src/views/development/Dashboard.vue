@@ -8,6 +8,7 @@ import ChallengeSection from "../../components/ChallengeSection.vue";
 import CaseStudyHero from "../../components/CaseStudyHero.vue";
 import CaseStudyContainer from "../../components/CaseStudyContainer.vue";
 import BrowserFrame from "../../components/BrowserFrame.vue";
+import ScrollNavigator from "../../components/ScrollNavigator.vue";
 
 export default {
   data() {
@@ -15,6 +16,12 @@ export default {
       dashboardVideo,
       dragVideo,
     };
+  },
+  props: {
+    darkLogo: {
+      type: Boolean,
+      default: false,
+    },
   },
   components: {
     CaseStudyHero,
@@ -24,13 +31,27 @@ export default {
     CaseStudyContainer,
     CodeSnippet,
     BrowserFrame,
+    ScrollNavigator,
   },
 };
 </script>
 
 <template>
+  <ScrollNavigator
+    :darkLogo="darkLogo"
+    :sections="[
+      { id: 'cd_hero', label: 'home' },
+      { id: 'cd_challenge', label: 'The Challenge' },
+      { id: 'template', label: 'Widget Template' },
+      { id: 'interaction', label: 'Widget Repositioning' },
+      { id: 'persistance', label: 'Persistant Layouts' },
+      { id: 'responsive_c', label: 'Responsive Collumns' },
+    ]"
+  />
+
   <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
+      id="cd_hero"
       title="Customisable Dashboard Experience"
       :roles="['Frontend Developer', 'UX/UI Designer']"
       :tools="['Vue 3', 'Tailwind', 'Draggable.js']"
@@ -52,7 +73,7 @@ export default {
 
     <PageDivider />
 
-    <ChallengeSection>
+    <ChallengeSection id="cd_challenge">
       <p>
         The platform's dashboard needed to bring together a growing collection of independent features—including sales,
         messaging, tasks, purchases and account management—into a single, cohesive interface. As new widgets were
@@ -67,7 +88,7 @@ export default {
     </ChallengeSection>
 
     <CaseStudyContainer>
-      <CaseStudySection>
+      <CaseStudySection id="template">
         <template #media>
           <div class="shadow-lg rounded-lg">
             <div class="bg-[#1a2e3c] rounded-t-lg text-gray-50 w-full py-3 px-5 flex gap-4 items-center">
@@ -87,7 +108,7 @@ export default {
           </div>
         </template>
 
-        <h3>1. Reusable Widget Architecture</h3>
+        <h3>1. Reusable Widget Template</h3>
 
         <p>
           Every dashboard widget shared a common wrapper component that handled the structure, styling and functionality
@@ -114,7 +135,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="interaction" reverse>
         <template #media>
           <BrowserFrame url="anytask.com/dashboard">
             <div class="p-6 bg-white">
@@ -123,7 +144,7 @@ export default {
           </BrowserFrame>
         </template>
 
-        <h3>2. Widget Positioning & Interaction</h3>
+        <h3>2. Widget Repositioning & Interaction</h3>
 
         <p>
           The dashboard featured a three-column drag-and-drop layout built with draggable.js, allowing users to
@@ -150,7 +171,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection>
+      <CaseStudySection id="persistance">
         <template #media>
           <div class="w-full relative hidden md:block">
             <div class="overflow-x-scroll w-full flex flex-col md:flex-row gap-4 px-10 pb-5">
@@ -241,7 +262,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="responsive_c" reverse>
         <template #media>
           <div class="w-full flex flex-col md:flex-row gap-5">
             <img
