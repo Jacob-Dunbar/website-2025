@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-  <PortfolioHero title="Frontend Development Portfolio">
+  <PortfolioHero title="Frontend Development">
     <h2>
       I build <span>scalable</span> frontend experiences with both <span>performance</span> and <span>vibe</span>.
     </h2>

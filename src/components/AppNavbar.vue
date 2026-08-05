@@ -149,10 +149,10 @@ export default {
         <div
           :class="[
             'overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out',
-            expanded ? 'w-[255px]' : 'w-[0px]',
+            expanded ? 'w-[185px]' : 'w-[0px]',
           ]"
         >
-          <h1 class="text-4xl leading-none">Jacob Dunbar</h1>
+          <h1 class="text-2xl leading-none uppercase">Jacob Dunbar</h1>
         </div>
         <div
           class="mb-[2px] transition-all duration-600 ease-in-out"
@@ -168,7 +168,7 @@ export default {
       </transition>
 
       <transition>
-        <nav ref="navbar" v-if="expanded" class="hidden md:flex items-center gap-4">
+        <nav ref="navbar" v-if="expanded" class="hidden md:flex items-center *:uppercase *:text-sm gap-4">
           <router-link
             to="/design"
             class="rounded-lg px-4 py-2 transition"
@@ -188,7 +188,7 @@ export default {
           <div class="relative" ref="contactMenu">
             <button
               @click="toggleContact"
-              class="rounded-lg px-4 py-2 cursor-pointer transition relative"
+              class="rounded-lg px-4 py-2 cursor-pointer transition relative uppercase"
               :class="[
                 darkLogo ? 'hover:bg-main-dark/20' : 'hover:bg-main-light/20',
                 contactOpen

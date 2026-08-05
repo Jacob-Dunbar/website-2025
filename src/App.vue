@@ -16,7 +16,7 @@ export default {
   <div class="min-h-screen flex flex-col !bg-main-dark">
     <Todo />
     <AppNavbar />
-    <main class="flex-1 flex flex-col min-h-0 pt-22">
+    <main class="flex-1 flex flex-col min-h-0">
       <router-view />
     </main>
     <Footer />

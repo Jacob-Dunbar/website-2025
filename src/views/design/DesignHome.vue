@@ -13,7 +13,7 @@ export default {
 </script>
 
 <template>
-  <PortfolioHero title="UX/UI Design Portfolio">
+  <PortfolioHero title="UX/UI Design">
     <h2>I turn <span>complex</span> problems into <span>simple</span>, and <span>enjoyable</span> experiences.</h2>
   </PortfolioHero>
 

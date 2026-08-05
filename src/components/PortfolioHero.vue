@@ -1,10 +1,12 @@
 <script>
-import AnimatedBackground from "./AnimatedBackground.vue";
+import { TresCanvas } from "@tresjs/core";
+import SpinningCube from "./SpinningCube.vue";
 
 export default {
   name: "PortfolioHero",
   components: {
-    AnimatedBackground,
+    TresCanvas,
+    SpinningCube,
   },
   props: {
     title: {
@@ -16,17 +18,32 @@ export default {
 </script>
 
 <template>
-  <section id="hero" class="w-full bg-main-dark text-main-light flex h-[70vh] justify-center relative">
-    <div class="mx-5 flex flex-col md:items-start justify-center max-w-7xl w-full] gap-22 py-12 z-10 relative">
-      <h2 class="absolute top-2 left-0 md:text-xl uppercase opacity-55">{{ title }}</h2>
-
+  <section id="hero" class="w-full h-screen flex items-center justify-center relative overflow-hidden">
+    <div
+      class="bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.2)_0%,_transparent_60%)] w-full max-w-7xl h-full relative"
+    >
       <div
-        class="md:w-full text-4xl px-5 md:text-7xl text-center text-main-light/80 flex flex-col gap-8 mb-10 [&_span]:italic [&_span]:text-sky-700 [&_span]:font-semibold"
+        class="w-full h-full mx-5 absolute top-0 left-0 flex flex-col md:flex-row z-20 pt-24 md:pt-0 justify-between"
       >
-        <slot></slot>
-      </div>
-    </div>
+        <div class="text-main-light text-5xl md:text-6xl w-3/4 md:w-1/3 flex flex-col justify-center">
+          <h2>{{ title }}</h2>
+          <h2>Portfolio.</h2>
+        </div>
 
-    <AnimatedBackground />
+        <div class="text-main-light text-2xl md:text-xl w-1/2 md:w-1/4 flex flex-col pb-5 md:pb-0 justify-center">
+          <slot></slot>
+        </div>
+      </div>
+
+      <TresCanvas :alpha="true" :clear-alpha="0">
+        <TresPerspectiveCamera :position="[0, 0, 5]" :look-at="[0, 0, 0]" />
+
+        <TresAmbientLight :intensity="1" />
+
+        <TresPointLight :position="[3, 3, 5]" :intensity="100" />
+
+        <SpinningCube :design="title === 'UX/UI Design'" />
+      </TresCanvas>
+    </div>
   </section>
 </template>
