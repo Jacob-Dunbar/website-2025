@@ -42,6 +42,7 @@ export default {
 
 <template>
   <ScrollNavigator
+    ref="scrollNavigator"
     :darkLogo="darkLogo"
     :sections="[
       { id: 'ms_hero', label: 'home' },
@@ -54,6 +55,7 @@ export default {
   />
   <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
+      @toFirst="$refs.scrollNavigator.scrollTo('ms_challenge')"
       id="ms_hero"
       title="Real-Time Messaging System"
       :roles="['Frontend Developer', 'UX/UI Designer']"

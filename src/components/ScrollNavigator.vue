@@ -80,8 +80,11 @@ export default {
             v-for="section in sections"
             :key="section.id"
             @click="scrollTo(section.id)"
-            class="text-xs uppercase tracking-widest hover:opacity-60 transition cursor-pointer"
-            :class="darkLogo ? 'text-main-dark' : 'text-main-light'"
+            class="text-xs uppercase tracking-widest opacity-60 hover:opacity-100 transition cursor-pointer"
+            :class="[
+              darkLogo ? 'text-main-dark' : 'text-main-light',
+              activeSection === section.id ? '!opacity-100' : 'opacity-60',
+            ]"
           >
             {{ section.label }}
           </button>
@@ -89,7 +92,7 @@ export default {
       </Transition>
 
       <Transition name="fade">
-        <div class="flex flex-col transition-all duration-300 ease-out" :class="hovered ? 'gap-[26px]' : 'gap-4'">
+        <div class="flex flex-col transition-all duration-300 ease-out" :class="hovered ? 'gap-[26px]' : 'gap-3'">
           <button
             v-for="section in sections"
             :key="section.id"

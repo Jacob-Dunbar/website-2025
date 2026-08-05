@@ -43,6 +43,7 @@ export default {
 
 <template>
   <ScrollNavigator
+    ref="scrollNavigator"
     :darkLogo="darkLogo"
     :sections="[
       { id: 'da_hero', label: 'home' },
@@ -54,6 +55,7 @@ export default {
   />
   <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
+      @toFirst="$refs.scrollNavigator.scrollTo('da_challenge')"
       id="da_hero"
       title="AI Powered Description Assistant"
       :roles="['UX/UI Design', 'Frontend Development']"

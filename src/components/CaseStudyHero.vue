@@ -21,7 +21,7 @@ export default {
 </script>
 
 <template>
-  <div id="hero" class="bg-main-dark text-main-light w-full min-h-[70vh] flex justify-center relative">
+  <div id="hero" class="bg-main-dark text-main-light w-full min-h-screen flex justify-center relative">
     <div class="max-w-7xl mx-5 flex flex-col gap-18 py-12 z-10 md:py-22 md:items-center md:flex-row">
       <div class="lg:w-1/2">
         <h2 class="text-5xl md:text-7xl">
@@ -50,7 +50,7 @@ export default {
             <span
               v-for="tool in tools"
               :key="tool"
-              class="px-2 py-1 rounded-md bg-main-light/80 text-main-dark text-sm font-bold"
+              class="px-2 py-1 rounded-md bg-main-light/60 text-main-dark text-sm font-bold"
             >
               {{ tool }}
             </span>
@@ -65,8 +65,12 @@ export default {
           </p>
         </div>
       </div>
-    </div>
 
-    <AnimatedBackground static />
+      <font-awesome-icon
+        @click="$emit('toFirst')"
+        class="absolute right-10 md:left-1/2 bottom-14 -translate-x-1/2 !size-6 text-main-light/50 cursor-pointer transition-all duration-300 ease-out hover:scale-125 hover:text-main-light/70"
+        icon="arrow-down-long"
+      />
+    </div>
   </div>
 </template>

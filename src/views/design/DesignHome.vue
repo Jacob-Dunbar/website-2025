@@ -22,6 +22,7 @@ export default {
 
 <template>
   <ScrollNavigator
+    ref="scrollNavigator"
     :darkLogo="darkLogo"
     :sections="[
       { id: 'hero', label: 'home' },
@@ -31,7 +32,7 @@ export default {
     ]"
   />
 
-  <PortfolioHero title="UX/UI Design">
+  <PortfolioHero @toFirst="$refs.scrollNavigator.scrollTo('user_dashboard')" title="UX/UI Design">
     <h2>I turn <span>complex</span> problems into <span>simple</span>, and <span>enjoyable</span> experiences.</h2>
   </PortfolioHero>
 

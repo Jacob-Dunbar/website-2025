@@ -40,6 +40,7 @@ export default {
 
 <template>
   <ScrollNavigator
+    ref="scrollNavigator"
     :darkLogo="darkLogo"
     :sections="[
       { id: 'db_hero', label: 'home' },
@@ -53,6 +54,7 @@ export default {
 
   <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
+      @toFirst="$refs.scrollNavigator.scrollTo('db_challenge')"
       id="db_hero"
       title="Dashboard Redesign and Expansion"
       :roles="['UX/UI Design', 'Frontend Development']"

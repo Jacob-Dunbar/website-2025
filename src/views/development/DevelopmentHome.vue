@@ -24,6 +24,7 @@ export default {
 
 <template>
   <ScrollNavigator
+    ref="scrollNavigator"
     :darkLogo="darkLogo"
     :sections="[
       { id: 'hero', label: 'Home' },
@@ -32,7 +33,7 @@ export default {
       { id: 'dashboard', label: 'Customisable Dashboard' },
     ]"
   />
-  <PortfolioHero title="Frontend Development">
+  <PortfolioHero @toFirst="$refs.scrollNavigator.scrollTo('messaging')" title="Frontend Development">
     <h2>
       I build <span>scalable</span> frontend experiences with both <span>performance</span> and <span>vibe</span>.
     </h2>
