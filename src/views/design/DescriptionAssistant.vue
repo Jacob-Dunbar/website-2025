@@ -10,6 +10,7 @@ import CaseStudySection from "../../components/CaseStudySection.vue";
 import BrowserFrame from "../../components/BrowserFrame.vue";
 import PageDivider from "../../components/PageDivider.vue";
 import SegmentedToggle from "../../components/SegmentedToggle.vue";
+import ScrollNavigator from "../../components/ScrollNavigator.vue";
 
 export default {
   data() {
@@ -20,6 +21,12 @@ export default {
       modeStructure: "Original",
     };
   },
+  props: {
+    darkLogo: {
+      type: Boolean,
+      default: false,
+    },
+  },
   components: {
     ImageCompare,
     CaseStudyHero,
@@ -29,13 +36,25 @@ export default {
     ChallengeSection,
     CaseStudyContainer,
     SegmentedToggle,
+    ScrollNavigator,
   },
 };
 </script>
 
 <template>
+  <ScrollNavigator
+    :darkLogo="darkLogo"
+    :sections="[
+      { id: 'da_hero', label: 'home' },
+      { id: 'da_challenge', label: 'The Challenge' },
+      { id: 'controlled', label: 'User Cntrolled' },
+      { id: 'structured', label: 'Structured Breakdown' },
+      { id: 'translation', label: 'AI Translations' },
+    ]"
+  />
   <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
+      id="da_hero"
       title="AI Powered Description Assistant"
       :roles="['UX/UI Design', 'Frontend Development']"
       :tools="['Figma']"
@@ -52,7 +71,7 @@ export default {
 
     <PageDivider />
 
-    <ChallengeSection visual>
+    <ChallengeSection id="da_challenge" visual>
       <p>
         As the platform grew, key information became scattered across multiple pages, making it difficult for users to
         keep track of messages, sales, purchases and other day-to-day activity.
@@ -76,7 +95,7 @@ export default {
     </ChallengeSection>
 
     <CaseStudyContainer>
-      <CaseStudySection>
+      <CaseStudySection id="controlled">
         <template #media>
           <img loading="lazy" class="w-full" src="/src/assets/AI_anim.png" alt="" />
         </template>
@@ -104,7 +123,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="structured" reverse>
         <template #media>
           <SegmentedToggle v-model="modeStructure" :options="['Original', 'AI Asisted']">
             <template #option0>
@@ -169,7 +188,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection>
+      <CaseStudySection id="translation">
         <template #media>
           <SegmentedToggle v-model="modeStructure" :options="['Original', 'AI Asisted']">
             <template #option0>

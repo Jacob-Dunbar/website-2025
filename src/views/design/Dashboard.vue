@@ -9,6 +9,7 @@ import BrowserFrame from "../../components/BrowserFrame.vue";
 import PageDivider from "../../components/PageDivider.vue";
 import ChallengeSection from "../../components/ChallengeSection.vue";
 import CaseStudyContainer from "../../components/CaseStudyContainer.vue";
+import ScrollNavigator from "../../components/ScrollNavigator.vue";
 
 export default {
   data() {
@@ -18,6 +19,12 @@ export default {
       after,
     };
   },
+  props: {
+    darkLogo: {
+      type: Boolean,
+      default: false,
+    },
+  },
   components: {
     ImageCompare,
     CaseStudyHero,
@@ -26,13 +33,27 @@ export default {
     PageDivider,
     ChallengeSection,
     CaseStudyContainer,
+    ScrollNavigator,
   },
 };
 </script>
 
 <template>
+  <ScrollNavigator
+    :darkLogo="darkLogo"
+    :sections="[
+      { id: 'db_hero', label: 'home' },
+      { id: 'db_challenge', label: 'The Challenge' },
+      { id: 'widget_architecture', label: 'Widget Architecture' },
+      { id: 'layouts', label: 'Customisable Layouts' },
+      { id: 'workflows', label: 'User Workflows' },
+      { id: 'responsive', label: 'Responsive Layouts' },
+    ]"
+  />
+
   <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
+      id="db_hero"
       title="Dashboard Redesign and Expansion"
       :roles="['UX/UI Design', 'Frontend Development']"
       :tools="['Figma']"
@@ -52,7 +73,7 @@ export default {
 
     <PageDivider />
 
-    <ChallengeSection visual>
+    <ChallengeSection id="db_challenge" visual>
       <p>
         As the platform grew, key information became scattered across multiple pages, making it difficult for users to
         keep track of messages, sales, purchases and other day-to-day activity.
@@ -77,7 +98,7 @@ export default {
     </ChallengeSection>
 
     <CaseStudyContainer>
-      <CaseStudySection>
+      <CaseStudySection id="widget_architecture">
         <template #media>
           <img loading="lazy" class="mx-auto" src="../../assets/dashboard_dropdown.png" alt="" />
         </template>
@@ -105,7 +126,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="layouts" reverse>
         <template #media>
           <BrowserFrame url="anytask.com/buyer/my_dashboard">
             <div class="p-2 md:p-8 md:pt-6">
@@ -136,7 +157,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection>
+      <CaseStudySection id="workflows">
         <template #media>
           <img loading="lazy" class="mx-auto" src="../../assets/workfows.png" alt="" />
         </template>
@@ -156,7 +177,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="responsive" reverse>
         <template #media>
           <div class="w-full flex flex-col md:flex-row gap-5">
             <img

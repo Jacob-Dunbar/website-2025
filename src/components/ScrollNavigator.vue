@@ -68,7 +68,11 @@ export default {
 </script>
 
 <template>
-  <div class="fixed right-8 top-1/2 -translate-y-1/2 z-50" @mouseenter="hovered = true" @mouseleave="hovered = false">
+  <div
+    class="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-50"
+    @mouseenter="hovered = true"
+    @mouseleave="hovered = false"
+  >
     <div class="flex items-center gap-4">
       <Transition name="fade">
         <div v-if="hovered" class="flex flex-col items-end gap-3">

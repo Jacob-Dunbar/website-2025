@@ -9,6 +9,7 @@ import BrowserFrame from "../../components/BrowserFrame.vue";
 import PageDivider from "../../components/PageDivider.vue";
 import ChallengeSection from "../../components/ChallengeSection.vue";
 import CaseStudyContainer from "../../components/CaseStudyContainer.vue";
+import ScrollNavigator from "../../components/ScrollNavigator.vue";
 
 export default {
   data() {
@@ -18,6 +19,12 @@ export default {
       after,
     };
   },
+  props: {
+    darkLogo: {
+      type: Boolean,
+      default: false,
+    },
+  },
   components: {
     ImageCompare,
     CaseStudyHero,
@@ -26,13 +33,27 @@ export default {
     PageDivider,
     ChallengeSection,
     CaseStudyContainer,
+    ScrollNavigator,
   },
 };
 </script>
 
 <template>
+  <ScrollNavigator
+    :darkLogo="darkLogo"
+    :sections="[
+      { id: 'se_hero', label: 'home' },
+      { id: 'se_challenge', label: 'The Challenge' },
+      { id: 'suggestions', label: 'Query Suggestions' },
+      { id: 'refinement', label: 'Quick Refinement' },
+      { id: 'category', label: 'Category Pages' },
+      { id: 'mobile', label: 'Mobile Design' },
+    ]"
+  />
+
   <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
+      id="se_hero"
       title="Intelligent Search Experience"
       :roles="['UX/UI Designer', 'Frontend Developer']"
       :tools="['Figma']"
@@ -53,7 +74,7 @@ export default {
 
     <PageDivider />
 
-    <ChallengeSection visual>
+    <ChallengeSection id="se_challenge" visual>
       <p>
         The existing search experience made it difficult for users to efficiently browse and refine results,
         particularly on mobile. Filtering occupied valuable screen space, available options lacked visibility, and
@@ -79,7 +100,7 @@ export default {
     </ChallengeSection>
 
     <CaseStudyContainer>
-      <CaseStudySection>
+      <CaseStudySection id="suggestions">
         <template #media>
           <BrowserFrame url="search_suggestions.mp4">
             <div class="md:p-8 md:pt-6">
@@ -105,7 +126,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="refinement" reverse>
         <template #media>
           <div class="relative overflow-hidden">
             <img loading="lazy" class="w-[200%] max-w-none" src="../../assets/search_filters.svg" alt="" />
@@ -129,7 +150,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection>
+      <CaseStudySection id="category">
         <template #media>
           <BrowserFrame url="anytask.com/?query=Logo%20Design">
             <img loading="lazy" class="w-full" src="../../assets/category_ui.png" alt="" />
@@ -158,7 +179,7 @@ export default {
 
       <PageDivider />
 
-      <CaseStudySection reverse>
+      <CaseStudySection id="mobile" reverse>
         <template #media>
           <div class="w-full relative">
             <div class="overflow-x-scroll flex gap-2 md:gap-8 px-10 pb-5">
