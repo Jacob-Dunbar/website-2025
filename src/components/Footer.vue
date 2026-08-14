@@ -31,10 +31,10 @@ export default {
     <div
       :class="[
         'overflow-hidden whitespace-nowrap transition-all duration-900 ease-in-out',
-        expanded ? 'w-[190px] md:w-[470px]' : 'w-[0px]',
+        expanded ? 'w-[160px] md:w-[395px]' : 'w-[0px]',
       ]"
     >
-      <h1 class="text-2xl md:text-[60px] leading-none uppercase">Jacob Dunbar</h1>
+      <h1 class="text-2xl md:text-[60px] leading-none">Jacob Dunbar</h1>
     </div>
     <div
       class="bg-main-light/80 mb-[2px]"
