@@ -69,7 +69,8 @@ export default {
 
 <template>
   <div
-    class="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-50"
+    class="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-50 rounded-md p-4"
+    :class="[darkLogo ? 'hover:bg-main-light' : 'hover:bg-main-dark']"
     @mouseenter="hovered = true"
     @mouseleave="hovered = false"
   >
