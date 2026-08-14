@@ -31,31 +31,33 @@ export default {
         <div class="text-main-light text-5xl md:text-6xl w-3/4 md:w-1/3 flex flex-col justify-center">
           <h2>{{ title }}</h2>
           <h2>Portfolio.</h2>
-          <button v-if="title === 'UX/UI Design'" class="mr-auto">
+          <button v-if="title === 'UX/UI Design'" class="mr-auto hidden md:flex">
             <router-link
               to="/development"
-              class="text-lg border hover:bg-main-light/10 mt-5 border-main-light/60 text-main-light/60 rounded-full py-1 px-6"
+              class="text-lg hover:bg-main-light/10 mt-5 text-main-light/50 rounded-md py-2 md:px-3"
             >
-              see my Development work
+              See my development work
             </router-link>
           </button>
 
           <button v-else class="mr-auto">
             <router-link
               to="/design"
-              class="text-lg border hover:bg-main-light/10 mt-5 border-main-light/60 text-main-light/60 rounded-full py-1 px-6"
+              class="text-lg hover:bg-main-light/10 mt-5 text-main-light/50 rounded-md py-2 md:px-3"
             >
-              see my Design work
+              See my design work
             </router-link>
           </button>
         </div>
 
-        <div class="text-main-light text-xl w-1/2 md:w-1/4 flex flex-col pb-5 md:pb-0 justify-center">
+        <div
+          class="text-main-light text-xl w-2/3 md:w-[28%] flex md:text-right flex-col pb-12 md:pb-0 justify-center items-end pr-5"
+        >
           <slot></slot>
         </div>
         <font-awesome-icon
           @click="$emit('toFirst')"
-          class="absolute right-10 md:left-1/2 bottom-14 -translate-x-1/2 !size-6 text-main-light/50 cursor-pointer transition-all duration-300 ease-out hover:scale-125 hover:text-main-light/70"
+          class="absolute right-10 md:left-1/2 bottom-14 -translate-x-1/2 !size-8 md:!size-6 text-main-light/50 cursor-pointer transition-all duration-300 ease-out hover:scale-125 hover:text-main-light/70"
           icon="arrow-down-long"
         />
       </div>
