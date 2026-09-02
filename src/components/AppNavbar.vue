@@ -70,7 +70,7 @@ export default {
         {
           threshold: 0,
           rootMargin: "-80px 0px 0px 0px",
-        }
+        },
       );
 
       this.observer.observe(hero);
@@ -146,7 +146,7 @@ export default {
     @mouseenter="onMouseEnter"
     @mouseleave="onMouseLeave"
     :class="[
-      'fixed top-0 left-0 right-0 z-50 px-5 justify-center flex text-main-dark py-5 transition-all duration-300',
+      'fixed top-0 left-0 right-0 z-50 px-5 mx-5 justify-center flex text-main-dark py-5 transition-all duration-300',
       expanded ? 'h-22' : 'h-10',
     ]"
   >
@@ -159,7 +159,7 @@ export default {
         <div
           :class="[
             'overflow-hidden whitespace-nowrap transition-all duration-300 ease-in-out',
-            expanded ? 'w-[192px]' : 'w-[0px]',
+            expanded ? 'w-[196px]' : 'w-[0px]',
           ]"
         >
           <h1 class="text-3xl leading-none">Jacob Dunbar</h1>
@@ -179,22 +179,6 @@ export default {
 
       <transition>
         <nav ref="navbar" v-if="expanded" class="hidden md:flex items-center *:uppercase *:text-sm gap-4">
-          <router-link
-            to="/design"
-            class="rounded-lg px-4 py-2 transition"
-            :class="[darkLogo ? 'hover:bg-main-dark/20' : 'hover:bg-main-light/20']"
-          >
-            Design
-          </router-link>
-
-          <router-link
-            to="/development"
-            class="rounded-lg px-4 py-2 transition"
-            :class="[darkLogo ? 'hover:bg-main-dark/20' : 'hover:bg-main-light/20']"
-          >
-            Development
-          </router-link>
-
           <div class="relative" ref="contactMenu">
             <button
               @click="toggleContact"
@@ -267,7 +251,9 @@ export default {
 <style scoped>
 .blob-enter-active,
 .blob-leave-active {
-  transition: transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 0.2s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1),
+    opacity 0.2s ease;
   transform-origin: top center;
 }
 

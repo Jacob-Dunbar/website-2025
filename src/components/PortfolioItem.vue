@@ -14,6 +14,7 @@ export default {
       default: () => [],
     },
     to: String,
+    to2: String,
     reverse: Boolean,
   },
 };
@@ -42,7 +43,12 @@ export default {
         {{ description }}
       </p>
 
-      <BaseButton :to="to"> View case study </BaseButton>
+      <div v-if="tags.length > 1" class="flex flex-col gap-2">
+        <BaseButton :to="to">{{ tags[0] }} case study </BaseButton>
+        <BaseButton :to="to2">{{ tags[1] }} case study </BaseButton>
+      </div>
+
+      <BaseButton v-else :to="to"> View case study </BaseButton>
     </div>
   </div>
 </template>

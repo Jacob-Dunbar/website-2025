@@ -93,7 +93,7 @@ export default {
       </Transition>
 
       <Transition name="fade">
-        <div class="flex flex-col transition-all duration-300 ease-out" :class="hovered ? 'gap-[26px]' : 'gap-3'">
+        <div class="flex flex-col transition-all duration-300 ease-out" :class="hovered ? 'gap-[26px]' : 'gap-2'">
           <button
             v-for="section in sections"
             :key="section.id"
