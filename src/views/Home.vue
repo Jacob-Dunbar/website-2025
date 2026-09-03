@@ -77,10 +77,10 @@ export default {
           </div>
           <div class="hidden md:flex flex-col items-center">
             <div class="relative flex gap-12 my-10">
-              <img loading="lazy" src="../assets/workoutApp/Character.png" alt="" class="relative size-[200px] -mx-8" />
+              <img loading="lazy" src="../assets/workoutApp/character.png" alt="" class="relative size-[200px] -mx-8" />
               <img
                 loading="lazy"
-                src="../assets/workoutApp/Character2.png"
+                src="../assets/workoutApp/character2.png"
                 alt=""
                 class="relative -mx-8 w-[200px] h-auto"
               />
@@ -88,13 +88,13 @@ export default {
             <div class="relative flex gap-12 my-10">
               <img
                 loading="lazy"
-                src="../assets/workoutApp/Character3.png"
+                src="../assets/workoutApp/character3.png"
                 alt=""
                 class="relative -mx-8 w-[200px] h-auto"
               />
               <img
                 loading="lazy"
-                src="../assets/workoutApp/Character4.png"
+                src="../assets/workoutApp/character4.png"
                 alt=""
                 class="relative -mx-8 w-[200px] h-auto"
               />
