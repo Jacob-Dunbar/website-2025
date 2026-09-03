@@ -11,11 +11,13 @@ import ChallengeSection from "../../components/ChallengeSection.vue";
 import CaseStudyContainer from "../../components/CaseStudyContainer.vue";
 import ScrollNavigator from "../../components/ScrollNavigator.vue";
 import WorkoutCompetitiveTable from "../../components/WorkoutCompetitiveTable.vue";
+import WorkoutVideo from "../../assets/workoutApp/workout1.mp4";
 
 export default {
   data() {
     return {
       searchVideo,
+      WorkoutVideo,
       before,
       after,
     };
@@ -89,7 +91,25 @@ export default {
       </p>
     </CaseStudyHero>
 
-    <div class="relative flex gap-12 my-10 mx-5 overflow-clip">
+    <div class="relative w-2/3 mx-auto max-w-[300px] p-2 bg-black border-4 border-gray-700 rounded-[2rem] shadow-xl">
+      <div class="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-700 rounded-full z-10"></div>
+
+      <div class="absolute -left-[6px] top-20 w-[3px] h-8 bg-gray-700 rounded-l"></div>
+      <div class="absolute -left-[6px] top-32 w-[3px] h-12 bg-gray-700 rounded-l"></div>
+      <div class="absolute -right-[6px] top-24 w-[3px] h-16 bg-gray-700 rounded-r"></div>
+
+      <video
+        preload="metadata"
+        :src="WorkoutVideo"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="w-full rounded-[1.5rem]"
+      ></video>
+    </div>
+
+    <!-- <div class="relative flex gap-12 my-10 mx-5 overflow-clip">
       <img
         loading="lazy"
         src="../../assets/workoutApp/Character.png"
@@ -114,7 +134,7 @@ export default {
         alt=""
         class="relative -mx-8 md:w-[200px] h-auto"
       />
-    </div>
+    </div> -->
 
     <ChallengeSection title="01 → The problem" id="w_problem">
       <p>
@@ -504,6 +524,94 @@ export default {
             </div>
           </div>
         </div>
+      </template>
+    </ChallengeSection>
+
+    <ChallengeSection title="05 → Gamification" id="w_gamification" visual>
+      <span
+        class="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-full bg-black text-gray-100 align-middle ml-2"
+      >
+        <span class="relative flex h-2 w-2">
+          <span class="absolute inline-flex h-full w-full rounded-full bg-white opacity-80 animate-ping"></span>
+          <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+        </span>
+
+        In progress
+      </span>
+
+      <p>
+        I wanted Squeeze to feel less like a traditional fitness tracker and more like a game. I began exploring how
+        game-like feedback, rewards and progression could make the process of completing a workout feel more engaging.
+      </p>
+
+      <p>
+        The current prototype introduces a reward system where users receive badges based on how closely they hit their
+        target reps. This turns a simple action like completing a set into a small gameplay moment, giving the user
+        immediate feedback and a reason to engage with the system beyond simply recording data.
+      </p>
+
+      <template #visual>
+        <div class="flex flex-col gap-8 mt-10">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-18">
+            <div class="border border-gray-300 rounded-lg p-6 md:p-12">
+              <h2 class="text-xl opacity-80 font-bold mb-2">A Game-Like Feedback Loop</h2>
+
+              <p>
+                This is an early working test of the interaction. The user logs their reps and sets, receives immediate
+                feedback on their performance, and is awarded a badge based on how closely they achieved their target.
+                The intention is to create a simple feedback loop: complete an action, receive a reward, and feel
+                motivated to continue.
+              </p>
+
+              <div
+                class="relative w-2/3 mx-auto mt-10 max-w-[300px] p-2 bg-black border-4 border-gray-700 rounded-[2rem] shadow-xl"
+              >
+                <div class="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-700 rounded-full z-10"></div>
+
+                <div class="absolute -left-[6px] top-20 w-[3px] h-8 bg-gray-700 rounded-l"></div>
+                <div class="absolute -left-[6px] top-32 w-[3px] h-12 bg-gray-700 rounded-l"></div>
+                <div class="absolute -right-[6px] top-24 w-[3px] h-16 bg-gray-700 rounded-r"></div>
+
+                <video
+                  preload="metadata"
+                  :src="WorkoutVideo"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  class="w-full rounded-[1.5rem]"
+                ></video>
+              </div>
+            </div>
+
+            <div class="border border-gray-300 rounded-lg p-6 md:p-12">
+              <h2 class="text-xl opacity-80 font-bold mb-2">Next: Progression</h2>
+
+              <p>
+                The current reward system is a test of the interaction and visual language rather than a finished
+                gamification system. The next stage is to introduce an XP system that connects individual workout
+                achievements into a longer-term progression loop.
+              </p>
+
+              <p>
+                I also want to refine the UI and develop a set of custom pixel-art assets, including the character and
+                supporting interface elements, so that progression is represented visually as well as numerically.
+              </p>
+
+              <div class="relative mt-10">
+                <img
+                  loading="lazy"
+                  src="../../assets/workoutApp/Character.png"
+                  alt=""
+                  class="relative w-full max-w-[300px] mx-auto h-auto"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="border border-gray-300 rounded-lg p-6 md:p-12"></div>
+        </div>
+        ```
       </template>
     </ChallengeSection>
 

@@ -4,8 +4,14 @@ import PortfolioItem from "../components/PortfolioItem.vue";
 import PageDivider from "../components/PageDivider.vue";
 import ModernisationRoadmap from "../components/ModernisationRoadmap.vue";
 import ScrollNavigator from "../components/ScrollNavigator.vue";
+import WorkoutVideo from "../assets/workoutApp/workout1.mp4";
 
 export default {
+  data() {
+    return {
+      WorkoutVideo,
+    };
+  },
   components: {
     PortfolioHero,
     PortfolioItem,
@@ -51,41 +57,48 @@ export default {
         :tags="['Front-End Development', 'UX/UI Design']"
         to="/workout-app"
       >
-        <div class="flex flex-col items-center">
-          <div class="relative flex gap-12 my-10">
-            <img loading="lazy" src="../assets/workoutApp/Character.png" alt="" class="relative size-[200px] -mx-8" />
-            <img
-              loading="lazy"
-              src="../assets/workoutApp/Character2.png"
-              alt=""
-              class="relative -mx-8 w-[200px] h-auto"
-            />
-            <img
-              loading="lazy"
-              src="../assets/workoutApp/Character3.png"
-              alt=""
-              class="relative -mx-8 w-[200px] h-auto"
-            />
+        <div class="flex flex-col md:flex-row-reverse gap-10 items-center">
+          <div class="relative mx-auto max-w-[300px] p-2 bg-black border-4 border-gray-700 rounded-[2rem] shadow-xl">
+            <div class="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-700 rounded-full z-10"></div>
+
+            <div class="absolute -left-[6px] top-20 w-[3px] h-8 bg-gray-700 rounded-l"></div>
+            <div class="absolute -left-[6px] top-32 w-[3px] h-12 bg-gray-700 rounded-l"></div>
+            <div class="absolute -right-[6px] top-24 w-[3px] h-16 bg-gray-700 rounded-r"></div>
+
+            <video
+              preload="metadata"
+              :src="WorkoutVideo"
+              autoplay
+              loop
+              muted
+              playsinline
+              class="w-full rounded-[1.5rem]"
+            ></video>
           </div>
-          <div class="relative flex gap-12 my-10">
-            <img
-              loading="lazy"
-              src="../assets/workoutApp/Character2.png"
-              alt=""
-              class="relative -mx-8 w-[200px] h-auto"
-            />
-            <img
-              loading="lazy"
-              src="../assets/workoutApp/Character3.png"
-              alt=""
-              class="relative -mx-8 w-[200px] h-auto"
-            />
-            <img
-              loading="lazy"
-              src="../assets/workoutApp/Character4.png"
-              alt=""
-              class="relative -mx-8 w-[200px] h-auto"
-            />
+          <div class="hidden md:flex flex-col items-center">
+            <div class="relative flex gap-12 my-10">
+              <img loading="lazy" src="../assets/workoutApp/Character.png" alt="" class="relative size-[200px] -mx-8" />
+              <img
+                loading="lazy"
+                src="../assets/workoutApp/Character2.png"
+                alt=""
+                class="relative -mx-8 w-[200px] h-auto"
+              />
+            </div>
+            <div class="relative flex gap-12 my-10">
+              <img
+                loading="lazy"
+                src="../assets/workoutApp/Character3.png"
+                alt=""
+                class="relative -mx-8 w-[200px] h-auto"
+              />
+              <img
+                loading="lazy"
+                src="../assets/workoutApp/Character4.png"
+                alt=""
+                class="relative -mx-8 w-[200px] h-auto"
+              />
+            </div>
           </div>
         </div>
       </PortfolioItem>
