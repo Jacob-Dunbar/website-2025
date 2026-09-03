@@ -109,33 +109,6 @@ export default {
       ></video>
     </div>
 
-    <!-- <div class="relative flex gap-12 my-10 mx-5 overflow-clip">
-      <img
-        loading="lazy"
-        src="../../assets/workoutApp/Character.png"
-        alt=""
-        class="relative md:w-[200px] -mx-8 h-auto"
-      />
-      <img
-        loading="lazy"
-        src="../../assets/workoutApp/Character2.png"
-        alt=""
-        class="relative -mx-8 md:w-[200px] h-auto"
-      />
-      <img
-        loading="lazy"
-        src="../../assets/workoutApp/Character3.png"
-        alt=""
-        class="relative -mx-8 md:w-[200px] h-auto"
-      />
-      <img
-        loading="lazy"
-        src="../../assets/workoutApp/Character4.png"
-        alt=""
-        class="relative -mx-8 md:w-[200px] h-auto"
-      />
-    </div> -->
-
     <ChallengeSection title="01 → The problem" id="w_problem">
       <p>
         People who want to train consistently can struggle to know what they should do each time they go to the gym.
@@ -452,25 +425,25 @@ export default {
             <div class="relative flex -gap-5 mt-10">
               <img
                 loading="lazy"
-                src="../../assets/workoutApp/Character.png"
+                src="../../assets/workoutApp/character.png"
                 alt=""
                 class="relative w-full -mx-8 h-auto"
               />
               <img
                 loading="lazy"
-                src="../../assets/workoutApp/Character2.png"
+                src="../../assets/workoutApp/character2.png"
                 alt=""
                 class="relative -mx-8 w-full h-auto"
               />
               <img
                 loading="lazy"
-                src="../../assets/workoutApp/Character3.png"
+                src="../../assets/workoutApp/character3.png"
                 alt=""
                 class="relative -mx-8 w-full h-auto"
               />
               <img
                 loading="lazy"
-                src="../../assets/workoutApp/Character4.png"
+                src="../../assets/workoutApp/character4.png"
                 alt=""
                 class="relative -mx-8 w-full h-auto"
               />
@@ -601,7 +574,7 @@ export default {
               <div class="relative mt-10">
                 <img
                   loading="lazy"
-                  src="../../assets/workoutApp/Character.png"
+                  src="../../assets/workoutApp/character.png"
                   alt=""
                   class="relative w-full max-w-[300px] mx-auto h-auto"
                 />
