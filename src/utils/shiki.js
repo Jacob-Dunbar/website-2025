@@ -6,7 +6,7 @@ export async function getHighlighter() {
   if (!highlighter) {
     highlighter = await createHighlighter({
       themes: ["github-dark"],
-      langs: ["vue", "vue-html", "javascript", "typescript", "html", "css", "bash"],
+      langs: ["vue", "vue-html", "javascript", "typescript", "tsx", "html", "css", "bash", "json"],
     });
   }
 

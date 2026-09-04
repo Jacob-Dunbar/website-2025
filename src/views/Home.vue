@@ -51,9 +51,12 @@ export default {
   <div class="flex w-full flex-col items-center bg-main-light">
     <div class="max-w-7xl mx-5 py-18 flex flex-col gap-16 md:gap-22">
       <PortfolioItem
+        journal
+        inProgress
         id="workout"
-        title="Workout App"
-        description="A self direct project from research throough design all the way to development and deployment of a new kind of gamified gym companion app."
+        title="Gamified Workout App"
+        description="An ongoing self-directed project exploring how gamification can make fitness more engaging and rewarding. 
+        A journal documenting the ideas, experiments, design and development behind the app as it takes shape."
         :tags="['Front-End Development', 'UX/UI Design']"
         to="/workout-app"
       >
@@ -103,7 +106,7 @@ export default {
         </div>
       </PortfolioItem>
 
-      <PageDivider />
+      <PageDivider class="my-16" />
 
       <PortfolioItem
         id="messaging"
@@ -116,7 +119,7 @@ export default {
         <img loading="lazy" class="w-full" src="../assets/messaging_ui.svg" />
       </PortfolioItem>
 
-      <PageDivider />
+      <PageDivider class="my-16" />
 
       <PortfolioItem
         id="modernisation"
@@ -128,7 +131,7 @@ export default {
         <ModernisationRoadmap />
       </PortfolioItem>
 
-      <PageDivider />
+      <PageDivider class="my-16" />
 
       <PortfolioItem
         id="dashboard"
@@ -142,7 +145,7 @@ export default {
         <img loading="lazy" class="w-full" src="../assets/dashboard_ui.png" />
       </PortfolioItem>
 
-      <PageDivider />
+      <PageDivider class="my-16" />
 
       <PortfolioItem
         id="search"
@@ -154,7 +157,7 @@ export default {
         <img class="w-full" loading="lazy" src="../assets/search_ui.svg" />
       </PortfolioItem>
 
-      <PageDivider />
+      <PageDivider class="my-16" />
 
       <PortfolioItem
         id="description"

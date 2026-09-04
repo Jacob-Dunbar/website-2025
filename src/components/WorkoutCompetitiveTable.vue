@@ -6,7 +6,7 @@ export default {
 
 <template>
   <div class="w-full overflow-x-auto">
-    <table class="w-full border-collapse text-left text-xs">
+    <table class="w-full border-collapse text-left text-sm">
       <thead>
         <tr class="border-b border-zinc-200">
           <th class="px-2 py-2.5 font-medium text-zinc-900 text-center"></th>

@@ -12,14 +12,62 @@ import CaseStudyContainer from "../../components/CaseStudyContainer.vue";
 import ScrollNavigator from "../../components/ScrollNavigator.vue";
 import WorkoutCompetitiveTable from "../../components/WorkoutCompetitiveTable.vue";
 import WorkoutVideo from "../../assets/workoutApp/workout1.mp4";
+import WorkoutVideoClose from "../../assets/workoutApp/workout2.mp4";
+import JournalEntry from "../../components/JournalEntry.vue";
+import PhoneFrame from "../../components/PhoneFrame.vue";
+import CodeSnippet from "../../components/CodeSnippet.vue";
+import OrderToggle from "../../components/OrderToggle.vue";
 
 export default {
   data() {
     return {
       searchVideo,
       WorkoutVideo,
+      WorkoutVideoClose,
       before,
       after,
+      reversed: false,
+      OrderToggle,
+      setBadgeCode: `
+    const completedReps = Number(reps[setIndex] ?? 0);
+
+    const badge =
+      completedReps > targetReps ? "limit" :
+      completedReps === targetReps ? "perfect" :
+      null;
+
+    return (
+      <View className="flex-row items-center gap-2">
+        <Text>Set {setIndex + 1}</Text>
+        <Text>{completedReps} reps</Text>
+
+        {badge && <SetBadge message={badge} />}
+      </View>
+    );`,
+      recoveryCountdownCode: `import { LinearGradient } from "expo-linear-gradient";
+import { Image, View } from "react-native";
+
+export default function RecoveryCountdown({ progress }) {
+  return (
+    <View className="relative h-8 overflow-hidden">
+      <View
+        className="absolute h-full"
+        style={{ width: \`\${progress * 100}%\` }}
+      >
+        <LinearGradient
+          colors={["#41a715", "#bdb709"]}
+          style={{ flex: 1 }}
+        />
+
+        <Image
+          source={require("../../assets/UI/bar5.png")}
+          className="absolute w-full h-full"
+          resizeMode="stretch"
+        />
+      </View>
+    </View>
+  );
+}`,
     };
   },
   props: {
@@ -38,31 +86,41 @@ export default {
     CaseStudyContainer,
     ScrollNavigator,
     WorkoutCompetitiveTable,
+    JournalEntry,
+    PhoneFrame,
+    CodeSnippet,
+    OrderToggle,
+  },
+  computed: {
+    navigatorSections() {
+      const journalSections = [
+        { id: "w_visual_direction", label: "01 → Finding the visual direction" },
+        { id: "w_progression", label: "02 → Making progression feel rewarding" },
+        { id: "w_sliders", label: "03 → Games bars and sliders" },
+        { id: "w_implementation", label: "04 → Making it real" },
+        { id: "w_interface", label: "05 → Trying out the interface" },
+        { id: "w_flow", label: "06 → Figuring out the flow" },
+        { id: "w_concept", label: "07 → Figuring out what Squeeze could be" },
+        { id: "w_research", label: "08 → Trying to understand the problem" },
+        { id: "w_problem", label: "09 → A problem worth exploring" },
+      ];
+
+      return [{ id: "w_hero", label: "home" }, ...(this.reversed ? [...journalSections].reverse() : journalSections)];
+    },
   },
 };
 </script>
 
 <template>
-  <ScrollNavigator
-    ref="scrollNavigator"
-    :darkLogo="darkLogo"
-    :sections="[
-      { id: 'se_hero', label: 'home' },
-      { id: 'w_problem', label: '01 → The problem' },
-      { id: 'w_research', label: '02 → Research' },
-      { id: 'w_synthesis', label: '03 → Synthesis' },
-      { id: 'w_exploration', label: '04 → UX Exploration' },
-      { id: 'w_ui', label: '05 → UI Design' },
-    ]"
-  />
+  <ScrollNavigator ref="scrollNavigator" :darkLogo="darkLogo" :sections="navigatorSections" />
 
   <div class="flex flex-col items-center gap-10 md:gap-28 pb-26 bg-main-light">
     <CaseStudyHero
-      @toFirst="$refs.scrollNavigator.scrollTo('se_challenge')"
-      id="se_hero"
-      title="Workout App"
+      @toFirst="$refs.scrollNavigator.scrollTo(navigatorSections[1].id)"
+      id="w_hero"
+      title="Gamified Workout App"
       :roles="['UX/UI Designer', 'Frontend Developer']"
-      :tools="['Figma', 'React']"
+      :tools="['Figma', 'React Native']"
       timeline="Ongoing"
     >
       <span
@@ -76,520 +134,410 @@ export default {
         In progress
       </span>
       <p>
-        Most existing workout app help you create and track progress within a rigit programme that leaves little
-        flexiblity and doesnt allow for real life complications.
+        I’ve been exploring how gamification could make the fitness journey more engaging, motivating and rewarding, not
+        just by tracking progress, but by making the process itself feel more like a game.
       </p>
 
       <p>
-        I also noticed that most train reqiems put far too little focus on recovery, or allow for each muscle group to
-        recovery at their own pace.
+        I started noticing that a lot of workout apps are built around rigid programmes and tracking. They can be great
+        for following a plan, but real life doesn’t always work that way. Your schedule changes, your energy changes,
+        and different parts of your body recover at different rates.
       </p>
 
       <p>
-        So i started with the question: 'Could an app adapt the session to the user, instead of tasking the user to
-        adapt themselves to the programme?'
+        So I started with a simple question: what if a workout app could adapt to the user, rather than expecting the
+        user to adapt to the programme?
       </p>
     </CaseStudyHero>
 
-    <div class="relative w-2/3 mx-auto max-w-[300px] p-2 bg-black border-4 border-gray-700 rounded-[2rem] shadow-xl">
-      <div class="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-700 rounded-full z-10"></div>
-
-      <div class="absolute -left-[6px] top-20 w-[3px] h-8 bg-gray-700 rounded-l"></div>
-      <div class="absolute -left-[6px] top-32 w-[3px] h-12 bg-gray-700 rounded-l"></div>
-      <div class="absolute -right-[6px] top-24 w-[3px] h-16 bg-gray-700 rounded-r"></div>
-
-      <video
-        preload="metadata"
-        :src="WorkoutVideo"
-        autoplay
-        loop
-        muted
-        playsinline
-        class="w-full rounded-[1.5rem]"
-      ></video>
-    </div>
-
-    <ChallengeSection title="01 → The problem" id="w_problem">
-      <p>
-        People who want to train consistently can struggle to know what they should do each time they go to the gym.
-        Existing training apps often rely on rigid programmes or leave users to plan their own workouts, making it
-        difficult to balance progression, recovery and the time available to train.
-      </p>
-      <h2>Initial hypothesis</h2>
-      <p>I began the project with three assumptions about how this problem could be addressed.:</p>
-
-      <ul>
-        <li class="flex !gap-4">
-          <font-awesome-icon class="mb-auto mt-1" icon="circle-check" />
-          <div>
-            <h3 class="font-bold">Training should be governed by recovery</h3>
-            <p>
-              The app should understand what the user has trained recently rather than treating every workout as an
-              isolated event.
-            </p>
-          </div>
-        </li>
-        <li class="flex !gap-4">
-          <font-awesome-icon class="mb-auto mt-1" icon="circle-check" />
-          <div>
-            <h3 class="font-bold">Training should adapt to the user</h3>
-            <p>
-              Workouts should flex around the user's available time and preferences, while still providing enough
-              guidance to make deciding what to do effortless.
-            </p>
-          </div>
-        </li>
-        <li class="flex !gap-4">
-          <font-awesome-icon class="mb-auto mt-1" icon="circle-check" />
-          <div>
-            <h3 class="font-bold">The experience should make training rewarding</h3>
-            <p>
-              A satisfying and engaging experience should encourage users to return regularly, helping turn training
-              from something they have to do into a habit they want to maintain.
-            </p>
-          </div>
-        </li>
-      </ul>
-
-      <p>These were assumptions, not conclusions. I wanted to test them before designing the product.</p>
-    </ChallengeSection>
-
-    <ChallengeSection title="02 → Research" id="w_research" visual>
-      <p>
-        Before designing anything, I wanted to understand how people actually decide what to train, what gets in the
-        way, and how existing fitness apps fit into their routines. I broke the research into three areas:
-      </p>
-
-      <ul>
-        <li class="flex-col !items-start !gap-0 mb-2">
-          <h3 class="font-bold text-lg">User research</h3>
-          <p>How do people actually plan and modify their workouts, and what problems do they encounter?</p>
-        </li>
-        <li class="flex-col !items-start !gap-0 mb-2">
-          <h3 class="font-bold text-lg">Competitive research</h3>
-          <p>How do existing fitness products approach workout selection, recovery, flexibility and motivation?</p>
-        </li>
-        <li class="flex-col !items-start !gap-0 mb-2">
-          <h3 class="font-bold text-lg">Secondary research</h3>
-          <p>What existing evidence exists around workout adherence, planning and fitness-app behaviour?</p>
-        </li>
-      </ul>
-
-      <template #visual>
-        <h2 class="text-2xl opacity-80 font-bold mb-2">User interviews</h2>
-        <p class="">
-          I interviewed gym-goers with different levels of experience, from newer lifters to more experienced regulars,
-          to understand how they plan their training and what role (if any) fitness apps play in their routines. My
-          findings were:
+    <OrderToggle v-model:reversed="reversed" />
+    <div class="flex gap-16" :class="reversed ? 'flex-col-reverse' : 'flex-col'">
+      <JournalEntry :number="9" title="Finding the visual direction" date="August 2026" id="w_visual_direction" visual>
+        <p>
+          Starting to build out the screens made me realise that the visual direction wasn't quite there yet. I had a
+          rough idea of what I wanted Squeeze to look like, but seeing it as an actual interface made it clear that I
+          needed to define the aesthetic more deliberately.
         </p>
 
-        <div class="grid md:grid-cols-3 gap-8 mt-6 opacity-90">
-          <div class="px-6 py-4 bg-gray-200 rounded-lg">
-            <h3 class="font-bold text-lg">Apps feel like work</h3>
-            <p>
-              Participants often described fitness apps as clunky, awkward or tedious to use, particularly when logging
-              workouts between sets.
-            </p>
+        <p>
+          I knew I didn't want Squeeze to look like a typical fitness app. I wanted it to feel much more like something
+          you'd find inside a game, so I started collecting references from retro games, pixel art and arcade
+          interfaces.
+        </p>
+
+        <p>
+          I wasn't trying to copy any one style. Instead, I was looking for elements I could bring into Squeeze, from
+          chunky typography and bright colours to progress bars, sprites and decorative UI.
+        </p>
+
+        <template #visual>
+          <img loading="lazy" src="../../assets/workoutApp/moodboard.png" alt="" class="relative w-full h-auto" />
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-16" />
+
+      <JournalEntry :number="8" title="Making progression feel rewarding" date="August 2026" id="w_progression" visual>
+        <p>
+          I wanted completing a set to feel like an event rather than just another number changing on screen. I started
+          experimenting with badges that appear when the user hits or exceeds their target, with more rewarding graphics
+          for better performances.
+        </p>
+
+        <template #visual>
+          <div class="flex flex-col md:flex-row w-full gap-8 md:gap-20">
+            <div class="flex-1 flex flex-col p-6 md:p-12 border border-gray-300 gap-5 rounded-lg">
+              <p>
+                I wanted the badge to appear in the middle of the screen, then shink down towards the set that triggered
+                it, which proved Challenging at first. I ended up using a modal as the starting point, giving the
+                animation a consistent origin before transitioning into the UI.
+              </p>
+
+              <p>
+                I also built the badge as a reusable component, so the same system can handle different badges, targets
+                and positions without rebuilding each animation from scratch.
+              </p>
+
+              <video
+                preload="metadata"
+                :src="WorkoutVideoClose"
+                autoplay
+                loop
+                muted
+                playsinline
+                class="w-full rounded-[1.5rem]"
+              ></video>
+            </div>
+
+            <CodeSnippet class="!w-1/2" filename="SetBadge.tsx" lang="tsx" :code="setBadgeCode" />
+          </div>
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-16" />
+
+      <JournalEntry :number="7" title="Games bars and sliders" date="August 2026" id="w_sliders" visual>
+        <p>
+          I knew Squeeze was going to take a lot of inspiration from classic game UI, and progress bars felt like a good
+          place to start. Workout tracking is naturally quite data-heavy, with lots of numbers, reps, weights and
+          timers, so I didn't want the interface to become a wall of information.
+        </p>
+
+        <p>
+          Instead, I started looking for ways to communicate some of that information visually. Progress bars, sliders
+          and other game-like UI elements could make the data easier to understand while also giving the interface more
+          of the character I was looking for.
+        </p>
+
+        <template #visual>
+          <div class="flex flex-col md:flex-row w-full gap-8 md:gap-20">
+            <div class="flex-1 flex flex-col p-6 md:p-12 border border-gray-300 gap-5 rounded-lg">
+              <p>
+                I wanted to combine custom graphics with CSS-controlled elements, rather than making every state a
+                separate image. This would let me use graphics for the visual style while keeping things like progress
+                and animation dynamic.
+              </p>
+
+              <div class="relative w-full overflow-hidden">
+                <div class="relative flex flex-col">
+                  <!-- Graphics -->
+                  <h3>PNG Graphics:</h3>
+                  <div class="relative overflow-hidden p-5 mb-3">
+                    <img loading="lazy" src="../../assets/workoutApp/bar1.png" alt="" class="relative w-full h-auto" />
+                    <img loading="lazy" src="../../assets/workoutApp/bar2.png" alt="" class="relative w-full h-auto" />
+                  </div>
+
+                  <h3>CSS Bars:</h3>
+                  <!-- Bars -->
+                  <div class="relative flex flex-col p-5 mb-3 gap-3 w-full">
+                    <div
+                      class="inset-0 bg-gradient-to-r from-green-500 to-yellow-400 h-8 opacity-75 animate-fill-bar animation-delay-1"
+                    ></div>
+                    <div
+                      class="inset-0 bg-gradient-to-r from-[#254AE0] to-[#CF13E8] h-8 animate-fill-bar animation-delay-2"
+                    ></div>
+                  </div>
+
+                  <h3>Layered together:</h3>
+
+                  <div class="relative flex flex-col p-5 mb-3 gap-3 w-full">
+                    <div class="relative overflow-hidden">
+                      <div
+                        class="absolute inset-0 bg-gradient-to-r from-green-500 to-yellow-400 h-[90%] opacity-75 animate-fill-bar skewed animation-delay-1"
+                      ></div>
+
+                      <img
+                        loading="lazy"
+                        src="../../assets/workoutApp/bar1.png"
+                        alt=""
+                        class="relative w-full h-auto"
+                      />
+                    </div>
+
+                    <div class="relative overflow-hidden -mt-[1px]">
+                      <div
+                        class="absolute inset-0 bg-gradient-to-r from-[#254AE0] to-[#CF13E8] animate-fill-bar skewed animation-delay-2"
+                      ></div>
+
+                      <img
+                        loading="lazy"
+                        src="../../assets/workoutApp/bar2.png"
+                        alt=""
+                        class="relative w-full h-auto"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <CodeSnippet class="!w-1/2" filename="RecoveryCountdown.tsx" lang="tsx" :code="recoveryCountdownCode" />
           </div>
 
-          <div class="px-6 py-4 bg-gray-200 rounded-lg">
-            <h3 class="font-bold text-lg">Motivation fades</h3>
-            <p>
-              Even when people initially enjoyed using an app, engagement often dropped over time and the app eventually
-              became something they stopped opening.
-            </p>
-          </div>
-
-          <div class="px-6 py-4 bg-gray-200 rounded-lg">
-            <h3 class="font-bold text-lg">Training isn't predictable</h3>
-            <p>
-              People frequently changed their workouts depending on their available time, energy, gym conditions or what
-              they had trained recently.
-            </p>
-          </div>
-        </div>
-
-        <div class="mt-8 mb-12">
-          <p>
-            This suggested the problem wasn't simply a lack of workout information. People already knew how to train,
-            but existing tools often added friction rather than making the decision easier.
+          <p class="mt-8 md:mt-20">
+            This gave me a simple approach I can build on as the interface develops. I can create different graphic
+            assets in Figma and layer them over dynamic React Native elements, giving me much more freedom to experiment
+            with the UI without having to create every possible state as a separate asset.
           </p>
-        </div>
 
-        <PageDivider class="scale-70 my-20 opacity-50" />
+          <p>
+            This is still something I'm experimenting with, but I like the idea of treating the interface more like a
+            game HUD than a traditional fitness app.
+          </p>
+        </template>
+      </JournalEntry>
 
-        <h2 class="text-2xl opacity-80 font-bold mb-2 mt-12">Competitive research</h2>
+      <PageDivider class="my-16" />
 
-        <p class="my-8">
-          With these themes in mind, I analysed a range of directly competing training apps to understand how existing
-          products approach workout selection, recovery, flexibility and long-term engagement.
+      <JournalEntry :number="6" title="Making it real" date="August 2026" id="w_implementation" visual>
+        <p>
+          Once I had a flow and layout I was reasonably happy with, I wanted to stop looking at static screens and
+          actually use it.
         </p>
 
-        <WorkoutCompetitiveTable />
-      </template>
-    </ChallengeSection>
-
-    <ChallengeSection title="03 → Synthesis" id="w_synthesis" visual>
-      <h2 class="text-2xl opacity-80 font-bold mb-2">From findings to opportunity</h2>
-
-      <p>
-        The research highlighted an opportunity beyond simply building a better workout tracker. People needed something
-        useful enough to keep using, flexible enough to fit around real life, and engaging enough to help build a habit.
-      </p>
-
-      <div class="flex flex-col gap-6 mt-6 opacity-90">
-        <div>
-          <h3 class="font-bold text-lg">Make fitness engaging</h3>
-          <p>Use game-like interactions, visual feedback and rewards to make progress feel immediately satisfying.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-lg">Adapt to real life</h3>
-          <p>Training isn't always predictable, so workouts need to adapt to time, recovery and circumstances.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-lg">Stay useful over time</h3>
-          <p>Experienced gym-goers still need a practical tool for tracking workouts, progression and performance.</p>
-        </div>
-      </div>
-
-      <template #visual>
-        <h2 class="text-2xl opacity-80 font-bold mb-2">The concept</h2>
-
-        <p class="mb-10">
-          I explored a gamified workout app designed to make fitness feel rewarding from the very beginning. By turning
-          everyday actions like completing sets, finishing workouts and hitting milestones into opportunities for
-          immediate visual feedback and rewards, the app can help bridge the gap between starting a fitness journey and
-          seeing the longer-term benefits of training. At the same time, the experience needs to remain flexible and
-          useful enough to support users as their goals and training become more advanced.
+        <p>
+          I built the first version in React Native and put together a simple working prototype covering the main user
+          flow.
         </p>
 
-        <h2 class="text-2xl opacity-80 font-bold mb-2">Product principles</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 opacity-90">
-          <div class="px-6 py-5 bg-gray-200 rounded-lg">
-            <div class="text-sm opacity-50 font-bold mb-2">01</div>
-            <h3 class="font-bold text-lg">Make progress feel rewarding</h3>
-            <p>Every session should feel like an achievement.</p>
-          </div>
-
-          <div class="px-6 py-5 bg-gray-200 rounded-lg">
-            <div class="text-sm opacity-50 font-bold mb-2">02</div>
-            <h3 class="font-bold text-lg">Reduce decision-making</h3>
-            <p>Help users know what to train without rigid planning.</p>
-          </div>
-
-          <div class="px-6 py-5 bg-gray-200 rounded-lg">
-            <div class="text-sm opacity-50 font-bold mb-2">03</div>
-            <h3 class="font-bold text-lg">Stay flexible</h3>
-            <p>Adapt workouts to available time, recovery and circumstances.</p>
-          </div>
-
-          <div class="px-6 py-5 bg-gray-200 rounded-lg">
-            <div class="text-sm opacity-50 font-bold mb-2">04</div>
-            <h3 class="font-bold text-lg">Remain useful beyond the honeymoon</h3>
-            <p>Let the product evolve from motivation into a genuinely useful training tool.</p>
-          </div>
-        </div>
-      </template>
-    </ChallengeSection>
-
-    <ChallengeSection title="04 → UX Exploration" id="w_exploration" visual>
-      <span
-        class="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-full bg-black text-gray-100 align-middle ml-2"
-      >
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full rounded-full bg-white opacity-80 animate-ping"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
-        </span>
-
-        In progress
-      </span>
-      <h2 class="text-2xl opacity-80 font-bold mb-2">Exploring possible solutions</h2>
-
-      <p>
-        I turned the research findings into prototypes, exploring different ways to make workout selection, logging and
-        progression feel simple, flexible and rewarding.
-      </p>
-
-      <div class="flex flex-col items-stretch gap-6 md:gap-4 opacity-90">
-        <div class="">
-          <h3 class="font-bold text-xl mb-1">01 - Explore</h3>
-          <p>Prototype different solutions and flows.</p>
-        </div>
-
-        <div class="">
-          <h3 class="font-bold text-xl mb-1">02 - Test</h3>
-          <p>Put the prototypes in front of users.</p>
-        </div>
-
-        <div class="">
-          <h3 class="font-bold text-xl mb-1">03 - Iterate</h3>
-          <p>Use feedback to refine the experience.</p>
-        </div>
-      </div>
-
-      <template #visual>
-        <img loading="lazy" src="../../assets/workoutApp/flow.png" alt="" class="relative w-full h-auto" />
-
-        <p class="my-8 md:my-20">
-          After outlining the flow, I explored different ideas through wireframes and built a low-fidelity prototype in
-          React Native. Hosting the prototype online allowed real users to test the core flow and functionality, helping
-          me gather early feedback before investing heavily in the visual design.
+        <p>
+          This was also the first time I could give it to other people and watch them use it. That was useful pretty
+          quickly, things that seemed obvious when looking at the screens weren't always as obvious once the app was in
+          someone's hands. From here, I can start testing the experience properly and iterating.
         </p>
 
-        <div class="flex flex-col md:flex-row w-full gap-8 md:gap-20">
-          <div class="w-full md:w-1/2 flex gap-5">
+        <template #visual>
+          <div class="flex flex-col md:flex-row w-full gap-8 md:gap-20">
+            <PhoneFrame>
+              <img src="../../assets/workoutApp/proto1.png" class="flex-1 min-w-0 h-auto" />
+            </PhoneFrame>
+            <PhoneFrame>
+              <img src="../../assets/workoutApp/proto2.png" class="flex-1 min-w-0 h-auto" />
+            </PhoneFrame>
+            <PhoneFrame>
+              <img src="../../assets/workoutApp/proto3.png" class="flex-1 min-w-0 h-auto" />
+            </PhoneFrame>
+          </div>
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-16" />
+
+      <JournalEntry :number="5" title="Trying out the interface" id="w_interface" date="August 2026" visual>
+        <p>Once I had a rough flow, I started sketching out what the individual screens could look like.</p>
+
+        <p>
+          I kept these deliberately rough at first. I wanted to concentrate on what information needed to be there and
+          how the screens connected together, rather than getting distracted by the visual design. Although i did at
+          this stage start to think about game UI elements and how they could be used creativly and playfully to
+          visualise data.
+        </p>
+
+        <p>
+          I went through a few different layouts, moving things around and simplifying where I could. At this stage I
+          was mainly trying to answer a simple question: <strong>does this actually feel easy to use?</strong>
+        </p>
+
+        <template #visual>
+          <div class="flex flex-col md:flex-row w-full gap-8 md:gap-20">
             <img src="../../assets/workoutApp/wireframe1.png" class="flex-1 min-w-0 h-auto" />
             <img src="../../assets/workoutApp/wireframe2.png" class="flex-1 min-w-0 h-auto" />
             <img src="../../assets/workoutApp/wireframe3.png" class="flex-1 min-w-0 h-auto" />
           </div>
+        </template>
+      </JournalEntry>
 
-          <div class="w-full md:w-1/2 flex gap-5">
-            <img src="../../assets/workoutApp/proto1.png" class="flex-1 min-w-0 h-auto" />
-            <img src="../../assets/workoutApp/proto2.png" class="flex-1 min-w-0 h-auto" />
-            <img src="../../assets/workoutApp/proto3.png" class="flex-1 min-w-0 h-auto" />
-          </div>
-        </div>
-      </template>
-    </ChallengeSection>
+      <PageDivider class="my-16" />
 
-    <ChallengeSection title="05 → UI Design" id="w_ui" visual>
-      <span
-        class="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-full bg-black text-gray-100 align-middle ml-2"
-      >
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full rounded-full bg-white opacity-80 animate-ping"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
-        </span>
+      <JournalEntry :number="4" title="Figuring out the flow" id="w_flow" date="August 2026" visual>
+        <p>
+          With the basic idea starting to make sense, I wanted to figure out what the actual experience should look
+          like. I mapped out the main flow from creating a workout through to completing it, trying to keep the number
+          of decisions as low as possible.
+        </p>
 
-        In progress
-      </span>
+        <p>
+          At the same time, I started thinking about how the game-like side of Squeeze could actually work. The basic
+          idea was: <strong>choose → train → complete → get rewarded → come back and do it again.</strong>
+          Completing sets and workouts could feed into things like XP, progression and rewards, giving the user
+          something immediate to work towards while still keeping the actual training at the centre of the experience.
+        </p>
 
-      <p>
-        With the core UX established, I developed the visual language and interactions around the idea of making
-        progress feel immediate, rewarding and tangible. I created a bold, playful interface inspired by retro games,
-        using pixel fonts, progress bars and nostalgic data visualisation to make progress feel fun and tangible. I also
-        experimented with layered transparent PNGs and CSS-controlled fills to create more expressive UI elements.
-      </p>
+        <template #visual>
+          <img loading="lazy" src="../../assets/workoutApp/flow.png" alt="" class="relative w-full h-auto" />
 
-      <template #visual>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-18 mt-10">
-          <div class="flex-1 p-6 md:p-12 border border-gray-300 rounded-lg">
-            <h2 class="text-xl opacity-80 font-bold mb-2">Bars and Sliders</h2>
+          <p class="my-8 md:my-20">
+            Mapping this out helped me see how the different parts of the idea needed to fit together. The workout flow
+            couldn't just be a series of screens for logging exercises — it also needed to create a reason to come back.
+            It also highlighted a few things I wasn't completely sure about yet, particularly how much control the user
+            should have over their workout and how the recovery system should influence what they see.
+          </p>
+        </template>
+      </JournalEntry>
 
-            <p>
-              I knew that data visualisation would be key for this project so I played around with different progress
-              bars
-            </p>
+      <PageDivider class="my-16" />
 
-            <div class="relative w-full overflow-hidden">
-              <div class="relative flex flex-col gap-5">
-                <!-- Bar 3 -->
-                <div class="relative overflow-hidden">
-                  <div class="absolute inset-0 bg-gray-900 opacity-40"></div>
-                  <div class="absolute inset-0 bg-gradient-to-r from-red-400 to-red-600 animate-fill-bar"></div>
+      <JournalEntry :number="3" title="Figuring out what Squeeze could be" id="w_concept" date="August 2026" visual>
+        <p>
+          After going through the interviews and looking at other apps, I started to get a clearer idea of where I
+          wanted to take Squeeze.
+        </p>
 
-                  <img loading="lazy" src="../../assets/workoutApp/bar3.png" alt="" class="relative w-full h-auto" />
-                </div>
+        <p>
+          What stood out to me was that I probably didn't want to build another workout tracker. There are already
+          plenty of those. The more interesting problem seemed to be helping people actually want to keep training,
+          while making the app useful enough that they would still want it once the novelty wore off.
+        </p>
 
-                <!-- Bar 1 -->
-                <div class="relative overflow-hidden">
-                  <div
-                    class="absolute inset-0 bg-gradient-to-r from-green-300 to-yellow-400 h-[90%] opacity-75 animate-fill-bar animation-delay-1"
-                  ></div>
+        <template #visual>
+          <h2 class="text-2xl opacity-80 font-bold mb-10">The idea started to take shape</h2>
 
-                  <img loading="lazy" src="../../assets/workoutApp/bar1.png" alt="" class="relative w-full h-auto" />
-                </div>
+          <p class="mb-10">
+            At this point I started exploring the idea of a gamified workout app. The basic thought was pretty simple:
+            make the small things people do in the gym feel more rewarding. Completing a set, finishing a workout or
+            hitting a milestone could all give some kind of immediate feedback. The hope was that this would make
+            training feel a little more like progressing through a game, while the underlying product still helped with
+            things like recovery, progression and deciding what to train. I didn't have the exact product figured out
+            yet, but this gave me something concrete to start designing around.
+          </p>
 
-                <!-- Bar 2 -->
-                <div class="relative overflow-hidden -mt-[1px]">
-                  <div
-                    class="absolute inset-0 bg-gradient-to-r from-[#254AE0] to-[#CF13E8] animate-fill-bar animation-delay-2"
-                  ></div>
+          <h2 class="text-2xl opacity-80 font-bold mb-10">A few things I wanted to keep in mind</h2>
 
-                  <img loading="lazy" src="../../assets/workoutApp/bar2.png" alt="" class="relative w-full h-auto" />
-                </div>
-              </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 opacity-90">
+            <div class="px-6 py-5 bg-gray-200 rounded-lg">
+              <h3 class="font-bold text-lg">01 - Make progress feel rewarding</h3>
+              <p>Give people a reason to feel good about completing a workout.</p>
+            </div>
+
+            <div class="px-6 py-5 bg-gray-200 rounded-lg">
+              <h3 class="font-bold text-lg">02 - Reduce the thinking</h3>
+              <p>Make it easier to work out what to train without having to plan everything.</p>
+            </div>
+
+            <div class="px-6 py-5 bg-gray-200 rounded-lg">
+              <h3 class="font-bold text-lg">03 - Keep it flexible</h3>
+              <p>Let training change depending on time, recovery and what's happening that day.</p>
+            </div>
+
+            <div class="px-6 py-5 bg-gray-200 rounded-lg">
+              <h3 class="font-bold text-lg">04 - Don't let the game get in the way</h3>
+              <p>The gamification should make the experience better, not turn the app into a gimmick.</p>
             </div>
           </div>
+        </template>
+      </JournalEntry>
 
-          <div class="flex-1 p-6 md:p-12 border border-gray-300 rounded-lg">
-            <h2 class="text-xl opacity-80 font-bold mb-2">Character</h2>
+      <PageDivider class="my-16" />
 
-            <p>
-              A game-inspired character that reacts to interactions and visibly powers up as users complete workouts.
-            </p>
+      <JournalEntry :number="2" title="Trying to understand the problem" id="w_research" date="July 2026" visual>
+        <p>
+          Before jumping into designs, I wanted to get a better understanding of how people actually decide what to
+          train. I was particularly interested in what makes that decision difficult, how people change their plans, and
+          whether existing fitness apps actually help.
+        </p>
 
-            <div class="relative flex -gap-5 mt-10">
-              <img
-                loading="lazy"
-                src="../../assets/workoutApp/character.png"
-                alt=""
-                class="relative w-full -mx-8 h-auto"
-              />
-              <img
-                loading="lazy"
-                src="../../assets/workoutApp/character2.png"
-                alt=""
-                class="relative -mx-8 w-full h-auto"
-              />
-              <img
-                loading="lazy"
-                src="../../assets/workoutApp/character3.png"
-                alt=""
-                class="relative -mx-8 w-full h-auto"
-              />
-              <img
-                loading="lazy"
-                src="../../assets/workoutApp/character4.png"
-                alt=""
-                class="relative -mx-8 w-full h-auto"
-              />
+        <p>
+          I approached this from a few different angles: speaking to people who train, looking at other fitness apps,
+          and reading around workout adherence and planning. I wasn’t trying to prove a particular idea at this stage. I
+          mostly wanted to see whether the problem I had in mind was actually something other people experienced too.
+        </p>
+
+        <template #visual>
+          <h2 class="text-2xl opacity-80 font-bold mb-2">User interviews</h2>
+
+          <p>
+            I spoke to gym-goers with different levels of experience, from newer lifters to people who train regularly.
+            I wanted to understand how they plan their workouts, how much they change them, and what role fitness apps
+            play. A few things came up repeatedly:
+          </p>
+
+          <div class="grid md:grid-cols-3 gap-8 mt-6 opacity-90">
+            <div class="px-6 py-4 bg-gray-200 rounded-lg">
+              <h3 class="font-bold text-lg">Apps can feel like work</h3>
+              <p>Logging workouts between sets was often described as clunky, awkward or just a bit tedious.</p>
             </div>
-          </div>
 
-          <div class="flex-1 p-6 md:p-12 border border-gray-300 rounded-lg">
-            <h2 class="text-xl opacity-80 font-bold mb-2">Badges and Medals</h2>
-
-            <p>
-              I also explored medals and achievements as a way to reward users for completing workouts and maintaining
-              training streaks.
-            </p>
-
-            <div class="relative flex gap-5 mt-10">
-              <img loading="lazy" src="../../assets/workoutApp/5kg.png" alt="" class="relative w-full h-auto" />
-              <img loading="lazy" src="../../assets/workoutApp/10kg.png" alt="" class="relative w-full h-auto" />
-              <img loading="lazy" src="../../assets/workoutApp/20kg.png" alt="" class="relative w-full h-auto" />
-              <img loading="lazy" src="../../assets/workoutApp/25kg.png" alt="" class="relative w-full h-auto" />
-            </div>
-            <div class="relative flex gap-5">
-              <img loading="lazy" src="../../assets/workoutApp/1st.png" alt="" class="relative w-full h-auto" />
-              <img loading="lazy" src="../../assets/workoutApp/2nd.png" alt="" class="relative w-full h-auto" />
-              <img loading="lazy" src="../../assets/workoutApp/3rd.png" alt="" class="relative w-full h-auto" />
-            </div>
-          </div>
-
-          <div class="flex-1 p-6 md:p-12 border border-gray-300 rounded-lg">
-            <h2 class="text-xl opacity-80 font-bold mb-2">Text and Fonts</h2>
-
-            <p>
-              Inspired by games like Tekken and Street Fighter, I explored two contrasting font styles: energetic
-              Asian-inspired brush scripts and nostalgic pixel fonts, balancing an analogue feel with a digital gaming
-              aesthetic.
-            </p>
-
-            <div class="relative flex flex-col gap-5 mt-10">
-              <img
-                loading="lazy"
-                src="../../assets/workoutApp/fox-font.png"
-                alt=""
-                class="relative max-w-[200px] h-auto"
-              />
-              <h1 class="!font-jersey text-5xl">WORKOUT</h1>
-
-              <h2 class="!font-press-start text-3xl">LEVEL UP</h2>
-
-              <h2 class="!font-bungee-inline text-4xl">ACHIEVEMENT</h2>
-
-              <p class="!font-audiowide text-2xl">Complete your workout to earn XP.</p>
-            </div>
-          </div>
-        </div>
-      </template>
-    </ChallengeSection>
-
-    <ChallengeSection title="05 → Gamification" id="w_gamification" visual>
-      <span
-        class="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-full bg-black text-gray-100 align-middle ml-2"
-      >
-        <span class="relative flex h-2 w-2">
-          <span class="absolute inline-flex h-full w-full rounded-full bg-white opacity-80 animate-ping"></span>
-          <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
-        </span>
-
-        In progress
-      </span>
-
-      <p>
-        I wanted Squeeze to feel less like a traditional fitness tracker and more like a game. I began exploring how
-        game-like feedback, rewards and progression could make the process of completing a workout feel more engaging.
-      </p>
-
-      <p>
-        The current prototype introduces a reward system where users receive badges based on how closely they hit their
-        target reps. This turns a simple action like completing a set into a small gameplay moment, giving the user
-        immediate feedback and a reason to engage with the system beyond simply recording data.
-      </p>
-
-      <template #visual>
-        <div class="flex flex-col gap-8 mt-10">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-18">
-            <div class="border border-gray-300 rounded-lg p-6 md:p-12">
-              <h2 class="text-xl opacity-80 font-bold mb-2">A Game-Like Feedback Loop</h2>
-
+            <div class="px-6 py-4 bg-gray-200 rounded-lg">
+              <h3 class="font-bold text-lg">Motivation doesn't last</h3>
               <p>
-                This is an early working test of the interaction. The user logs their reps and sets, receives immediate
-                feedback on their performance, and is awarded a badge based on how closely they achieved their target.
-                The intention is to create a simple feedback loop: complete an action, receive a reward, and feel
-                motivated to continue.
+                Some people enjoyed using an app at first, but eventually stopped opening it or found it became another
+                thing to keep up with.
               </p>
-
-              <div
-                class="relative w-2/3 mx-auto mt-10 max-w-[300px] p-2 bg-black border-4 border-gray-700 rounded-[2rem] shadow-xl"
-              >
-                <div class="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-700 rounded-full z-10"></div>
-
-                <div class="absolute -left-[6px] top-20 w-[3px] h-8 bg-gray-700 rounded-l"></div>
-                <div class="absolute -left-[6px] top-32 w-[3px] h-12 bg-gray-700 rounded-l"></div>
-                <div class="absolute -right-[6px] top-24 w-[3px] h-16 bg-gray-700 rounded-r"></div>
-
-                <video
-                  preload="metadata"
-                  :src="WorkoutVideo"
-                  autoplay
-                  loop
-                  muted
-                  playsinline
-                  class="w-full rounded-[1.5rem]"
-                ></video>
-              </div>
             </div>
 
-            <div class="border border-gray-300 rounded-lg p-6 md:p-12">
-              <h2 class="text-xl opacity-80 font-bold mb-2">Next: Progression</h2>
-
+            <div class="px-6 py-4 bg-gray-200 rounded-lg">
+              <h3 class="font-bold text-lg">Workouts change all the time</h3>
               <p>
-                The current reward system is a test of the interaction and visual language rather than a finished
-                gamification system. The next stage is to introduce an XP system that connects individual workout
-                achievements into a longer-term progression loop.
+                What people trained depended on things like their available time, energy, gym conditions and what they
+                had trained recently.
               </p>
-
-              <p>
-                I also want to refine the UI and develop a set of custom pixel-art assets, including the character and
-                supporting interface elements, so that progression is represented visually as well as numerically.
-              </p>
-
-              <div class="relative mt-10">
-                <img
-                  loading="lazy"
-                  src="../../assets/workoutApp/character.png"
-                  alt=""
-                  class="relative w-full max-w-[300px] mx-auto h-auto"
-                />
-              </div>
             </div>
           </div>
 
-          <div class="border border-gray-300 rounded-lg p-6 md:p-12"></div>
-        </div>
-        ```
-      </template>
-    </ChallengeSection>
+          <div class="mt-8 mb-12">
+            <p>
+              This made me question whether the main problem was really a lack of workout information. People generally
+              knew how to train. The harder part seemed to be deciding what made sense for them on a particular day,
+              without the app getting in the way.
+            </p>
+          </div>
 
-    <div>
-      <h1 class="mx-auto text-7xl text-gray-800 !font-jersey">To be continued...</h1>
+          <PageDivider class="scale-70 my-16 opacity-50" />
+
+          <h2 class="text-2xl opacity-80 font-bold mb-2 mt-12">Looking at other apps</h2>
+
+          <p class="my-8">
+            I then spent some time looking at existing training apps to see how they approached workout selection,
+            recovery, flexibility and keeping people engaged over time. I wasn’t looking for a single app to copy. I
+            wanted to understand what seemed to work, where the experience felt frustrating, and whether there was
+            anything missing from the way these products helped people decide what to do next.
+          </p>
+
+          <WorkoutCompetitiveTable />
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-16" />
+
+      <JournalEntry :number="1" title="A problem worth exploring" id="w_problem" date="July 2026">
+        <p>
+          I started Squeeze (working title) because I wanted to explore a different way of approaching workout apps.
+          I’ve always found that the hardest part of training consistently isn’t necessarily the workout itself, it’s
+          deciding what to do when you get to the gym.
+        </p>
+
+        <p>
+          Most apps either give you a fixed programme or leave you to plan everything yourself. I wanted to see if there
+          was a middle ground: something that could take recovery, progression and the time available into account,
+          while still making the next workout feel simple.
+        </p>
+
+        <p>
+          That became the starting point for Squeeze. I didn’t have all the answers yet, but I had a few ideas I wanted
+          to explore, particularly around making training feel more personal, more adaptable and, eventually, a little
+          more rewarding.
+        </p>
+      </JournalEntry>
     </div>
   </div>
 </template>
@@ -625,7 +573,7 @@ export default {
   animation-delay: 1s;
 }
 
-.animate-fill-bar {
+.skewed {
   transform: skewX(-30deg);
   transform-origin: left;
 }
