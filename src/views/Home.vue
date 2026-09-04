@@ -65,7 +65,7 @@ export default {
       >
         <div class="flex flex-col md:flex-row-reverse gap-10 items-center">
           <PhoneFrame>
-            <div class="relative min-h-[597px] bg-gray-900">
+            <div class="relative min-h-[510px] md:min-h-[597px] bg-gray-900">
               <div class="absolute inset-0 flex items-center justify-center">
                 <div class="w-8 h-8 border-4 border-gray-600 border-t-white rounded-full animate-spin"></div>
               </div>
