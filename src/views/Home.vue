@@ -5,6 +5,8 @@ import PageDivider from "../components/PageDivider.vue";
 import ModernisationRoadmap from "../components/ModernisationRoadmap.vue";
 import ScrollNavigator from "../components/ScrollNavigator.vue";
 import WorkoutVideo from "../assets/workoutApp/workout1.mp4";
+import PhoneFrame from "../components/PhoneFrame.vue";
+import PhoneFrameVue from "../components/PhoneFrame.vue";
 
 export default {
   data() {
@@ -18,6 +20,7 @@ export default {
     PageDivider,
     ModernisationRoadmap,
     ScrollNavigator,
+    PhoneFrame,
   },
   props: {
     darkLogo: {
@@ -61,23 +64,23 @@ export default {
         to="/workout-app"
       >
         <div class="flex flex-col md:flex-row-reverse gap-10 items-center">
-          <div class="relative mx-auto max-w-[300px] p-2 bg-black border-4 border-gray-700 rounded-[2rem] shadow-xl">
-            <div class="absolute top-2 left-1/2 -translate-x-1/2 w-16 h-1 bg-gray-700 rounded-full z-10"></div>
+          <PhoneFrame>
+            <div class="relative min-h-[597px] bg-gray-900">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-8 h-8 border-4 border-gray-600 border-t-white rounded-full animate-spin"></div>
+              </div>
 
-            <div class="absolute -left-[6px] top-20 w-[3px] h-8 bg-gray-700 rounded-l"></div>
-            <div class="absolute -left-[6px] top-32 w-[3px] h-12 bg-gray-700 rounded-l"></div>
-            <div class="absolute -right-[6px] top-24 w-[3px] h-16 bg-gray-700 rounded-r"></div>
-
-            <video
-              preload="metadata"
-              :src="WorkoutVideo"
-              autoplay
-              loop
-              muted
-              playsinline
-              class="w-full rounded-[1.5rem]"
-            ></video>
-          </div>
+              <video
+                preload="metadata"
+                :src="WorkoutVideo"
+                autoplay
+                loop
+                muted
+                playsinline
+                class="relative z-10 block w-full h-full object-contain"
+              ></video>
+            </div>
+          </PhoneFrame>
           <div class="hidden md:flex flex-col items-center">
             <div class="relative flex gap-12 my-10">
               <img loading="lazy" src="../assets/workoutApp/character.png" alt="" class="relative size-[200px] -mx-8" />
