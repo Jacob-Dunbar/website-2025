@@ -175,7 +175,7 @@ export default function RecoveryCountdown({ progress }) {
         </template>
       </JournalEntry>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <JournalEntry :number="8" title="Making progression feel rewarding" date="August 2026" id="w_progression" visual>
         <p>
@@ -209,12 +209,12 @@ export default function RecoveryCountdown({ progress }) {
               ></video>
             </div>
 
-            <CodeSnippet class="!w-1/2" filename="SetBadge.tsx" lang="tsx" :code="setBadgeCode" />
+            <CodeSnippet class="md:!w-1/2" filename="SetBadge.tsx" lang="tsx" :code="setBadgeCode" />
           </div>
         </template>
       </JournalEntry>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <JournalEntry :number="7" title="Games bars and sliders" date="August 2026" id="w_sliders" visual>
         <p>
@@ -291,7 +291,7 @@ export default function RecoveryCountdown({ progress }) {
               </div>
             </div>
 
-            <CodeSnippet class="!w-1/2" filename="RecoveryCountdown.tsx" lang="tsx" :code="recoveryCountdownCode" />
+            <CodeSnippet class="md:!w-1/2" filename="RecoveryCountdown.tsx" lang="tsx" :code="recoveryCountdownCode" />
           </div>
 
           <p class="mt-8 md:mt-20">
@@ -307,7 +307,7 @@ export default function RecoveryCountdown({ progress }) {
         </template>
       </JournalEntry>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <JournalEntry :number="6" title="Making it real" date="August 2026" id="w_implementation" visual>
         <p>
@@ -341,7 +341,7 @@ export default function RecoveryCountdown({ progress }) {
         </template>
       </JournalEntry>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <JournalEntry :number="5" title="Trying out the interface" id="w_interface" date="August 2026" visual>
         <p>Once I had a rough flow, I started sketching out what the individual screens could look like.</p>
@@ -359,7 +359,7 @@ export default function RecoveryCountdown({ progress }) {
         </p>
 
         <template #visual>
-          <div class="flex flex-col md:flex-row w-full gap-8 md:gap-20">
+          <div class="flex md:flex-row w-full gap-8 md:gap-20">
             <img src="../../assets/workoutApp/wireframe1.png" class="flex-1 min-w-0 h-auto" />
             <img src="../../assets/workoutApp/wireframe2.png" class="flex-1 min-w-0 h-auto" />
             <img src="../../assets/workoutApp/wireframe3.png" class="flex-1 min-w-0 h-auto" />
@@ -367,7 +367,7 @@ export default function RecoveryCountdown({ progress }) {
         </template>
       </JournalEntry>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <JournalEntry :number="4" title="Figuring out the flow" id="w_flow" date="August 2026" visual>
         <p>
@@ -395,7 +395,7 @@ export default function RecoveryCountdown({ progress }) {
         </template>
       </JournalEntry>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <JournalEntry :number="3" title="Figuring out what Squeeze could be" id="w_concept" date="August 2026" visual>
         <p>
@@ -447,7 +447,7 @@ export default function RecoveryCountdown({ progress }) {
         </template>
       </JournalEntry>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <JournalEntry :number="2" title="Trying to understand the problem" id="w_research" date="July 2026" visual>
         <p>
@@ -517,7 +517,7 @@ export default function RecoveryCountdown({ progress }) {
         </template>
       </JournalEntry>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <JournalEntry :number="1" title="A problem worth exploring" id="w_problem" date="July 2026">
         <p>

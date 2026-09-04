@@ -106,7 +106,7 @@ export default {
         </div>
       </PortfolioItem>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
         id="messaging"
@@ -119,7 +119,7 @@ export default {
         <img loading="lazy" class="w-full" src="../assets/messaging_ui.svg" />
       </PortfolioItem>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
         id="modernisation"
@@ -131,7 +131,7 @@ export default {
         <ModernisationRoadmap />
       </PortfolioItem>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
         id="dashboard"
@@ -145,7 +145,7 @@ export default {
         <img loading="lazy" class="w-full" src="../assets/dashboard_ui.png" />
       </PortfolioItem>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
         id="search"
@@ -157,7 +157,7 @@ export default {
         <img class="w-full" loading="lazy" src="../assets/search_ui.svg" />
       </PortfolioItem>
 
-      <PageDivider class="my-16" />
+      <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
         id="description"

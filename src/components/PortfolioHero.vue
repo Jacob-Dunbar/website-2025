@@ -21,14 +21,14 @@ export default {
 </script>
 
 <template>
-  <section id="hero" class="h-screen mx-10 flex items-center justify-center relative overflow-hidden">
+  <section id="hero" class="h-screen md:mx-10 flex items-center justify-center relative overflow-hidden">
     <div
       class="bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.2)_0%,_transparent_60%)] w-full max-w-7xl h-full relative"
     >
       <div
-        class="w-full h-full mx-5 absolute top-0 left-0 flex flex-col md:flex-row z-20 pt-24 md:pt-0 justify-between"
+        class="w-full h-full mx-10 md:mx-5 absolute top-0 left-0 flex flex-col md:flex-row z-20 pt-24 md:pt-0 justify-between"
       >
-        <div class="text-main-light text-5xl w-3/4 md:w-1/3 flex flex-col justify-center">
+        <div class="text-main-light text-4xl md:text-5xl w-3/4 md:w-1/3 flex flex-col justify-center">
           <h2>{{ title }}</h2>
           <h2>Portfolio.</h2>
         </div>
