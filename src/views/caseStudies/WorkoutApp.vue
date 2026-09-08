@@ -179,8 +179,8 @@ export default function RecoveryCountdown({ progress }) {
         <template #visual>
           <div class="w-full flex flex-col gap-16">
             <!-- PROGRESSION: TEXT → IMAGE -->
-            <div class="w-full flex gap-5 items-start">
-              <div class="w-1/2 flex flex-col items-start gap-10">
+            <div class="w-full flex flex-col md:flex-row gap-5 items-start">
+              <div class="md:w-1/2 flex flex-col items-start gap-10">
                 <h3 class="text-2xl font-bold">Progression you can see</h3>
 
                 <p>
@@ -190,26 +190,26 @@ export default function RecoveryCountdown({ progress }) {
                 </p>
               </div>
 
-              <div class="w-1/2">
-                <div class="w-full flex items-end justify-center gap-5">
-                  <img src="../../assets/workoutApp/character_1.png" class="h-48 w-auto pixel-art" />
-                  <img src="../../assets/workoutApp/character_2.png" class="h-48 w-auto pixel-art" />
-                  <img src="../../assets/workoutApp/character_3.png" class="h-48 w-auto pixel-art" />
-                  <img src="../../assets/workoutApp/character_5.png" class="h-48 w-auto pixel-art" />
-                  <img src="../../assets/workoutApp/character_6.png" class="h-48 w-auto pixel-art" />
+              <div class="md:w-1/2 mx-auto">
+                <div class="w-full flex md:items-end justify-center gap-5">
+                  <img src="../../assets/workoutApp/character_1.png" class="h-24 md:h-48 w-auto pixel-art" />
+                  <img src="../../assets/workoutApp/character_2.png" class="h-24 md:h-48 w-auto pixel-art" />
+                  <img src="../../assets/workoutApp/character_3.png" class="h-24 md:h-48 w-auto pixel-art" />
+                  <img src="../../assets/workoutApp/character_5.png" class="h-24 md:h-48 w-auto pixel-art" />
+                  <img src="../../assets/workoutApp/character_6.png" class="h-24 md:h-48 w-auto pixel-art" />
                 </div>
               </div>
             </div>
 
             <!-- TRANSFORMATIONS: IMAGE → TEXT -->
-            <div class="w-full flex gap-5 items-start">
-              <div class="w-1/2">
+            <div class="w-full flex flex-col md:flex-row gap-5 items-start">
+              <div class="md:w-1/2 mx-auto">
                 <div class="w-full flex items-end justify-center gap-5">
                   <img src="../../assets/workoutApp/character_evolve.gif" class="h-48 w-auto pixel-art" />
                 </div>
               </div>
 
-              <div class="w-1/2 flex flex-col items-start gap-10">
+              <div class="md:w-1/2 flex flex-col items-start gap-10">
                 <h3 class="text-2xl font-bold">Epic transformations</h3>
 
                 <p>
@@ -221,8 +221,8 @@ export default function RecoveryCountdown({ progress }) {
             </div>
 
             <!-- IDLE: TEXT → IMAGE -->
-            <div class="w-full flex gap-5 items-start">
-              <div class="w-1/2 flex flex-col items-start gap-10">
+            <div class="w-full flex flex-col-reverse md:flex-row gap-5 items-start">
+              <div class="md:w-1/2 flex flex-col items-start gap-10">
                 <h3 class="text-2xl font-bold">Making the characters feel alive</h3>
 
                 <p>
@@ -233,7 +233,7 @@ export default function RecoveryCountdown({ progress }) {
                 </p>
               </div>
 
-              <div class="w-1/2">
+              <div class="md:w-1/2 mx-auto">
                 <div class="w-full flex items-end justify-center gap-5">
                   <img src="../../assets/workoutApp/character_idle.gif" class="h-48 w-auto pixel-art" />
                 </div>
@@ -241,15 +241,15 @@ export default function RecoveryCountdown({ progress }) {
             </div>
 
             <!-- PERSONALITY: IMAGE → TEXT -->
-            <div class="w-full flex gap-5 items-start">
-              <div class="w-1/2">
+            <div class="w-full flex flex-col md:flex-row gap-5 items-start">
+              <div class="md:w-1/2 mx-auto">
                 <div class="w-full flex items-end justify-center gap-5">
                   <img src="../../assets/workoutApp/character_celebrate.gif" class="h-48 w-auto pixel-art" />
                   <img src="../../assets/workoutApp/character_wave.gif" class="h-48 w-auto pixel-art" />
                 </div>
               </div>
 
-              <div class="w-1/2 flex flex-col items-start gap-10">
+              <div class="md:w-1/2 flex flex-col items-start gap-10">
                 <h3 class="text-2xl font-bold">Small moments of personality</h3>
 
                 <p>
@@ -277,7 +277,7 @@ export default function RecoveryCountdown({ progress }) {
         visual
       >
         <template #visual>
-          <div class="w-full flex gap-5">
+          <div class="w-full flex flex-col md:flex-row gap-10 md:gap-5">
             <PhoneFrame>
               <div class="relative min-h-[510px] md:min-h-[597px] bg-gray-900">
                 <div class="absolute inset-0 flex items-center justify-center">
@@ -295,14 +295,14 @@ export default function RecoveryCountdown({ progress }) {
                 ></video>
               </div>
             </PhoneFrame>
-            <div class="w-1/2 flex flex-col items-start gap-10">
+            <div class="md:w-1/2 flex flex-col items-start gap-10">
               <p>
                 I decided to take the visual direction in a more low-fi, old-school tech direction, inspired by retro
                 game consoles, monochrome colour schemes and pixel fonts. I think this is an improvement, while leaving
                 room to reintroduce more playfulness in future iterations.
               </p>
 
-              <BrowserFrame class="-pt-1">
+              <BrowserFrame class="mx-auto">
                 <video
                   preload="metadata"
                   :src="SlideVideo"
