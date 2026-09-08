@@ -24,3 +24,8 @@ h1,
 h2 {
   font-family: "Geist", sans-serif;
 }
+
+.pixel-art {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}

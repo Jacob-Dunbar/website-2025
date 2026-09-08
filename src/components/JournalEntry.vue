@@ -38,7 +38,7 @@ export default {
       <!-- Header -->
       <div class="lg:w-1/2 flex flex-col items-start gap-4">
         <div class="flex items-center gap-3 text-sm text-main-dark/50">
-          <span>Journal entry {{ number < 10 && 0 }}{{ number }}</span>
+          <span>Journal entry {{ number < 10 ? 0 : "" }}{{ number }}</span>
 
           <span v-if="date">→</span>
 

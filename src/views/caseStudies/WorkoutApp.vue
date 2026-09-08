@@ -11,12 +11,13 @@ import ChallengeSection from "../../components/ChallengeSection.vue";
 import CaseStudyContainer from "../../components/CaseStudyContainer.vue";
 import ScrollNavigator from "../../components/ScrollNavigator.vue";
 import WorkoutCompetitiveTable from "../../components/WorkoutCompetitiveTable.vue";
-import WorkoutVideo from "../../assets/workoutApp/workout1.mp4";
+import WorkoutVideo from "../../assets/workoutApp/workout3.mp4";
 import WorkoutVideoClose from "../../assets/workoutApp/workout2.mp4";
 import JournalEntry from "../../components/JournalEntry.vue";
 import PhoneFrame from "../../components/PhoneFrame.vue";
 import CodeSnippet from "../../components/CodeSnippet.vue";
 import OrderToggle from "../../components/OrderToggle.vue";
+import SlideVideo from "../../assets/workoutApp/slide_interaction.mp4";
 
 export default {
   data() {
@@ -24,6 +25,7 @@ export default {
       searchVideo,
       WorkoutVideo,
       WorkoutVideoClose,
+      SlideVideo,
       before,
       after,
       reversed: false,
@@ -94,15 +96,17 @@ export default function RecoveryCountdown({ progress }) {
   computed: {
     navigatorSections() {
       const journalSections = [
-        { id: "w_visual_direction", label: "01 → Finding the visual direction" },
-        { id: "w_progression", label: "02 → Making progression feel rewarding" },
-        { id: "w_sliders", label: "03 → Games bars and sliders" },
-        { id: "w_implementation", label: "04 → Making it real" },
+        { id: "w_character_progression", label: "11 → Building character progression" },
+        { id: "w_set_logging", label: "10 → Developing style and interaction" },
+        { id: "w_visual_direction", label: "09 → Finding the visual direction" },
+        { id: "w_progression", label: "08 → Making progression feel rewarding" },
+        { id: "w_sliders", label: "07 → Games bars and sliders" },
+        { id: "w_implementation", label: "06 → Making it real" },
         { id: "w_interface", label: "05 → Trying out the interface" },
-        { id: "w_flow", label: "06 → Figuring out the flow" },
-        { id: "w_concept", label: "07 → Figuring out what Squeeze could be" },
-        { id: "w_research", label: "08 → Trying to understand the problem" },
-        { id: "w_problem", label: "09 → A problem worth exploring" },
+        { id: "w_flow", label: "04 → Figuring out the flow" },
+        { id: "w_concept", label: "03 → Figuring out what Squeeze could be" },
+        { id: "w_research", label: "02 → Trying to understand the problem" },
+        { id: "w_problem", label: "01 → A problem worth exploring" },
       ];
 
       return [{ id: "w_hero", label: "home" }, ...(this.reversed ? [...journalSections].reverse() : journalSections)];
@@ -151,7 +155,185 @@ export default function RecoveryCountdown({ progress }) {
     </CaseStudyHero>
 
     <OrderToggle v-model:reversed="reversed" />
+
     <div class="flex gap-16" :class="reversed ? 'flex-col-reverse' : 'flex-col'">
+      <JournalEntry
+        :number="11"
+        title="Building character progression and animation"
+        date="September 2026"
+        id="w_character_progression"
+        visual
+      >
+        <p>
+          I used PixelLab's AI tools to create and iterate on Squeeze's character and animation assets, with my
+          background in animation and illustration helping me direct movement, maintain consistency and refine the
+          results.
+        </p>
+
+        <p>
+          I chose a deliberately low-resolution pixel-art style to reinforce the retro game aesthetic while creating a
+          flexible visual system. The limited resolution makes it possible to evolve the character significantly through
+          silhouette, proportions and key details, without losing their identity.
+        </p>
+
+        <template #visual>
+          <div class="w-full flex flex-col gap-16">
+            <!-- PROGRESSION: TEXT → IMAGE -->
+            <div class="w-full flex gap-5 items-start">
+              <div class="w-1/2 flex flex-col items-start gap-10">
+                <h3 class="text-2xl font-bold">Progression you can see</h3>
+
+                <p>
+                  Progression is a core part of the gamification in Squeeze, so I wanted it to be something users could
+                  actually see rather than just a number increasing on a screen. The character evolves alongside the
+                  user's training, giving their progress a more tangible, game-like reward.
+                </p>
+              </div>
+
+              <div class="w-1/2">
+                <div class="w-full flex items-end justify-center gap-5">
+                  <img src="../../assets/workoutApp/character_1.png" class="h-48 w-auto pixel-art" />
+                  <img src="../../assets/workoutApp/character_2.png" class="h-48 w-auto pixel-art" />
+                  <img src="../../assets/workoutApp/character_3.png" class="h-48 w-auto pixel-art" />
+                  <img src="../../assets/workoutApp/character_5.png" class="h-48 w-auto pixel-art" />
+                  <img src="../../assets/workoutApp/character_6.png" class="h-48 w-auto pixel-art" />
+                </div>
+              </div>
+            </div>
+
+            <!-- TRANSFORMATIONS: IMAGE → TEXT -->
+            <div class="w-full flex gap-5 items-start">
+              <div class="w-1/2">
+                <div class="w-full flex items-end justify-center gap-5">
+                  <img src="../../assets/workoutApp/character_evolve.gif" class="h-48 w-auto pixel-art" />
+                </div>
+              </div>
+
+              <div class="w-1/2 flex flex-col items-start gap-10">
+                <h3 class="text-2xl font-bold">Epic transformations</h3>
+
+                <p>
+                  Each stage of progression is brought to life through a transformation animation, turning a simple
+                  level-up into a more rewarding game-like moment. The character physically changes from one form to the
+                  next, making progression feel earned rather than purely numerical.
+                </p>
+              </div>
+            </div>
+
+            <!-- IDLE: TEXT → IMAGE -->
+            <div class="w-full flex gap-5 items-start">
+              <div class="w-1/2 flex flex-col items-start gap-10">
+                <h3 class="text-2xl font-bold">Making the characters feel alive</h3>
+
+                <p>
+                  I also wanted the characters to feel like part of the interface, rather than static illustrations
+                  placed on top of it. Subtle idle animations give them a small amount of life while the user is
+                  navigating the app, helping reinforce the feeling that Squeeze is behaving more like a game than a
+                  traditional fitness tracker.
+                </p>
+              </div>
+
+              <div class="w-1/2">
+                <div class="w-full flex items-end justify-center gap-5">
+                  <img src="../../assets/workoutApp/character_idle.gif" class="h-48 w-auto pixel-art" />
+                </div>
+              </div>
+            </div>
+
+            <!-- PERSONALITY: IMAGE → TEXT -->
+            <div class="w-full flex gap-5 items-start">
+              <div class="w-1/2">
+                <div class="w-full flex items-end justify-center gap-5">
+                  <img src="../../assets/workoutApp/character_celebrate.gif" class="h-48 w-auto pixel-art" />
+                  <img src="../../assets/workoutApp/character_wave.gif" class="h-48 w-auto pixel-art" />
+                </div>
+              </div>
+
+              <div class="w-1/2 flex flex-col items-start gap-10">
+                <h3 class="text-2xl font-bold">Small moments of personality</h3>
+
+                <p>
+                  I created smaller character animations that respond to user actions, such as a wave or celebration,
+                  making interactions feel more playful and rewarding.
+                </p>
+
+                <p>
+                  These moments are used sparingly so completing a workout, reaching a milestone or unlocking something
+                  feels like a small game moment.
+                </p>
+              </div>
+            </div>
+          </div>
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-2 md:my-16" />
+
+      <JournalEntry
+        :number="10"
+        title="Developing style and playful interaction"
+        date="September 2026"
+        id="w_set_logging"
+        visual
+      >
+        <template #visual>
+          <div class="w-full flex gap-5">
+            <PhoneFrame>
+              <div class="relative min-h-[510px] md:min-h-[597px] bg-gray-900">
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <div class="w-8 h-8 border-4 border-gray-600 border-t-white rounded-full animate-spin"></div>
+                </div>
+
+                <video
+                  preload="metadata"
+                  :src="WorkoutVideo"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  class="relative z-10 block w-full h-full object-contain"
+                ></video>
+              </div>
+            </PhoneFrame>
+            <div class="w-1/2 flex flex-col items-start gap-10">
+              <p>
+                I decided to take the visual direction in a more low-fi, old-school tech direction, inspired by retro
+                game consoles, monochrome colour schemes and pixel fonts. I think this is an improvement, while leaving
+                room to reintroduce more playfulness in future iterations.
+              </p>
+
+              <BrowserFrame class="-pt-1">
+                <video
+                  preload="metadata"
+                  :src="SlideVideo"
+                  autoplay
+                  loop
+                  muted
+                  playsinline
+                  class="relative z-10 block max-w-[300px] object-contain"
+                ></video>
+              </BrowserFrame>
+
+              <p>
+                I also introduced a new rep-logging interaction, allowing users to slide across the rep blocks to
+                quickly set their reps, while still being able to enter a value directly. My hypothesis is that, because
+                logging reps is the main action users repeat throughout every workout, optimising it for speed and
+                minimal effort could make the overall experience feel much more frictionless.
+              </p>
+
+              <p>
+                There may be a small learning curve initially, but I expect the interaction to become second nature
+                through repetition, ultimately saving users time across every workout (Although user testing is needed
+                to support this). I've also added an automatic rest timer that starts as soon as a set is logged, again
+                reducing clicks.
+              </p>
+            </div>
+          </div>
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-2 md:my-16" />
+
       <JournalEntry :number="9" title="Finding the visual direction" date="August 2026" id="w_visual_direction" visual>
         <p>
           Starting to build out the screens made me realise that the visual direction wasn't quite there yet. I had a
