@@ -32,7 +32,7 @@ export default {
 </script>
 
 <template>
-  <article class="max-w-7xl mx-5 md:mx-20 flex flex-col gap-12 md:gap-28">
+  <article class="max-w-7xl !mx-5 md:mx-20 flex flex-col gap-12 md:gap-28">
     <!-- Entry header + content -->
     <div class="flex flex-col gap-10 md:gap-5 items-start lg:flex-row text-gray-800">
       <!-- Header -->
@@ -56,7 +56,7 @@ export default {
           class="inline-flex items-center gap-2 px-3 py-1 text-sm font-medium rounded-full bg-black text-gray-100"
         >
           <span class="relative flex h-2 w-2">
-            <span class="absolute inline-flex h-full w-full rounded-full bg-white opacity-80 animate-ping"></span>
+            <span class="absolute inline-flex h-full flex-1 rounded-full bg-white opacity-80 animate-ping"></span>
             <span class="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
           </span>
 
@@ -73,7 +73,7 @@ export default {
     </div>
 
     <!-- Visual content -->
-    <div v-if="visual" class="*:w-full [&_h2]:text-gray-700 [&_h3]:text-gray-600">
+    <div v-if="visual" class="*:w-flex-1 [&_h2]:text-gray-700 [&_h3]:text-gray-600">
       <slot name="visual"></slot>
     </div>
   </article>

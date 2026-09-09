@@ -5,11 +5,11 @@ export default {
 </script>
 
 <template>
-  <div class="w-full overflow-x-auto">
-    <table class="w-full border-collapse text-left text-sm">
+  <div class="w-full overflow-hidden">
+    <table class="w-full border-collapse text-left text-sm table-fixed">
       <thead>
         <tr class="border-b border-zinc-200">
-          <th class="px-2 py-2.5 font-medium text-zinc-900 text-center"></th>
+          <th class="w-1/3 px-2 py-2.5 font-medium text-zinc-900 text-left"></th>
           <th class="px-2 py-2.5 font-medium text-zinc-900 text-center">FitPro</th>
           <th class="px-2 py-2.5 font-medium text-zinc-900 text-center">Trainly</th>
           <th class="px-2 py-2.5 font-medium text-zinc-900 text-center">Strong</th>

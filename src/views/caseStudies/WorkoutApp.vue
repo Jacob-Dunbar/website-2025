@@ -13,6 +13,7 @@ import ScrollNavigator from "../../components/ScrollNavigator.vue";
 import WorkoutCompetitiveTable from "../../components/WorkoutCompetitiveTable.vue";
 import WorkoutVideo from "../../assets/workoutApp/workout3.mp4";
 import WorkoutVideoClose from "../../assets/workoutApp/workout2.mp4";
+import GameVideo from "../../assets/workoutApp/game.mp4";
 import JournalEntry from "../../components/JournalEntry.vue";
 import PhoneFrame from "../../components/PhoneFrame.vue";
 import CodeSnippet from "../../components/CodeSnippet.vue";
@@ -24,12 +25,27 @@ export default {
     return {
       searchVideo,
       WorkoutVideo,
+      GameVideo,
       WorkoutVideoClose,
       SlideVideo,
       before,
       after,
       reversed: false,
       OrderToggle,
+      gameCode: `setCharacterX((current) => {
+
+  let next = current;
+
+  if (keys.current.left) { next -= MOVE_SPEED }
+
+  if (keys.current.right) { next += MOVE_SPEED }
+
+  next = Math.max( 0, Math.min(gameWidth.current, next )
+);
+
+  return next;
+});
+`,
       setBadgeCode: `
     const completedReps = Number(reps[setIndex] ?? 0);
 
@@ -158,6 +174,101 @@ export default function RecoveryCountdown({ progress }) {
 
     <div class="flex gap-16" :class="reversed ? 'flex-col-reverse' : 'flex-col'">
       <JournalEntry
+        :number="12"
+        title="Building a Mini Fighting Game"
+        date="September 2026"
+        id="w_fighting_game"
+        visual
+      >
+        <p>
+          I wanted to add something unexpected to Squeeze: a small, optional fighting game that gives consistent
+          training another way to reward progression. The fights are designed to be quick enough to pick up between sets
+          or while waiting for equipment.
+        </p>
+
+        <p>
+          Users can take their trained character through a series of short one-on-one battles against increasingly
+          stronger opponents, unlocking optional badges and accessories along the way.
+        </p>
+
+        <template #visual>
+          <div class="w-full flex flex-col gap-20">
+            <div class="w-full flex flex-col md:flex-row gap-8 items-center">
+              <div class="md:w-1/2 flex flex-col items-start gap-8">
+                <h3 class="text-2xl font-bold">A battle between sets</h3>
+
+                <p>
+                  The game is designed as an optional extra rather than part of the core workout experience. Battles are
+                  intentionally short, giving users something they can play between sets without interrupting their
+                  workout.
+                </p>
+
+                <div class="flex flex-col md:flex-row w-full gap-5 justify-center flex-1">
+                  <img
+                    src="../../assets/workoutApp/kick.png"
+                    alt="Pixel art kick animation sprite sheet"
+                    class="flex-1 mx-auto max-w-md pixel-art"
+                  />
+                  <img
+                    src="../../assets/workoutApp/battle-idle.png"
+                    alt="Pixel art kick animation sprite sheet"
+                    class="flex-1 mx-auto max-w-md pixel-art"
+                  />
+                </div>
+
+                <p>
+                  I created the character animations as pixel-art sprite sheets and built the basic movement
+                  foundations, including directional movement, jumping with gravity and a kick animation.
+                </p>
+              </div>
+
+              <div class="md:w-1/2 mx-auto">
+                <div class="md:w-full flex items-center justify-center">
+                  <PhoneFrame>
+                    <div class="relative md:min-h-[597px] bg-gray-900">
+                      <video
+                        preload="metadata"
+                        :src="GameVideo"
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        class="block w-full h-full object-contain"
+                      ></video>
+                    </div>
+                  </PhoneFrame>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full flex flex-col md:flex-row gap-8 items-center">
+              <div class="w-full md:w-1/2 md:p-15">
+                <CodeSnippet filename="Game.tsx" lang="tsx" :code="gameCode" />
+              </div>
+
+              <div class="md:w-1/2 flex flex-col items-start gap-8">
+                <h3 class="text-2xl font-bold">From movement to combat</h3>
+
+                <p>
+                  One challenge was allowing the character to move naturally around the arena while keeping the original
+                  sprite dimensions and transparent padding intact. I solved this by separating the character's movement
+                  position from the sprite viewport.
+                </p>
+
+                <p>
+                  The prototype is being built one mechanic at a time. With movement, jumping and the first attack
+                  working, the next step is to introduce an opponent, hit detection, health and more attacks before
+                  connecting the combat system back into Squeeze's progression and training stats.
+                </p>
+              </div>
+            </div>
+          </div>
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-2 md:my-16" />
+
+      <JournalEntry
         :number="11"
         title="Building character progression and animation"
         date="September 2026"
@@ -178,7 +289,6 @@ export default function RecoveryCountdown({ progress }) {
 
         <template #visual>
           <div class="w-full flex flex-col gap-16">
-            <!-- PROGRESSION: TEXT → IMAGE -->
             <div class="w-full flex flex-col md:flex-row gap-5 items-start">
               <div class="md:w-1/2 flex flex-col items-start gap-10">
                 <h3 class="text-2xl font-bold">Progression you can see</h3>
@@ -201,7 +311,6 @@ export default function RecoveryCountdown({ progress }) {
               </div>
             </div>
 
-            <!-- TRANSFORMATIONS: IMAGE → TEXT -->
             <div class="w-full flex flex-col md:flex-row gap-5 items-start">
               <div class="md:w-1/2 mx-auto">
                 <div class="w-full flex items-end justify-center gap-5">
@@ -220,7 +329,6 @@ export default function RecoveryCountdown({ progress }) {
               </div>
             </div>
 
-            <!-- IDLE: TEXT → IMAGE -->
             <div class="w-full flex flex-col-reverse md:flex-row gap-5 items-start">
               <div class="md:w-1/2 flex flex-col items-start gap-10">
                 <h3 class="text-2xl font-bold">Making the characters feel alive</h3>
@@ -240,7 +348,6 @@ export default function RecoveryCountdown({ progress }) {
               </div>
             </div>
 
-            <!-- PERSONALITY: IMAGE → TEXT -->
             <div class="w-full flex flex-col md:flex-row gap-5 items-start">
               <div class="md:w-1/2 mx-auto">
                 <div class="w-full flex items-end justify-center gap-5">
@@ -422,7 +529,6 @@ export default function RecoveryCountdown({ progress }) {
 
               <div class="relative w-full overflow-hidden">
                 <div class="relative flex flex-col">
-                  <!-- Graphics -->
                   <h3>PNG Graphics:</h3>
                   <div class="relative overflow-hidden p-5 mb-3">
                     <img loading="lazy" src="../../assets/workoutApp/bar1.png" alt="" class="relative w-full h-auto" />
@@ -430,7 +536,6 @@ export default function RecoveryCountdown({ progress }) {
                   </div>
 
                   <h3>CSS Bars:</h3>
-                  <!-- Bars -->
                   <div class="relative flex flex-col p-5 mb-3 gap-3 w-full">
                     <div
                       class="inset-0 bg-gradient-to-r from-green-500 to-yellow-400 h-8 opacity-75 animate-fill-bar animation-delay-1"
