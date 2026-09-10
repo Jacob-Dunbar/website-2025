@@ -8,6 +8,7 @@ import DevDashboard from "../views/caseStudies/DevDashboard.vue";
 import MessagingSystem from "../views/caseStudies/MessagingSystem.vue";
 import FrontendModernisation from "../views/caseStudies/FrontendModernisation.vue";
 import WorkoutApp from "../views/caseStudies/WorkoutApp.vue";
+import CvExperience from "../views/caseStudies/3dCvExperience.vue";
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: "/search-experience",
     name: "searchExperience",
     component: SearchExperience,
+  },
+  {
+    path: "/3d-experience",
+    name: "3dExperience",
+    component: CvExperience,
   },
   {
     path: "/description-assistant",

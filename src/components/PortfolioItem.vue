@@ -1,3 +1,4 @@
+```vue
 <script>
 import BaseButton from "./BaseButton.vue";
 
@@ -33,7 +34,7 @@ export default {
     :class="['flex w-full md:items-center gap-10 lg:gap-22 flex-col', reverse ? 'md:flex-row-reverse' : 'md:flex-row']"
   >
     <div class="md:w-2/3">
-      <slot> </slot>
+      <slot></slot>
     </div>
 
     <div class="md:w-1/3 flex flex-col items-start gap-6 md:gap-5">
@@ -63,14 +64,16 @@ export default {
         {{ description }}
       </p>
 
-      <BaseButton v-if="journal" :to="to"> View Project Journal </BaseButton>
+      <BaseButton v-if="journal" :to="to">View Project Journal</BaseButton>
 
       <div v-else-if="tags.length > 1" class="flex flex-col gap-2">
-        <BaseButton :to="to">{{ tags[0] }} case study </BaseButton>
-        <BaseButton :to="to2">{{ tags[1] }} case study </BaseButton>
+        <BaseButton :to="to">{{ tags[0] }} case study</BaseButton>
+        <BaseButton :to="to2">{{ tags[1] }} case study</BaseButton>
       </div>
 
-      <BaseButton v-else :to="to"> View case study </BaseButton>
+      <BaseButton v-else :to="to">View case study</BaseButton>
+
+      <slot name="extra-button"></slot>
     </div>
   </div>
 </template>

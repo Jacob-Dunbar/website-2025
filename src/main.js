@@ -36,6 +36,7 @@ import {
   faCheck,
   faBars,
   faArrowDownLong,
+  faArrowUpRightFromSquare,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faArrowRightLong);
@@ -69,6 +70,7 @@ library.add(faGithub);
 library.add(faCheck);
 library.add(faBars);
 library.add(faArrowDownLong);
+library.add(faArrowUpRightFromSquare);
 
 const app = createApp(App);
 

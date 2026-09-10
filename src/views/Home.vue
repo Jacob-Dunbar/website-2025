@@ -7,11 +7,15 @@ import ScrollNavigator from "../components/ScrollNavigator.vue";
 import WorkoutVideo from "../assets/workoutApp/workout1.mp4";
 import PhoneFrame from "../components/PhoneFrame.vue";
 import PhoneFrameVue from "../components/PhoneFrame.vue";
+import BaseButton from "../components/BaseButton.vue";
+import BrowserFrame from "../components/BrowserFrame.vue";
+import cvVideo from "../assets/3dcv/3dcv.mp4";
 
 export default {
   data() {
     return {
       WorkoutVideo,
+      cvVideo,
     };
   },
   components: {
@@ -21,6 +25,8 @@ export default {
     ModernisationRoadmap,
     ScrollNavigator,
     PhoneFrame,
+    BaseButton,
+    BrowserFrame,
   },
   props: {
     darkLogo: {
@@ -38,6 +44,7 @@ export default {
     :sections="[
       { id: 'hero', label: 'Home' },
       { id: 'workout', label: 'Workout App' },
+      { id: '3dexperience', label: '3D CV Experience' },
       { id: 'messaging', label: 'Real-Time Messaging' },
       { id: 'modernisation', label: 'Frontend Modernisation' },
       { id: 'dashboard', label: 'Customisable Dashboard' },
@@ -112,8 +119,39 @@ export default {
       <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
-        id="messaging"
+        id="3dexperience"
         reverse
+        title="3D CV Experience"
+        description="An interactive 3D CV built with React Three Fiber, featuring a custom jungle environment, atmospheric lighting, interactive objects, and animated characters."
+        :tags="['Front-End Development', 'Three.js', 'React Three Fiber']"
+        to="/3d-experience"
+      >
+        <BrowserFrame url="https://jacob-dunbar-3d-cv.netlify.app/">
+          <video
+            preload="metadata"
+            :src="cvVideo"
+            autoplay
+            loop
+            muted
+            playsinline
+            class="block w-full h-full object-contain"
+          ></video>
+        </BrowserFrame>
+        <template #extra-button>
+          <BaseButton
+            class="!bg-main-dark !text-main-light"
+            href="https://jacob-dunbar-3d-cv.netlify.app/"
+            icon="arrow-up-right-from-square"
+          >
+            Visit Live Experience
+          </BaseButton>
+        </template>
+      </PortfolioItem>
+
+      <PageDivider class="my-2 md:my-16" />
+
+      <PortfolioItem
+        id="messaging"
         title="Real-Time Messaging System"
         description="Built a real-time messaging experience with live updates, reusable components, and enhanced workflows including translation and contextual messaging."
         :tags="['Front-End Development']"
@@ -125,6 +163,7 @@ export default {
       <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
+        reverse
         id="modernisation"
         title="Frontend Modernisation Project"
         description="Modernised a legacy Vue application by upgrading the frontend stack, improving maintainability, and creating a more scalable foundation for future development."
@@ -138,7 +177,6 @@ export default {
 
       <PortfolioItem
         id="dashboard"
-        reverse
         title="Customisable Dashboard Experience"
         description="Built a modular dashboard system allowing users to personalise their workspace through configurable widgets, responsive layouts, and scalable component architecture."
         :tags="['Front-End Development', 'UX/UI Design']"
@@ -152,6 +190,7 @@ export default {
 
       <PortfolioItem
         id="search"
+        reverse
         title="Intelligent Search Experience"
         description="Redesigned search and filtering to improve discoverability and reduce friction when browsing services."
         :tags="['UX/UI Design']"
@@ -164,7 +203,6 @@ export default {
 
       <PortfolioItem
         id="description"
-        reverse
         title="AI Description Assistant"
         description="Designed an AI-powered writing assistant that helped sellers create clearer, higher-quality service descriptions with minimal effort."
         :tags="['UX/UI Design']"

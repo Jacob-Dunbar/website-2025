@@ -11,7 +11,7 @@ export default {
 
 <template>
   <div class="overflow-hidden max-w-7xl rounded-xl border border-slate-200 bg-white shadow-lg">
-    <div class="flex items-center gap-3 border-b border-slate-200 bg-main-dark px-4 py-3">
+    <div class="flex items-center gap-3 border-b border-slate-800 bg-main-dark px-4 py-3">
       <div class="flex gap-2">
         <div class="h-3 w-3 rounded-full bg-red-400"></div>
       </div>
