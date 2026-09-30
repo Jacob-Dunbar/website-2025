@@ -69,8 +69,8 @@ export default {
 
 <template>
   <div
-    class="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-50 rounded-md p-4"
-    :class="[darkLogo ? 'hover:bg-main-light' : 'hover:bg-main-dark']"
+    class="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-50 rounded-md p-4 bg-white/10 backdrop-blur-md border border-white/10 shadow-lg"
+    :class="[darkLogo ? 'hover:bg-main-light/20' : 'hover:bg-main-dark/20']"
     @mouseenter="hovered = true"
     @mouseleave="hovered = false"
   >
@@ -102,7 +102,7 @@ export default {
           >
             <span
               class="block h-[2px] w-4 transition-all duration-300"
-              :class="[darkLogo ? 'bg-main-dark' : 'bg-main-light', activeSection === section.id ? '' : 'opacity-40']"
+              :class="[darkLogo ? 'bg-main-dark' : 'bg-main-light', activeSection === section.id ? '' : 'opacity-30']"
             ></span>
           </button>
         </div>
@@ -114,7 +114,9 @@ export default {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .fade-enter-from,
