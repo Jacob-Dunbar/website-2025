@@ -19,15 +19,23 @@ import PhoneFrame from "../../components/PhoneFrame.vue";
 import CodeSnippet from "../../components/CodeSnippet.vue";
 import OrderToggle from "../../components/OrderToggle.vue";
 import SlideVideo from "../../assets/workoutApp/slide_interaction.mp4";
+import slideCloseupVideo from "../../assets/workoutApp/rep_slider_closeup.mp4";
+import originalRepInputVideo from "../../assets/workoutApp/original_rep_input.mp4";
+import currentSlider from "../../assets/workoutApp/current_slider.mp4";
+import badgeAnimationVideo from "../../assets/workoutApp/badge_animation.mp4";
 
 export default {
   data() {
     return {
       searchVideo,
+      badgeAnimationVideo,
+      slideCloseupVideo,
       WorkoutVideo,
       GameVideo,
       WorkoutVideoClose,
       SlideVideo,
+      originalRepInputVideo,
+      currentSlider,
       before,
       after,
       reversed: false,
@@ -86,6 +94,108 @@ export default function RecoveryCountdown({ progress }) {
     </View>
   );
 }`,
+      repSliderGestureCode: `const updateFromPosition = (x: number) => {
+  if (!containerWidth) return
+
+  const percentage = Math.max(0, Math.min(1, x / containerWidth))
+  const value = Math.round(percentage * maxReps)
+
+  onUpdateReps(Math.max(1, value))
+}
+`,
+      clickVsDragCode: `const handleTouchEnd = () => {
+  if (!hasMoved.current) {
+    onSubmitSet()
+    ...
+    return
+  }
+
+  tapHintTimeout.current = setTimeout(() => {
+    setShowTapToLog(true)
+    ...
+  }, 2000)
+}`,
+      touchInputCode: `{editing ? (
+  <TextInput ... />
+) : (
+  <Pressable onPress={() => setEditing(true)}>
+    <Text>{value}</Text>
+  </Pressable>
+)}
+`,
+      typographyCode: `  theme: {
+    extend: {
+      fontFamily: {
+        grotesk: ["SpaceGrotesk_400Regular"],
+        "grotesk-medium": ["SpaceGrotesk_500Medium"],
+        "grotesk-semibold": ["SpaceGrotesk_600SemiBold"],
+        "grotesk-bold": ["SpaceGrotesk_700Bold"],
+        liberation: ["LiberationMono"],
+        "liberation-bold": ["LiberationMonoBold"],
+      },
+    },
+  }
+`,
+      colourCode: `export const colors = {
+  primary: "#C3F400",
+  secondary: "#A855F7",
+  tertiary: "#EF4444",
+  background: "#181B25",
+  lightText: "#C4C9AC",
+};
+`,
+      spacingCode: `// placeholder: Tailwind spacing implementation
+export const spacing = {
+  sm: "p-2",
+  md: "p-4",
+  lg: "p-8",
+};
+`,
+      buttonComponentCode: `<ActionButton
+  label="Save changes"
+  type="primary"
+  state={canSave ? "active" : "disabled"}
+  onPress={handleCreateWorkout}
+  className="flex-1"
+/>
+`,
+      tagComponentCode: `<Tag
+  label={isReady ? "Ready" : "Recovering"}
+  type={isReady ? "primary" : "secondary"}
+  size="small"
+/>
+`,
+      progressComponentCode: `<RecoveryCountdown 
+  progress={getProgress(workout)} 
+/>
+`,
+      badgeAnimationCode1: `targetRef.current?.measureInWindow((x, y, width, height) => {
+  const targetCenterX = x + width / 2 
+  const targetCenterY = y + height / 2 
+  translateX.setValue(SCREEN_WIDTH / 2 - targetCenterX) 
+  translateY.setValue(SCREEN_HEIGHT / 2 - targetCenterY) 
+})
+
+Animated.parallel([
+  Animated.timing(scale, {
+    toValue: FINAL_SCALE,
+    duration: 500,
+    useNativeDriver: true,
+  }),
+
+  Animated.timing(translateX, {
+    toValue: 0,
+    duration: 500,
+    useNativeDriver: true,
+  }),
+
+  Animated.timing(translateY, {
+    toValue: 0,
+    duration: 500,
+    useNativeDriver: true,
+  }),
+])
+`,
     };
   },
   props: {
@@ -112,6 +222,10 @@ export default function RecoveryCountdown({ progress }) {
   computed: {
     navigatorSections() {
       const journalSections = [
+        { id: "w_badge_animation", label: "15 → Making progress feel physical" },
+        { id: "w_design_system", label: "14 → Building Squeeze's design system" },
+        { id: "w_rep_slider", label: "13 → Rep slider interaction" },
+        { id: "w_fighting_game", label: "12 → Building a mini fighting game" },
         { id: "w_character_progression", label: "11 → Building character progression" },
         { id: "w_set_logging", label: "10 → Developing style and interaction" },
         { id: "w_visual_direction", label: "09 → Finding the visual direction" },
@@ -138,9 +252,9 @@ export default function RecoveryCountdown({ progress }) {
     <CaseStudyHero
       @toFirst="$refs.scrollNavigator.scrollTo(navigatorSections[1].id)"
       id="w_hero"
-      title="Gamified Workout App"
+      title="Designing & Building a Workout App"
       :roles="['UX/UI Designer', 'Frontend Developer']"
-      :tools="['Figma', 'React Native']"
+      :tools="['Figma', 'React Native', 'Co-pilot', 'Tailwind CSS']"
       timeline="Ongoing"
     >
       <span
@@ -153,26 +267,425 @@ export default function RecoveryCountdown({ progress }) {
 
         In progress
       </span>
+
       <p>
-        I’ve been exploring how gamification could make the fitness journey more engaging, motivating and rewarding, not
-        just by tracking progress, but by making the process itself feel more like a game.
+        Squeeze is an ongoing exploration of interaction design and design engineering, built from the ground up in
+        Figma and React Native.
       </p>
 
       <p>
-        I started noticing that a lot of workout apps are built around rigid programmes and tracking. They can be great
-        for following a plan, but real life doesn’t always work that way. Your schedule changes, your energy changes,
-        and different parts of your body recover at different rates.
+        I originally started the project by exploring how gamification could make workouts feel more engaging and
+        rewarding. As it developed, the focus expanded into a broader exploration of interaction, animation, visual
+        design and how these ideas translate into polished, working interfaces.
       </p>
 
       <p>
-        So I started with a simple question: what if a workout app could adapt to the user, rather than expecting the
-        user to adapt to the programme?
+        I’ve been designing interactions in Figma, implementing them myself and refining them through testing, while
+        building a small design system and using AI throughout the process to accelerate concept development, visual
+        exploration and implementation.
       </p>
+
+      <div class="flex flex-col items-start gap-2 mt-8">
+        <a
+          href="https://squeeze.expo.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-white text-gray-900 font-medium transition-transform hover:scale-[1.02]"
+        >
+          View WIP app online
+          <font-awesome-icon icon="arrow-up-right-from-square" />
+        </a>
+
+        <p class="text-sm opacity-60">Best viewed on mobile · Feedback welcome</p>
+      </div>
     </CaseStudyHero>
+
+    <div class="w-full max-w-5xl flex flex-col md:flex-row gap-8 md:gap-12 items-center justify-center">
+      <PhoneFrame>
+        <img src="../../assets/workoutApp/home_Screen.png" alt="Squeeze home screen" class="block w-full h-auto" />
+      </PhoneFrame>
+
+      <PhoneFrame>
+        <img
+          src="../../assets/workoutApp/details_Screen.png"
+          alt="Squeeze exercise details screen"
+          class="block w-full h-auto"
+        />
+      </PhoneFrame>
+
+      <PhoneFrame>
+        <img
+          src="../../assets/workoutApp/new_workout_screen.png"
+          alt="Squeeze new workout screen"
+          class="block w-full h-auto"
+        />
+      </PhoneFrame>
+    </div>
 
     <OrderToggle v-model:reversed="reversed" />
 
     <div class="flex gap-16" :class="reversed ? 'flex-col-reverse' : 'flex-col'">
+      <JournalEntry
+        :number="15"
+        title="Making Progress Feel Physical"
+        date="September 2026"
+        id="w_badge_animation"
+        visual
+      >
+        <p>
+          I wanted hitting your target to feel special and exciting, rather than simply changing a number on screen.
+          When a target is hit, a large reward badge appears, then shrinks and travels into its final position within
+          the workout interface.
+        </p>
+
+        <p>
+          The challenge was that the destination isn't fixed. Its position can change depending on the surrounding
+          content and screen layout, so I couldn't simply animate the badge to a hard-coded coordinate.
+        </p>
+
+        <p>
+          Instead, I measure the destination view at runtime with React Native's measureInWindow(), calculate its centre
+          point, and use that position as the animation's destination. The badge can then scale and translate
+          simultaneously, allowing the same animation to work regardless of where the destination appears on screen.
+        </p>
+
+        <template #visual>
+          <div class="w-full flex flex-col gap-12">
+            <div class="w-full flex justify-center">
+              <PhoneFrame>
+                <div class="relative md:min-h-[597px] bg-gray-900">
+                  <video
+                    preload="metadata"
+                    :src="badgeAnimationVideo"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    class="block w-full object-contain"
+                  ></video>
+                </div>
+              </PhoneFrame>
+            </div>
+
+            <div class="w-full flex flex-col gap-6 p-6 md:p-12 border border-gray-300 bg-black/5 rounded-lg">
+              <h3 class="text-2xl font-bold">Measuring the destination at runtime</h3>
+
+              <p>
+                Rather than animating to a fixed coordinate, the badge measures the destination view in real time and
+                travels to its centre point, so the same animation works no matter where the destination sits on screen.
+              </p>
+
+              <CodeSnippet filename="SetBadge.tsx" lang="tsx" :code="badgeAnimationCode1" />
+            </div>
+          </div>
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-2 md:my-16" />
+
+      <JournalEntry
+        :number="14"
+        title="Building Squeeze's Design System"
+        date="September 2026"
+        id="w_design_system"
+        visual
+      >
+        <p>
+          As Squeeze grew, I found myself repeatedly making the same visual decisions. I used Google Stitch to explore
+          initial directions, then refined them in Figma and formalised them into a small design system.
+        </p>
+
+        <p>
+          The system covers typography, colour, spacing, components, icons and interaction states, which I translated
+          into reusable React Native components and Tailwind styles.
+        </p>
+
+        <template #visual>
+          <div class="w-full flex flex-col gap-24">
+            <div class="flex flex-col gap-8">
+              <h3 class="text-2xl font-bold">The design system</h3>
+
+              <p>
+                I keep the core visual decisions together in a single reference, making it easier to maintain
+                consistency as the product develops.
+              </p>
+
+              <div class="p-5 bg-black/75 rounded-xl">
+                <img
+                  loading="lazy"
+                  src="../../assets/workoutApp/design_system.png"
+                  alt="Full Figma design system sheet"
+                  class="w-full h-auto"
+                />
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-5">
+              <h3 class="text-2xl font-bold">From Figma to Code</h3>
+
+              <div class="w-full flex flex-col md:flex-row gap-12 mt-5">
+                <div class="md:w-1/2 flex flex-col gap-6">
+                  <h3 class="text-xl font-bold">Typography</h3>
+
+                  <p>
+                    Typography was one of the first parts of the visual language I formalised. Squeeze uses a
+                    combination of display and supporting typefaces, with defined sizes and roles for headings,
+                    numerical values, labels and supporting text. These were added to the Tailwind configuration so they
+                    could be applied consistently through utility classes.
+                  </p>
+
+                  <CodeSnippet filename="tailwind.config.js" lang="js" :code="typographyCode" />
+                </div>
+
+                <div class="md:w-1/2 flex flex-col gap-6">
+                  <h3 class="text-xl font-bold">Colour</h3>
+
+                  <p>
+                    I centralised the application's core colours so they could be changed globally rather than repeated
+                    throughout the codebase. The same colour tokens are used for UI elements, typography and interaction
+                    states, with a dedicated colours file also allowing them to be used where Tailwind classes aren't
+                    suitable.
+                  </p>
+
+                  <CodeSnippet filename="colors.ts" lang="ts" :code="colourCode" />
+                </div>
+              </div>
+
+              <div class="w-full flex flex-col gap-6 mt-5">
+                <h3 class="text-xl font-bold">Reusable Components</h3>
+
+                <p>
+                  The system became more useful when I started applying these rules to reusable components. Instead of
+                  recreating the same patterns on each screen, components encapsulate their visual structure while
+                  receiving their content and state through props.
+                </p>
+
+                <div class="w-full flex flex-col md:flex-row gap-8">
+                  <CodeSnippet class="md:!w-1/3" filename="Tag Implimentation" lang="tsx" :code="tagComponentCode" />
+                  <CodeSnippet
+                    class="md:!w-1/3"
+                    filename="Button Implimentation"
+                    lang="tsx"
+                    :code="buttonComponentCode"
+                  />
+                  <CodeSnippet
+                    class="md:!w-1/3"
+                    filename="Recovery Countdown Implementation"
+                    lang="tsx"
+                    :code="progressComponentCode"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-2 md:my-16" />
+
+      <JournalEntry :number="13" title="Rep Slider Interaction" date="September 2026" id="w_rep_slider" visual reversed>
+        <p>
+          After testing an early version of Squeeze with users, I decided to temporarily reduce the emphasis on game
+          mechanics and focus on making the core workout experience feel fast, intuitive and well-crafted.
+        </p>
+        <p>
+          Logging reps is one of the most frequently repeated interactions in the app, so even small improvements to the
+          interaction can have a significant impact over an entire workout.
+        </p>
+
+        <!-- <BrowserFrame class="mx-auto">
+          <video
+            preload="metadata"
+            :src="slideCloseupVideo"
+            autoplay
+            loop
+            muted
+            playsinline
+            class="relative z-10 block max-w-[300px] object-contain"
+          ></video>
+        </BrowserFrame> -->
+
+        <template #visual>
+          <div class="w-full flex flex-col gap-20">
+            <div class="w-full flex flex-col md:flex-row gap-8 items-center">
+              <div class="md:w-1/2 flex flex-col items-start gap-8">
+                <h3 class="text-2xl font-bold">The original interaction</h3>
+                <p>
+                  The original interaction required users to tap a field, enter a number using the keyboard and submit
+                  it. This could take up to five taps for a single value and caused the keyboard to repeatedly interrupt
+                  the workout layout.
+                </p>
+
+                <p>
+                  I wanted to replace this with a direct manipulation interaction that could be completed with a single
+                  gesture.
+                </p>
+              </div>
+
+              <div class="md:w-1/2 mx-auto">
+                <div class="md:w-full flex items-center justify-center">
+                  <PhoneFrame>
+                    <div class="relative md:min-h-[597px] bg-gray-900">
+                      <video
+                        preload="metadata"
+                        :src="originalRepInputVideo"
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        class="block w-full object-contain"
+                      ></video>
+                    </div>
+                  </PhoneFrame>
+                </div>
+              </div>
+            </div>
+
+            <div class="w-full flex flex-col md:flex-row gap-8 items-center">
+              <div class="md:w-1/2 mx-auto">
+                <div class="md:w-full flex items-center justify-center">
+                  <PhoneFrame>
+                    <div class="relative md:min-h-[597px] bg-gray-900">
+                      <video
+                        preload="metadata"
+                        :src="WorkoutVideo"
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        class="block w-full h-full object-contain"
+                      ></video>
+                    </div>
+                  </PhoneFrame>
+                </div>
+              </div>
+
+              <div class="md:w-1/2 flex flex-col items-start gap-8">
+                <h3 class="text-2xl font-bold">Initial test</h3>
+
+                <p>
+                  I built an early version of a segmented rep slider and put it in front of testers quickly rather than
+                  trying to perfect it first.
+                </p>
+
+                <p>
+                  The interaction felt significantly faster, but testing exposed an important problem: the gesture
+                  wasn't immediately obvious. The active area felt too narrow and there wasn't enough visual indication
+                  that the slider could be dragged.
+                </p>
+
+                <p>This feedback shaped the next iteration.</p>
+              </div>
+            </div>
+
+            <div class="w-full flex flex-col md:flex-row gap-8 items-center">
+              <div class="md:w-1/2 flex flex-col items-start gap-8">
+                <h3 class="text-2xl font-bold">Current slider</h3>
+
+                <p>
+                  The current version makes the interaction itself more visually prominent, giving the slider a tactile,
+                  trackpad-like quality.
+                </p>
+
+                <p>
+                  I also introduced lightweight guidance for first-time or uncertain users. An animated arrow
+                  demonstrates the initial gesture, while the larger rep counter makes the relationship between the
+                  gesture and the result immediately visible. Once the user starts interacting, these prompts get out of
+                  the way.
+                </p>
+
+                <p>
+                  After a user finishes sliding, the app waits briefly before showing a "Tap to log" prompt. This avoids
+                  permanently occupying the interface with instructions while still providing a fallback for users who
+                  aren't sure what to do next.
+                </p>
+
+                <p>
+                  The goal was to accept a small learning curve in exchange for making a repeated interaction
+                  substantially faster.
+                </p>
+              </div>
+
+              <div class="md:w-1/2 mx-auto">
+                <div class="md:w-full flex items-center justify-center">
+                  <PhoneFrame>
+                    <div class="relative md:min-h-[597px] bg-gray-900">
+                      <video
+                        preload="metadata"
+                        :src="currentSlider"
+                        autoplay
+                        loop
+                        muted
+                        playsinline
+                        class="block w-full h-full object-contain"
+                      ></video>
+                    </div>
+                  </PhoneFrame>
+                </div>
+              </div>
+            </div>
+            <!-- code snippets  -->
+            <div class="w-full flex flex-col gap-8 p-6 md:p-12 border border-gray-300 bg-black/5 rounded-lg">
+              <h3 class="text-2xl font-bold">Building the Interaction</h3>
+
+              <p>
+                The final interaction was built directly in React Native, allowing me to iterate on the behaviour and
+                visual feedback together rather than treating implementation as a separate stage. I used Expo to run the
+                app in the browser, making it easy to share a URL with testers and quickly iterate between testing,
+                feedback and implementation.
+              </p>
+
+              <div class="flex flex-col gap-8">
+                <div class="flex flex-row gap-10">
+                  <div class="flex flex-col gap-2 md:w-1/3">
+                    <h4 class="text-lg font-semibold">Mapping Touch to Reps</h4>
+                    <p>
+                      The slider converts the user's touch position into a percentage of the available track, which is
+                      then mapped to the maximum number of reps. This keeps the interaction responsive across different
+                      screen sizes.
+                    </p>
+                  </div>
+
+                  <CodeSnippet class="md:!w-2/3" filename="RepSlider.tsx" lang="tsx" :code="repSliderGestureCode" />
+                </div>
+
+                <div class="flex flex-row gap-10">
+                  <div class="flex flex-col gap-2 md:w-1/3">
+                    <h4 class="text-lg font-semibold">Tap vs Drag Decision</h4>
+                    <p>
+                      I wanted the same control to handle both adjusting and submitting a set, without adding another
+                      button to the interface.
+                    </p>
+
+                    <p>
+                      A small movement threshold distinguishes between a tap and a drag. Dragging adjusts the rep count,
+                      while releasing without moving submits the set.
+                    </p>
+                  </div>
+
+                  <CodeSnippet class="md:!w-2/3" filename="RepSlider.tsx" lang="tsx" :code="clickVsDragCode" />
+                </div>
+
+                <div class="flex flex-row gap-10">
+                  <div class="flex flex-col gap-2 md:w-1/3">
+                    <h4 class="text-lg font-semibold">Accessibility / Alternative Input</h4>
+                    <p>
+                      The slider is optimised for speed, but the numerical value remains directly editable, providing an
+                      alternative input method for users who prefer precise keyboard entry or find the gesture
+                      difficult.
+                    </p>
+                  </div>
+
+                  <CodeSnippet class="md:!w-2/3" filename="RepSlider.tsx" lang="tsx" :code="touchInputCode" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </JournalEntry>
+
+      <PageDivider class="my-2 md:my-16" />
+
       <JournalEntry
         :number="12"
         title="Building a Mini Fighting Game"
@@ -301,7 +814,7 @@ export default function RecoveryCountdown({ progress }) {
               </div>
 
               <div class="md:w-1/2 mx-auto">
-                <div class="w-full flex md:items-end justify-center gap-5">
+                <div class="w-full flex md:items-end justify-center gap-5 flex-wrap">
                   <img src="../../assets/workoutApp/character_1.png" class="h-24 md:h-48 w-auto pixel-art" />
                   <img src="../../assets/workoutApp/character_2.png" class="h-24 md:h-48 w-auto pixel-art" />
                   <img src="../../assets/workoutApp/character_3.png" class="h-24 md:h-48 w-auto pixel-art" />
@@ -377,8 +890,8 @@ export default function RecoveryCountdown({ progress }) {
       <PageDivider class="my-2 md:my-16" />
 
       <JournalEntry
-        :number="10"
         title="Developing style and playful interaction"
+        :number="10"
         date="September 2026"
         id="w_set_logging"
         visual

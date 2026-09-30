@@ -4,7 +4,6 @@ import PortfolioItem from "../components/PortfolioItem.vue";
 import PageDivider from "../components/PageDivider.vue";
 import ModernisationRoadmap from "../components/ModernisationRoadmap.vue";
 import ScrollNavigator from "../components/ScrollNavigator.vue";
-import WorkoutVideo from "../assets/workoutApp/workout1.mp4";
 import PhoneFrame from "../components/PhoneFrame.vue";
 import PhoneFrameVue from "../components/PhoneFrame.vue";
 import BaseButton from "../components/BaseButton.vue";
@@ -14,7 +13,6 @@ import cvVideo from "../assets/3dcv/3dcv.mp4";
 export default {
   data() {
     return {
-      WorkoutVideo,
       cvVideo,
     };
   },
@@ -64,56 +62,44 @@ export default {
         journal
         inProgress
         id="workout"
-        title="Gamified Workout App"
-        description="An ongoing self-directed project exploring how gamification can make fitness more engaging and rewarding. 
-        A journal documenting the ideas, experiments, design and development behind the app as it takes shape."
+        title="Workout App — Design & Development"
+        description="An ongoing self-directed project exploring interaction design, visual systems and front-end development through a gamified fitness experience. A journal documenting the design process, interaction experiments and implementation as the app takes shape."
         :tags="['Front-End Development', 'UX/UI Design']"
         to="/workout-app"
       >
-        <div class="flex flex-col md:flex-row-reverse gap-10 items-center">
+        <div class="flex flex-col md:flex-row gap-8 md:gap-6 items-center justify-center">
           <PhoneFrame>
-            <div class="relative min-h-[510px] md:min-h-[597px] bg-gray-900">
-              <div class="absolute inset-0 flex items-center justify-center">
-                <div class="w-8 h-8 border-4 border-gray-600 border-t-white rounded-full animate-spin"></div>
-              </div>
-
-              <video
-                preload="metadata"
-                :src="WorkoutVideo"
-                autoplay
-                loop
-                muted
-                playsinline
-                class="relative z-10 block w-full h-full object-contain"
-              ></video>
-            </div>
+            <img src="../assets/workoutApp/home_Screen.png" alt="Squeeze home screen" class="block w-full h-auto" />
           </PhoneFrame>
-          <div class="hidden md:flex flex-col items-center">
-            <div class="relative flex gap-12 my-10">
-              <img loading="lazy" src="../assets/workoutApp/character.png" alt="" class="relative size-[200px] -mx-8" />
-              <img
-                loading="lazy"
-                src="../assets/workoutApp/character2.png"
-                alt=""
-                class="relative -mx-8 w-[200px] h-auto"
-              />
-            </div>
-            <div class="relative flex gap-12 my-10">
-              <img
-                loading="lazy"
-                src="../assets/workoutApp/character3.png"
-                alt=""
-                class="relative -mx-8 w-[200px] h-auto"
-              />
-              <img
-                loading="lazy"
-                src="../assets/workoutApp/character4.png"
-                alt=""
-                class="relative -mx-8 w-[200px] h-auto"
-              />
-            </div>
-          </div>
+
+          <PhoneFrame>
+            <img
+              src="../assets/workoutApp/details_Screen.png"
+              alt="Squeeze exercise details screen"
+              class="block w-full h-auto"
+            />
+          </PhoneFrame>
+
+          <PhoneFrame>
+            <img
+              src="../assets/workoutApp/new_workout_screen.png"
+              alt="Squeeze new workout screen"
+              class="block w-full h-auto"
+            />
+          </PhoneFrame>
         </div>
+
+        <template #extra-button>
+          <BaseButton
+            class="!bg-main-dark !text-main-light"
+            href="https://squeeze.expo.app"
+            icon="arrow-up-right-from-square"
+          >
+            View WIP App Online
+          </BaseButton>
+
+          <p class="text-sm opacity-60">Best viewed on mobile · Feedback welcome</p>
+        </template>
       </PortfolioItem>
 
       <PageDivider class="my-2 md:my-16" />

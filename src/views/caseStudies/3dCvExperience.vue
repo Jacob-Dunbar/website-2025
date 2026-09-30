@@ -21,8 +21,8 @@ export default {
       characterVideo,
       interactionCode: `<group
   onClick={() => {
-     props.setEvilMode(!props.evilMode)}
-  }
+    props.setEvilMode(!props.evilMode)
+  }}
 >
   ...
 </group>
@@ -82,7 +82,7 @@ useFrame(() => {
       { id: 'cv_hero', label: 'home' },
       { id: 'cv_experience', label: '01. Camera & Scene Control' },
       { id: 'cv_interaction', label: '02. Pointer Interaction & Reactive State' },
-      { id: 'cv_atmosphere', label: '03. Asset Optimisation' },
+      { id: 'cv_atmosphere', label: '03. Asset Optimisation & Rendering' },
       { id: 'cv_animation', label: '04. Bringing the Scene to Life' },
     ]"
   />
@@ -103,9 +103,9 @@ useFrame(() => {
       </p>
 
       <p>
-        The aim was to make the information feel like something the user could discover, rather than simply read. The
-        scene was designed around a dark archaeological setting, with carved monoliths, atmospheric lighting and small
-        interactive details that encouraged exploration.
+        The goal was to turn a traditionally static document into an interactive experience where users could explore,
+        discover information and interact directly with the 3D environment. This gave me an opportunity to experiment
+        with real-time rendering, camera control, pointer interaction and 3D animation in the browser.
       </p>
 
       <BaseButton
@@ -136,15 +136,16 @@ useFrame(() => {
         <h3>01. Camera & Scene Control</h3>
 
         <p>
-          I built the scene around free-form exploration, using Three.js camera controls to let users move through the
-          environment and discover the different CV sections embedded within it. Clicking and dragging provides the
+          I built the experience around free-form exploration, using Three.js camera controls to let users move through
+          the environment and discover the different CV sections embedded within it. Clicking and dragging provides the
           primary navigation, while keyboard controls allow continuous movement through the scene.
         </p>
 
         <p>
-          The keyboard movement works by updating both the camera position and its target together, allowing the camera
-          to translate through the environment while maintaining its current viewing direction. I also normalised the
-          movement vector so diagonal movement remains consistent with horizontal and vertical movement.
+          Rather than moving the camera independently, keyboard input updates both the camera position and its target
+          together. This allows the camera to translate through the environment while preserving its current viewing
+          direction. I also normalised the movement vector so diagonal movement remains consistent with horizontal and
+          vertical movement.
         </p>
 
         <CodeSnippet filename="CvExperience.js" lang="js" :code="cameraCode" />
@@ -170,9 +171,9 @@ useFrame(() => {
         <h3>02. Pointer Interaction & Reactive State</h3>
 
         <p>
-          I also wanted the 3D objects themselves to become part of the interaction. The skull is an example of a
-          clickable Three.js object, with pointer input handled directly on the rendered mesh rather than through
-          traditional DOM controls.
+          I wanted the 3D environment itself to become part of the interface, rather than using the canvas purely as a
+          visual backdrop. Three.js objects can respond directly to pointer input, allowing interaction to happen within
+          the scene rather than through traditional DOM controls.
         </p>
 
         <p>
@@ -208,7 +209,7 @@ useFrame(() => {
           </div>
         </template>
 
-        <h3>03. Asset Optimisation & Real-Time Rendering</h3>
+        <h3>03. Asset Optimisation & Rendering</h3>
 
         <p>
           Because the environment was intended to run in real time in the browser, I created and optimised the 3D assets
@@ -219,9 +220,8 @@ useFrame(() => {
         <p>
           The finished assets were exported as <code>.glb</code> files and loaded into the React Three Fiber scene,
           giving me a workflow from modelling and optimisation in Blender through to real-time rendering in Three.js. I
-          also used Suspense and preloading when loading assets to help manage the experience while the scene was being
-          prepared. I also used React Suspense and GLTF preloading to manage asset loading and avoid rendering the scene
-          before its models were ready.
+          also used React Suspense and GLTF preloading to manage asset loading and avoid rendering the scene before its
+          models were ready.
         </p>
       </CaseStudySection>
 
@@ -250,10 +250,10 @@ useFrame(() => {
         </p>
 
         <p>
-          The character was imported as a GLTF asset and animated within the React Three Fiber scene using
-          <code>useFrame</code>, allowing its movement to be updated continuously at render time. The nervous, shaking
-          animation helped reinforce the atmosphere while giving me an opportunity to experiment with integrating and
-          controlling a custom 3D character.
+          The character was imported as a GLTF asset and animated within the React Three Fiber render loop using
+          <code>useFrame</code>, allowing its movement to be updated continuously as the scene renders. The nervous,
+          shaking animation helped reinforce the atmosphere while giving me an opportunity to experiment with
+          integrating and controlling a custom 3D character.
         </p>
 
         <CodeSnippet filename="head.js" lang="js" :code="characterCode" />
