@@ -127,15 +127,10 @@ export default {
       return this.$route.path.includes("/development");
     },
     cv() {
-      return this.isDevelopment
-        ? {
-            href: "/Jacob-Dunbar-Dev-CV.pdf",
-            filename: "Jacob-Dunbar-Dev-CV.pdf",
-          }
-        : {
-            href: "/Jacob-Dunbar-Design-CV.pdf",
-            filename: "Jacob-Dunbar-Design-CV.pdf",
-          };
+      return {
+        href: "/Jacob_Dunbar_CV_scannable.pdf",
+        filename: "Jacob_Dunbar_CV_scannable.pdf",
+      };
     },
   },
 };
