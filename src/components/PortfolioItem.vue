@@ -64,14 +64,14 @@ export default {
         {{ description }}
       </p>
 
-      <BaseButton v-if="journal" :to="to">View Project Journal</BaseButton>
+      <BaseButton v-if="journal && to" :to="to">View Project Journal</BaseButton>
 
       <div v-else-if="tags.length > 1" class="flex flex-col gap-2">
-        <BaseButton :to="to">{{ tags[0] }} case study</BaseButton>
-        <BaseButton :to="to2">{{ tags[1] }} case study</BaseButton>
+        <BaseButton v-if="to" :to="to">{{ tags[0] }} case study</BaseButton>
+        <BaseButton v-if="to2" :to="to2">{{ tags[1] }} case study</BaseButton>
       </div>
 
-      <BaseButton v-else :to="to">View case study</BaseButton>
+      <BaseButton v-else-if="to" :to="to">View case study</BaseButton>
 
       <slot name="extra-button"></slot>
     </div>

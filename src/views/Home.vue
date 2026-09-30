@@ -42,12 +42,12 @@ export default {
     :sections="[
       { id: 'hero', label: 'Home' },
       { id: 'workout', label: 'Workout App' },
-      { id: '3dexperience', label: '3D CV Experience' },
+      { id: 'tillson', label: 'Milly Tillson Portfolio' },
       { id: 'messaging', label: 'Real-Time Messaging' },
       { id: 'modernisation', label: 'Frontend Modernisation' },
       { id: 'dashboard', label: 'Customisable Dashboard' },
+      { id: '3dexperience', label: '3D CV Experience' },
       { id: 'search', label: 'Search Experience' },
-      { id: 'description', label: 'Description Assistant' },
     ]"
   />
   <PortfolioHero @toFirst="$refs.scrollNavigator.scrollTo('messaging')" title="Frontend Development & UX/UI Design">
@@ -60,11 +60,12 @@ export default {
     <div class="max-w-7xl mx-5 py-18 flex flex-col gap-16 md:gap-22">
       <PortfolioItem
         journal
+        reverse
         inProgress
         id="workout"
         title="Workout App — Design & Development"
         description="An ongoing self-directed project exploring interaction design, visual systems and front-end development through a gamified fitness experience. A journal documenting the design process, interaction experiments and implementation as the app takes shape."
-        :tags="['Front-End Development', 'UX/UI Design']"
+        :tags="['Figma', 'React Native', 'Zustand', 'TypeScript', 'AI Assisted Development']"
         to="/workout-app"
       >
         <div class="flex flex-col md:flex-row gap-8 md:gap-6 items-center justify-center">
@@ -105,11 +106,73 @@ export default {
       <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
-        id="3dexperience"
+        journal
+        id="tillson"
+        title="Milly Tillson — Portfolio Site"
+        description="A Portfolio site I designed and built for a fashion photographer, translating a visual design into a responsive production experience. Integrated with Contentful CMS so the client could manage portfolio content without touching the code."
+        :tags="['Next.js', 'Contentful CMS', 'Styled Components']"
+      >
+        <BrowserFrame url="https://www.millytillson.com/">
+          <img loading="lazy" class="w-full" src="../assets/tillson.png" alt="Milly Tillson portfolio website" />
+        </BrowserFrame>
+
+        <template #extra-button>
+          <BaseButton
+            class="!bg-main-dark !text-main-light"
+            href="https://www.millytillson.com/"
+            icon="arrow-up-right-from-square"
+          >
+            View Live Site
+          </BaseButton>
+        </template>
+      </PortfolioItem>
+
+      <PageDivider class="my-2 md:my-16" />
+
+      <PortfolioItem
         reverse
+        id="messaging"
+        title="Real-Time Messaging System"
+        description="Built a real-time messaging experience with live updates, reusable components, and enhanced workflows including translation and contextual messaging."
+        :tags="['Vue.js', 'AWS AppSync', 'Pinia', 'Tailwind CSS']"
+        to="/messaging-system"
+      >
+        <img loading="lazy" class="w-full" src="../assets/messaging_ui.svg" />
+      </PortfolioItem>
+
+      <PageDivider class="my-2 md:my-16" />
+
+      <PortfolioItem
+        id="modernisation"
+        title="Frontend Modernisation Project"
+        description="Modernised a legacy Vue application by upgrading the frontend stack, improving maintainability, and creating a more scalable foundation for future development."
+        :tags="['Pinia', 'Vitest', 'Vue 3', 'Tailwind CSS', 'PrimeVue']"
+        to="/frontend-modernisation"
+      >
+        <ModernisationRoadmap />
+      </PortfolioItem>
+
+      <PageDivider class="my-2 md:my-16" />
+
+      <PortfolioItem
+        reverse
+        id="dashboard"
+        title="Customisable Dashboard Experience"
+        description="Built a modular dashboard system allowing users to personalise their workspace through configurable widgets, responsive layouts, and scalable component architecture."
+        :tags="['Figma', 'Rest APIs', 'Pinia']"
+        to="/dev-dashboard"
+        to2="/dev-dashboard"
+      >
+        <img loading="lazy" class="w-full" src="../assets/dashboard_ui.png" />
+      </PortfolioItem>
+
+      <PageDivider class="my-2 md:my-16" />
+
+      <PortfolioItem
+        id="3dexperience"
         title="3D CV Experience"
         description="An interactive 3D CV built with React Three Fiber, featuring a custom jungle environment, atmospheric lighting, interactive objects, and animated characters."
-        :tags="['Front-End Development', 'Three.js', 'React Three Fiber']"
+        :tags="['React', 'Three.js', 'React Three Fiber']"
         to="/3d-experience"
       >
         <BrowserFrame url="https://jacob-dunbar-3d-cv.netlify.app/">
@@ -137,55 +200,17 @@ export default {
       <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
-        id="messaging"
-        title="Real-Time Messaging System"
-        description="Built a real-time messaging experience with live updates, reusable components, and enhanced workflows including translation and contextual messaging."
-        :tags="['Front-End Development']"
-        to="/messaging-system"
-      >
-        <img loading="lazy" class="w-full" src="../assets/messaging_ui.svg" />
-      </PortfolioItem>
-
-      <PageDivider class="my-2 md:my-16" />
-
-      <PortfolioItem
-        reverse
-        id="modernisation"
-        title="Frontend Modernisation Project"
-        description="Modernised a legacy Vue application by upgrading the frontend stack, improving maintainability, and creating a more scalable foundation for future development."
-        :tags="['Front-End Development']"
-        to="/frontend-modernisation"
-      >
-        <ModernisationRoadmap />
-      </PortfolioItem>
-
-      <PageDivider class="my-2 md:my-16" />
-
-      <PortfolioItem
-        id="dashboard"
-        title="Customisable Dashboard Experience"
-        description="Built a modular dashboard system allowing users to personalise their workspace through configurable widgets, responsive layouts, and scalable component architecture."
-        :tags="['Front-End Development', 'UX/UI Design']"
-        to="/dev-dashboard"
-        to2="/dev-dashboard"
-      >
-        <img loading="lazy" class="w-full" src="../assets/dashboard_ui.png" />
-      </PortfolioItem>
-
-      <PageDivider class="my-2 md:my-16" />
-
-      <PortfolioItem
         id="search"
         reverse
         title="Intelligent Search Experience"
         description="Redesigned search and filtering to improve discoverability and reduce friction when browsing services."
-        :tags="['UX/UI Design']"
+        :tags="['Figma', 'Vue.js', 'TypeScript', 'Algolia']"
         to="/search-experience"
       >
         <img class="w-full" loading="lazy" src="../assets/search_ui.svg" />
       </PortfolioItem>
 
-      <PageDivider class="my-2 md:my-16" />
+      <!-- <PageDivider class="my-2 md:my-16" />
 
       <PortfolioItem
         id="description"
@@ -195,7 +220,7 @@ export default {
         to="/description-assistant"
       >
         <img class="w-full" loading="lazy" src="../assets/ai_ui.svg" />
-      </PortfolioItem>
+      </PortfolioItem> -->
     </div>
   </div>
 </template>
