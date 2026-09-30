@@ -571,7 +571,9 @@ Animated.parallel([
                 <p>
                   The interaction felt significantly faster, but testing exposed an important problem: the gesture
                   wasn't immediately obvious. The active area felt too narrow and there wasn't enough visual indication
-                  that the slider could be dragged.
+                  that the slider could be dragged. At this stage the interaction was slide and release, rather than
+                  slide and tap to log. But I found that this was prone to mistakes as users would log realising without
+                  releasing.
                 </p>
 
                 <p>This feedback shaped the next iteration.</p>
@@ -595,9 +597,10 @@ Animated.parallel([
                 </p>
 
                 <p>
-                  After a user finishes sliding, the app waits briefly before showing a "Tap to log" prompt. This avoids
-                  permanently occupying the interface with instructions while still providing a fallback for users who
-                  aren't sure what to do next.
+                  I switched to a slide and tap gesture as the tap feels more intentional than a release and lets users
+                  confirm their action deliberately. After a user finishes sliding, the app waits briefly before showing
+                  a "Tap to log" prompt. This avoids permanently occupying the interface with instructions while still
+                  providing a fallback for users who aren't sure what to do next.
                 </p>
 
                 <p>
